@@ -3,9 +3,9 @@ import { Grid, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 
 
-const AllowAccessButtons = ({ classes, label, icon }) => {
+const AllowAccessButtons = ({ classes, label, icon, onClick }) => {
     return (
-        <Grid container item direction='row' alignItems='center' justify='flex-start' className={clsx(classes)} >
+        <Grid container item direction='row' alignItems='center' justify='flex-start' className={clsx(classes)} onClick={onClick}>
             <Grid item >
                 {icon}
             </Grid>

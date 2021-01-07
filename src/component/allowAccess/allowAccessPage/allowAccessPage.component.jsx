@@ -68,8 +68,16 @@ const useStyles = makeStyles(theme => ({
 
 
 
-const AllowAccessPage = () => {
+const AllowAccessPage = ({ match, history }) => {
     const classes = useStyles();
+
+    const goToHomePage = () => {
+        history.push('/home');
+    }
+
+    const goToLocationAccessPage = () => {
+        history.push(`${match.url}/locationAccess`);
+    }
 
     return (
         <Grid container item xs={12} sm={8} md={7} justify='center' alignItems='flex-end' color='primary' className={classes.bottomPadding}>
@@ -78,6 +86,7 @@ const AllowAccessPage = () => {
                 <AllowAccessPageButtons
                     label='Location Access'
                     icon={<LocationOnIcon fontSize='large' className={clsx([classes.rounded, classes.whiteBackground, classes.blackBorder])} />}
+                    onClick={goToLocationAccessPage}
                 />
 
                 <Grid item container spacing={2} direction='column'>
@@ -111,7 +120,7 @@ const AllowAccessPage = () => {
                     className={classes.radiusBorder}
                     fullWidth
                 >
-                    <Button fullWidth style={{ color: 'white' }}>
+                    <Button fullWidth style={{ color: 'white' }} onClick={goToHomePage}>
                         <Typography variant='h6' component='h1'>
                             START
                         </Typography>

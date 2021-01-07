@@ -1,24 +1,26 @@
 import React from 'react';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 
-import '../globalStyle/globalStyles.scss';
 
 const useStyles = makeStyles(theme => ({
-    seconaryIconButton: {
+    primaryButton: {
         background: 'linear-gradient(90deg, rgba(43,190,200,1), rgba(29,233,182,1))',
+        color: 'white'
     },
     buttonIcon: {
         transform: 'scale(2)'
     }
 }));
 
-const PrimaryButton = ({ label, children }) => {
+const PrimaryButton = ({ label, children, onClick }) => {
     const classes = useStyles();
     return (
         <Button
             variant='contained'
             startIcon={children}
-            className={classes.seconaryIconButton}
+            className={classes.primaryButton}
+            fullWidth
+            onClick={onClick}
         >
             <Typography variant='body1' component='h1'>
                 {label}
@@ -27,5 +29,5 @@ const PrimaryButton = ({ label, children }) => {
     );
 }
 
-export defaut PrimaryButton;
+export default PrimaryButton;
 
