@@ -1,0 +1,16 @@
+$blue:#5C4DB1;
+$purple:#220555;
+$green:#1EBE71;
+$brown:#D65246;
+$darkGreen:#128C7e;
+$blueGradient:lineargradient(to right, #2BBEC8, #1DE9B6);
+$pinkGradient:lineargradient(to right, #220555, #EC2B7A);
+
+
+@mixin centerElement() {
+    display: grid;
+    place-items: center;
+}
+
+$medium:500px;
+$large:768px;

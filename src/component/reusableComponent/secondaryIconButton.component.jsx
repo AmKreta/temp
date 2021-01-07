@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button, makeStyles, Typography } from '@material-ui/core';
 
-import '../globalStyle/globalStyles.scss';
 
 const useStyles = makeStyles(theme => ({
     seconaryIconButton: {

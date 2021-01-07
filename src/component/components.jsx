@@ -5,7 +5,8 @@ import { Switch, Route } from 'react-router-dom';
 
 // customComponents
 import LoginPage from './loginAndSignUpPage/loginPage.component';
-import AskForPermission from './AskForPermission/askForPermission.component';
+import AllowAccess from './allowAccess/allowAccess.component';
+import App from './app/app.component';
 
 // creating style
 const useStyles = makeStyles(theme => ({
@@ -34,14 +35,15 @@ const Components = () => {
     const classes = useStyles();
     return (
         <ThemeProvider theme={newTheme}>
-            <Grid container item xs={12} direction='row' justify='center' alignItems='' className={classes.root}>
+            <Grid container direction='row' justify='center' className={classes.root}>
                 <Switch>
                     <Route exact path='/' component={LoginPage} />
-                    <Route path='/AskForPermissionPage' component={AskForPermission} />
+                    <Route path='/allowAccess' component={AllowAccess} />
+                    <Route path='/home' component={App} />
                 </Switch>
             </Grid>
         </ThemeProvider>
     );
 }
 
-export default Components;
+export default React.memo(Components);

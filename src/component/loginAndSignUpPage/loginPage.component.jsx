@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
         super();
         this.state = {
             timer: { min: 2, sec: 0 },
-            name: 'Amk',
+            name: '',
             phoneNo: '',
             showOtpComponent: false,
             otp: ['', '', '', '', '', ''],

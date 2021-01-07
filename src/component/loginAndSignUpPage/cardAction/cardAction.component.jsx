@@ -8,7 +8,7 @@ const CardActionComponent = () => {
         setisButtonClicked(prevState => !prevState.isButtonClicked);
     }
     if (isButtonClicked) {
-        return <Redirect to='/AskForPermissionPage' />
+        return <Redirect to='/allowAccess' />
     }
     else {
         return (

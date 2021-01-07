@@ -1,0 +1,68 @@
+@import '../../../../../assets/globalStyles.scss';
+
+.home {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: stretch;
+    justify-content: flex-start;
+
+    .iconTab {
+        margin-top: 2%;
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-around;
+        height: 15%;
+
+        .iconButton {
+            height: 60px;
+            width: 60px;
+            text-align: center;
+            position:relative;
+
+            .iconContainer {
+                height: 100%;
+                width: 100%;
+                background: $blue;
+                border-radius: 50%;
+            }
+
+            .caption{
+                margin-top:3px;
+                font-size: .8em;
+            }
+
+            .iconTabNotification{
+                position:absolute;
+                height:20px;
+                width:20px;
+                border-radius:50%;
+                background:red;
+                color:white;
+                top:0;
+                right:0;
+            }
+
+        }
+    }
+
+    .buttonTab {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top:5%;
+
+        .buttonContainer {
+            width: 80%;
+            margin-top:3%;
+            text-align: left;
+            border:1px solid #ccc;
+            border-radius:10px;
+            box-shadow:0 0 10px 0px #ccc;
+        }
+    }
+}
+

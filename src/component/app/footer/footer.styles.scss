@@ -1,0 +1,19 @@
+@import '../../../../assets/globalStyles.scss';
+
+.appFooter {
+    height: 10%;
+    display:flex;
+    flex-flow:row wrap;
+    align-items:flex-start;
+    justify-content:space-around;
+
+    &.purpleAppFooter {
+        background-color: $purple;
+        color: white;
+    }
+
+    &.whiteAppFooter {
+        background-color: white;
+        color: rgba(0, 0, 0, .9);
+    }
+}
