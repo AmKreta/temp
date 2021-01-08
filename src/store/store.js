@@ -1,25 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 
-const initialState = {
-    isLoggedIn: false
-};
+import locationReducer from './location/locationReducer';
+import tokenReducer from './token/tokenReducer';
 
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'sucessfulLogin':
-            return { ...initialState, isLoggedIn: true };
-        default:
-            if(action.type.includes('@redux/INIT')){
-                console.log('reducer method initialized');
-            }
-            else{
-                console.log(action,' is not defined in te reducer method');
-            }
-            
-    }
-}
+const rootReducer = combineReducers({
+    location: locationReducer,
+    token: tokenReducer
+});
 
-const store = createStore(reducer);
+const store = createStore(rootReducer);
 
 export default store;
 

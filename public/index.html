@@ -41,4 +41,9 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
+  <script>
+      let app=document.querySelector('.App');
+      app.setAttribute('style',`min-height: ${app.offsetHeight+'px'}`)
+      console.log(app.offsetHeight);
+  </script>
 </html>

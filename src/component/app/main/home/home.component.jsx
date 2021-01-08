@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const IconButtonContainer = ({ icon, caption }) => {
+const IconButtonContainer = ({ icon, caption, onClick }) => {
     return (
         <div className="iconButton">
             <div className="iconContainer">
-                <IconButton >
+                <IconButton onClick={onClick}>
                     {icon}
                 </IconButton>
             </div>
@@ -44,7 +44,7 @@ const ButtonContainer = ({ label }) => {
     return (
         <div className="buttonContainer">
             <IconButton className={classes.blueColor}>
-                <ExitToAppIcon font-size='medium' />
+                <ExitToAppIcon fontSize='medium' />
             </IconButton>
             <Button className={classes.blueColor}>
                 {label}
@@ -53,8 +53,13 @@ const ButtonContainer = ({ label }) => {
     );
 }
 
-const Home = () => {
+const Home = ({ history, match }) => {
     const classes = useStyles();
+
+    const gotoPage = (page) => {
+        history.push(`${match.url}/${page}/`);
+    }
+
     return (
         <div className="home">
             <div className="iconTab">
@@ -62,18 +67,22 @@ const Home = () => {
                 <IconButtonContainer
                     icon={<PersonIcon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Doctor'
+                    onClick={() => { gotoPage("search/doctor") }}
                 />
                 <IconButtonContainer
                     icon={<ApartmentIcon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Pharmacy'
+                    onClick={() => { gotoPage("search/pharmacy") }}
                 />
                 <IconButtonContainer
                     icon={<PersonIcon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Hospital'
+                    onClick={() => { gotoPage("search/hospital") }}
                 />
                 <IconButtonContainer
                     icon={<Battery20Icon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Pathology'
+                    onClick={() => { gotoPage("search/pathology") }}
                 />
 
             </div>

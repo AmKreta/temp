@@ -1,0 +1,29 @@
+@import '../../../../assets/globalStyles.scss';
+
+$iconSize:3vh;
+
+.inputContainer {
+    width: 80%;
+    background: white;
+    box-shadow: 0 0 15px #ccc;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0 2%;
+
+    &>input {
+        flex-grow: 1;
+        padding: 10px;
+        border: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .icon {
+        color: $lightBlue;
+        height: $iconSize;
+        width: $iconSize;
+    }
+}

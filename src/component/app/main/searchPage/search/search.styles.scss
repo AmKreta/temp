@@ -1,0 +1,48 @@
+@import '../../../../../../assets/globalStyles.scss';
+
+.search {
+    height: 11%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: space-around;
+
+    .searchInput {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        padding: 0 3%;
+        justify-content: space-around;
+
+        .searchButtonContainer {
+            &>button {
+                height: 100%;
+                color: white;
+                background: $blueGradient;
+                border: none;
+                padding: 0 4%;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .recentSearch {
+
+        &>div {
+            min-width: min-content;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            padding-left: 5%;
+            padding-right: 10%;
+
+            &>p{
+                &:not(:first-child) {
+                    color: $lightBlue;
+                }
+                padding:0 5px;
+            }
+
+        }
+    }
+}

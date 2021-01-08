@@ -6,8 +6,7 @@ import Store from './store/store';
 
 import Component from './component/components';
 
-window.store = Store;
-
+console.log(Store.getState());
 // wrapped root component in Provider and 
 // then in BrowserRouter
 

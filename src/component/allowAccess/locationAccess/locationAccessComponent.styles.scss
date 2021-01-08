@@ -1,15 +1,21 @@
 @import '../../../../assets/globalStyles.scss';
 
+$cardHeight:50%;
+$cardWidth:Min(85%, 350px);
+$cardMarginTop:Min(20%, 100px);
+$inputPadding:8px;
+$boxShadow:0 0 15px #ccc;
+
 .locationAccessContainer {
     height: 100%;
     width: 100%;
 
     .locationAccess {
-        height: 50%;
-        width: Min(85%, 350px);
+        height: $cardHeight;
+        width: $cardWidth;
         margin: auto;
-        margin-top: Min(20%, 100px);
-        box-shadow: 0 0 15px #ccc;
+        margin-top: $cardMarginTop;
+        box-shadow: $boxShadow;
         border-radius: 10px;
         display: flex;
         flex-flow: column nowrap;
@@ -46,6 +52,8 @@
             }
 
             .setCurrentLocationContainer {
+                padding-left: 2%;
+
                 .setCurrentLocationLabel {
                     flex-grow: 1;
                     color: lighten(black, 30%);
@@ -57,13 +65,12 @@
         }
 
         .enterCityPincode {
-            box-shadow: 0 0 15px #ccc;
+            box-shadow: $boxShadow;
             border-radius: 20px;
             display: flex;
             justify-content: center;
-            padding: 0 10px;
             align-items: center;
-            padding: 4px;
+            padding: 1% 1%;
             position: relative;
 
             &:focus {
@@ -101,7 +108,7 @@
         .cityPincodeSearchResult {
             &>input {
                 width: 100%;
-                padding: 8px;
+                padding: $inputPadding;
                 padding-left: 23px;
                 opacity: .8;
                 font-size: 1.1em;

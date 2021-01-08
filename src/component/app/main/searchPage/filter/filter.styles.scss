@@ -1,0 +1,36 @@
+@import '../../../../../../assets/globalStyles.scss';
+
+$highLightSize:15px;
+
+.filter {
+    height: 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    align-items: stretch;
+    margin:0 4%;
+
+    .filterItem {
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+
+        .filterLabel {
+            color: lighten(#000000, 50%);
+        }
+
+        .highlight {
+            position: absolute;
+            background: red;
+            top: 0;
+            right: 0;
+            transform: translate(50%, 60%);
+            border-radius: 50%;
+            color: white;
+            height: $highLightSize;
+            width: $highLightSize;
+            font-size: .8em;
+            @include centerElement();
+        }
+    }
+}

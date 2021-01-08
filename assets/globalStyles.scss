@@ -1,11 +1,13 @@
 $blue:#5C4DB1;
+$lightBlue:#2BBEC8;
 $purple:#220555;
+$pink:#EC2B7A;
 $green:#1EBE71;
+$lightGreen:#1DE9B6;
 $brown:#D65246;
 $darkGreen:#128C7e;
-$blueGradient:lineargradient(to right, #2BBEC8, #1DE9B6);
-$pinkGradient:lineargradient(to right, #220555, #EC2B7A);
-
+$blueGradient:linear-gradient(to right, #2BBEC8, #1DE9B6);
+$pinkGradient:linear-gradient(to right, #220555, #EC2B7A);
 
 @mixin centerElement() {
     display: grid;
