@@ -67,6 +67,7 @@ $iconSize:43px;
         background: none;
         height: auto;
         max-height: 400px;
+        margin-left:1%;
 
         &>div {
             @include card();

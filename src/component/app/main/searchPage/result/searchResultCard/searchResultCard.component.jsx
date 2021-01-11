@@ -25,7 +25,7 @@ const SearchResultCard = ({ id, name, type, avatar, address, isVarified, distanc
             </div>
             <div className="isVarified">
                 {
-                    isVarified ?<img src={logo} alt='verified' />:null
+                    isVarified ? <img src={logo} alt='verified' /> : null
                 }
             </div>
             <div className="stars">

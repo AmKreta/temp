@@ -1,0 +1,22 @@
+.input {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 3%;
+    width: 100%;
+
+    &>input {
+        flex-grow: 1;
+        border: none;
+        font-size: 1.1em;
+
+        &:focus {
+            outline: none;
+        }
+
+        margin-left:2%;
+    }
+}

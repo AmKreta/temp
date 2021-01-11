@@ -1,0 +1,30 @@
+@import '../../../assets/globalStyles.scss';
+
+.loginPage {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: Min(400px, 100%);
+    height:90%;
+    padding:2%;
+
+    
+    
+    .signUpPageFooter{
+        height:15%;
+        display:flex;
+        flex-flow:column nowrap;
+        justify-content: space-between;
+    }
+}
+
+@media only screen and ( min-width : $medium ){
+    .login{
+        height:50%;
+        border:1px solid red;
+        .signUpPageFooter{
+            height:30%;
+        }
+    }
+}

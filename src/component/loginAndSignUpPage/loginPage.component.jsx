@@ -1,144 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button } from '@material-ui/core';
+import './loginPage.styles.scss';
+
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import PhoneIcon from '@material-ui/icons/Phone';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+
+//custom components
+import OtpInput from './otpInput/otpInput.component';
+import Input from './input/input.component';
+
+//reusableComponent
+import SecondaryIconButton from '../reusableComponent/secondaryIconButton.component';
 
 
-//material ui imports
-import { Grid, withStyles } from '@material-ui/core';
-import { Card } from '@material-ui/core';
+const LoginPage = ({ history }) => {
+    const [username, setUserName] = useState('');
+    const [phoneNo, setPhoneNo] = useState('');
+    const [otp, setOtp] = useState({ enabled: false, sending: false, sent: false, value: ['', '', '', '', '', ''] });
 
-
-// custom components
-import CardHeaderComponent from './cardHeader/cardHeader.component';
-import CardContentComponent from './cardContent/cardContent.component';
-import CardActionComponent from './cardAction/cardAction.component';
-import LoginPageFooter from './loginPageFooter/loginPageFooter.component';
-
-//custom functions
-import fetchCall from '../fetchCall/fetchCall';
-
-//creating styles
-const styles = theme => ({
-    loginPage: {
-        padding: theme.spacing(1)
-    },
-    enterInfoCard: {
-        padding: `${theme.spacing(2)}px 0`
-    }
-});
-
-
-
-// creating component
-class LoginPage extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            timer: { min: 2, sec: 0 },
-            name: '',
-            phoneNo: '',
-            showOtpComponent: false,
-            otp: ['', '', '', '', '', ''],
-            isVarifiedByServer: false
-        };
-        // contains object returned by setInterval for the otp countdown
-        this.timerInterval = null;
-    }
-
-    setName = e => {
-        this.setState({ name: e.target.value });
-    }
-
-    setPhoneNo = e => {
-        /*if (false) {
-            //check for validation
+    useEffect(() => {
+        if (phoneNo.length === 10 && !otp.enabled) {
+            setOtp(prevState => ({ ...prevState, enabled: true }));
         }
-        else {
+    }, [phoneNo]);
 
-        }*/
-        this.setState({ phoneNo: e.target.value }, () => {
-            if (!this.timerInterval && this.state.phoneNo.length === 10) {
-                this.setShowOtpComponentTrue();
-                this.timerInterval = setInterval(() => {
-                    // setting timer after entering phone number
-                    this.setState(prevState => {
-                        if (prevState.timer.min === 0 && prevState.timer.sec === 0) {
-                            clearInterval(this.timerInterval);
-                            this.timerInterval = null;
-                        }
-                        else if (prevState.timer.sec === 0) {
-                            return ({ timer: { min: prevState.timer.min - 1, sec: 59 } });
-                        }
-                        else {
-                            return ({ timer: { min: prevState.timer.min, sec: prevState.timer.sec - 1 } });
-                        }
-                    });
-                }, 1000);
-            }
-        });
-    }
+    return (
+        <div className="loginPage">
 
-    setOtp = (value, index) => {
-        let tempOtp = this.state.otp;
-        tempOtp[index] = value;
-        this.setState({ otp: tempOtp });
-    }
+            <SecondaryIconButton label='User Login'>
+                <AccountCircleIcon />
+            </SecondaryIconButton>
 
-    setShowOtpComponentTrue = (e) => {
-        this.setState({
-            showOtpComponent: true
-        });
-    }
+            <Input value={username} onChange={(e) => { setUserName(e.target.value) }} placeHolder='user name'>
+                <AccountCircleIcon />
+            </Input>
 
-    verificationProcess = () => {
-        let endPointForSignInVerification = '';
-        let method = 'get';
-        let requestBody = {
-            name: this.state.name,
-            phoneNO: this.state.phoneNO,
-            otp: this.state.otp
-        }
-        fetchCall(endPointForSignInVerification, method, requestBody);
-    }
+            <Input value={phoneNo} onChange={(e) => { setPhoneNo(e.target.value) }} placeHolder='phone no.' >
+                <PhoneIcon />
+            </Input>
 
-    componentDidMount() {
+            <OtpInput {...{ otp, setOtp }} />
 
-    }
+            <Button fullWidth variant='contained' color='primary' onClick={()=>history.push('/allowAccess')} >Sign In</Button>
 
-    render() {
-        const { classes } = this.props;
-        return (
+            <div className="signUpPageFooter">
+                <SecondaryIconButton label='Store Login'>
+                    <StorefrontIcon />
+                </SecondaryIconButton>
+                <hgroup>
+                    <h4>Or</h4>
+                    <h4>Set up your stor here </h4>
+                </hgroup>
+            </div>
 
-            <Grid container item xs={12} sm={8} md={4} justify='center' alignItems='stretch' className={classes.loginPage}>
-                <Grid item xs={12}>
-                    <Card className={classes.enterInfoCard}>
-                        <Grid container item direction='column' spacing={1} alignItems='stretch'>
-                            <CardHeaderComponent />
-                            <CardContentComponent
-                                timer={this.state.timer}
-                                showOtpComponent={this.state.showOtpComponent}
-                                setShowOtpComponentTrue={this.setShowOtpComponentTrue}
-                                name={this.state.name}
-                                phoneNo={this.state.phoneNo}
-                                otp={this.state.otp}
-                                setName={this.setName}
-                                setPhoneNo={this.setPhoneNo}
-                                setOtp={this.setOtp}
-                            />
-                            <CardActionComponent />
-                        </Grid>
-                    </Card>
-                </Grid>
-                <LoginPageFooter />
-            </Grid>
-
-        );
-    }
-    componentWillUnmount() {
-
-        if (this.timerInterval) {
-            clearInterval(this.timerInterval);
-        }
-
-    }
+        </div>
+    );
 }
 
-export default withStyles(styles)(LoginPage);
+export default LoginPage;

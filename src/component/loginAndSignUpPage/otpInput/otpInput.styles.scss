@@ -1,0 +1,35 @@
+.otpInputContainer {
+    text-align: left;
+
+    &.enabled {
+        opacity: 1;
+    }
+
+    &.disabled {
+        opacity: .4;
+        pointer-events: none;
+    }
+
+    .resendIn {
+        text-align: right;
+    }
+
+    .otpInput {
+        text-align: center;
+        display: flex;
+        flex-flow: row nowrap;
+
+        &>input {
+            font-size: 1.1em;
+            width: 15%;
+            margin: 1.5% 0;
+            margin-left: 1.5%;
+            padding: 3% 5%;
+            border: 1px solid #ccc;
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+}

@@ -4,7 +4,7 @@ $locationIconSize:20px;
 $starIconSize:13px;
 $starIconColor:orange;
 $cardHeight:160px;
-$maxCardWidth:100%;//50px;
+$maxCardWidth:100%; //50px;
 
 @mixin dispFlex($alignItems, $justifyContent) {
     display: flex;
@@ -17,10 +17,10 @@ $maxCardWidth:100%;//50px;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-template-areas:
-        "name   name   name    isVarified isVarified"
-        "avatar avatar address address    stars"
-        "avatar avatar address address    distance"
-        "type   type   type    type       closeBy"
+        "name   name   name   name    isVarified isVarified"
+        "avatar avatar address address address    stars"
+        "avatar avatar address address address    distance"
+        "type   type   type   type    type       closeBy"
     ;
     @include card();
     margin-top: 15px;
@@ -36,15 +36,12 @@ $maxCardWidth:100%;//50px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        padding-left: 10%;
-
-        &>p {
-            margin-right: 20%;
-        }
+        padding-left: 2%;
     }
 
     .avatar {
         grid-area: avatar;
+        @include dispFlex(flex, flex-start);
 
         .avatarImage {
             max-height: 100%;
@@ -60,7 +57,8 @@ $maxCardWidth:100%;//50px;
         scrollbar-width: none;
         font-weight: bold;
         color: lighten(#000000, 20%);
-        @include dispFlex(flex-end, center);
+        @include dispFlex(center, center);
+        padding: 0 3%;
     }
 
     .isVarified {
@@ -77,7 +75,7 @@ $maxCardWidth:100%;//50px;
     .stars {
         grid-area: stars;
 
-        @include dispFlex(flex-end, center);
+        @include dispFlex(flex-end, flex-end);
 
         .starIcons {
             height: $starIconSize;
@@ -89,7 +87,7 @@ $maxCardWidth:100%;//50px;
     .distance {
         grid-area: distance;
         font-weight: 400px;
-        @include dispFlex(flex-end, space-between);
+        @include dispFlex(flex-end, flex-end);
 
         .distanceIcon {
             color: lighten(#000000, 20%);
@@ -102,10 +100,11 @@ $maxCardWidth:100%;//50px;
         grid-area: type;
         font-size: .7em;
         font-weight: bold;
-        @include dispFlex(stretch, space-around);
+        @include dispFlex(stretch, space-between);
 
         .typeOption {
-            @include dispFlex(center, space-around);
+            margin-top:3%;
+            @include dispFlex(center, space-evenly);
             flex-flow: column nowrap;
             text-align: left;
         }
@@ -116,6 +115,6 @@ $maxCardWidth:100%;//50px;
     .closeBy {
         grid-area: closeBy;
         font-size: .6em;
-        @include dispFlex(flex-end, center)
+        @include dispFlex(flex-end, flex-end);
     }
 }
