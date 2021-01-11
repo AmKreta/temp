@@ -1,27 +1,36 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import './search.styles.scss';
 
-//reusable component
-import InputWithIcon from '../../../../reusableComponent/InputwithIcon/inputWithIcon.component';
+import SearchInput from './searchInput/searchInput.component';
+import SearchInputWithSuggestion from './searchInputWithSuggestion/searchInputWithSuggestion.component';
 
-const Search = () => {
+const Search = ({ searchInput, setSearchInput }) => {
+
+    const [isFocused, setIsFocused] = useState(false);
+    const [recentSearches, setRecentSearches] = useState(['abc', 'abc', 'abc']);
+
+    const changeHandler = useCallback((e) => {
+        setSearchInput(e.target.value);
+    }, [setSearchInput]);
+
+    const focusHandler = useCallback((e) => {
+        setIsFocused(true);
+    }, []);
+
+    const blurHandler = useCallback((e) => {
+        setIsFocused(false);
+    }, []);
+
+
     return (
-        <div className="search">
-            <div className="searchInput">
-                <InputWithIcon />
-                <div className="searchButtonContainer">
-                    <button type='button'>ReOrder</button>
-                </div>
-            </div>
-            <div className="recentSearch">
-                <div>
-                    <p>Recent Search:-</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                    <p>abc</p>
-                </div>
-            </div>
-        </div>
+        <React.Fragment>
+            <SearchInput {...{ searchInput, recentSearches, focusHandler }} />
+            {
+                isFocused
+                    ? <SearchInputWithSuggestion {...{ searchInput, recentSearches, changeHandler, blurHandler }} />
+                    : null
+            }
+        </React.Fragment>
     );
 }
 

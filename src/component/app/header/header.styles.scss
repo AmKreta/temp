@@ -1,6 +1,14 @@
-.appHeader{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    height:5%;
+@import '../../../../assets/globalStyles.scss';
+
+.appHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 5%;
+}
+
+@media only screen and (min-width: $medium) {
+    .appHeader {
+        display: none;
+    }
 }

@@ -1,27 +1,32 @@
 @import '../../../../assets/globalStyles.scss';
 
-$iconSize:3vh;
+$iconSize:convert(150, percent, px);
 
 .inputContainer {
-    width: 80%;
+    margin:0 auto;
+    width: var(--width);
+    height: Min(100%, var(--height));
     background: white;
     box-shadow: 0 0 15px #ccc;
     display: flex;
     align-items: center;
-    border-radius: 10px;
-    padding: 0 2%;
+    border-radius: 5px;
+    padding: var(--padding);
+    overflow: hidden;
 
     &>input {
-        flex-grow: 1;
         padding: 10px;
         border: none;
+        flex-grow: 1;
+        color: darken(#ccc, 20%);
+        font-size:1.1em;
 
         &:focus {
             outline: none;
         }
     }
 
-    .icon {
+    .inputIcon {
         color: $lightBlue;
         height: $iconSize;
         width: $iconSize;

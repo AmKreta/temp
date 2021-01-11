@@ -9,6 +9,14 @@ $darkGreen:#128C7e;
 $blueGradient:linear-gradient(to right, #2BBEC8, #1DE9B6);
 $pinkGradient:linear-gradient(to right, #220555, #EC2B7A);
 
+@mixin card($borderRadius:10px){
+    box-shadow:0 0 15px #ccc;
+    border-left:1px solid #ccc;
+    border-right:1px solid #ccc;
+    border-bottom:2px solid #ccc;
+    border-radius:$borderRadius;
+}
+
 @mixin centerElement() {
     display: grid;
     place-items: center;
@@ -16,3 +24,36 @@ $pinkGradient:linear-gradient(to right, #220555, #EC2B7A);
 
 $medium:500px;
 $large:768px;
+
+@function convert($value, $currentUnit, $convertUnit) {
+
+    @if $currentUnit==px {
+        @if $convertUnit==em {
+            @return $value / 16+0em;
+        }
+
+        @else if $convertUnit==percent {
+            @return percentage($value / 16);
+        }
+    }
+
+    @else if $currentUnit==em {
+        @if $convertUnit==px {
+            @return $value * 16+0px;
+        }
+
+        @else if $convertUnit==percent {
+            @return percentage($value);
+        }
+    }
+
+    @else if $currentUnit==percent {
+        @if $convertUnit==px {
+            @return $value * 16 / 100+0px;
+        }
+
+        @else if $convertUnit==em {
+            @return $value / 100+0em;
+        }
+    }
+}

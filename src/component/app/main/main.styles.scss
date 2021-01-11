@@ -1,3 +1,15 @@
-.appMain{
-    height:85%;
+@import '../../../../assets/globalStyles.scss';
+
+.appMain {
+    height: 85%;
+    width: 100%;
+    background: white;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+}
+
+@media only screen and ( min-width: $medium ){
+    .appMain{
+        height:100%;
+    }
 }

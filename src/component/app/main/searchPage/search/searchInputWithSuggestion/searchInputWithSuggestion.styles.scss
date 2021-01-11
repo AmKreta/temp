@@ -1,0 +1,79 @@
+@import '../../../../../../../assets/globalStyles.scss';
+@import '../../search.sharableStyle.scss';
+
+//$searchHeight,$flexWidth,maxFlexItemWidth defined in search.sharableStyles.scss
+
+$iconSize:43px;
+
+.searchInputContainer {
+    background: rgba(0, 0, 0, .7);
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+
+    //@include card();
+    &>div {
+        background: white;
+        overflow-y: scroll;
+        overflow-x: auto;
+        max-height: 350px;
+    }
+
+    .searchInput {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 0 1%;
+        border-bottom: 1px solid #ccc;
+        height: 50px;
+
+        &>input {
+            flex-grow: 1;
+            border: none;
+            padding: 10px;
+            font-size: 1.1em;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+
+    }
+
+    .recentSearch {
+        text-align: left;
+    }
+
+    .suggestions {
+        text-align: left;
+    }
+}
+
+@media only screen and (min-width: $medium) {
+    .searchInputContainer {
+        position: absolute;
+        width: Min($flexItemWidth, $maxFlexItemWidth);
+        background: none;
+        height: auto;
+        max-height: 400px;
+
+        &>div {
+            @include card();
+        }
+
+        .searchInput {
+            height: auto;
+        }
+    }
+}

@@ -8,6 +8,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import ApartmentIcon from '@material-ui/icons/Apartment';
 import Battery20Icon from '@material-ui/icons/Battery20';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { MdLocationOn } from 'react-icons/md';
+import { IconContext } from 'react-icons';
 
 const useStyles = makeStyles((theme) => ({
     colorWhite: {
@@ -23,9 +25,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const IconButtonContainer = ({ icon, caption, onClick }) => {
+const IconButtonContainer = ({ icon, caption, onClick, hideInSmallScreen }) => {
     return (
-        <div className="iconButton">
+        <div className={`iconButton ${hideInSmallScreen ? 'hiddenIconButton' : null}`}>
             <div className="iconContainer">
                 <IconButton onClick={onClick}>
                     {icon}
@@ -44,7 +46,7 @@ const ButtonContainer = ({ label }) => {
     return (
         <div className="buttonContainer">
             <IconButton className={classes.blueColor}>
-                <ExitToAppIcon fontSize='medium' />
+                <ExitToAppIcon />
             </IconButton>
             <Button className={classes.blueColor}>
                 {label}
@@ -84,15 +86,39 @@ const Home = ({ history, match }) => {
                     caption='Pathology'
                     onClick={() => { gotoPage("search/pathology") }}
                 />
+                <IconButtonContainer
+                    icon={<Battery20Icon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
+                    caption='Pathology'
+                    onClick={() => { gotoPage("search/pathology") }}
+                    hideInSmallScreen
+                />
+                <IconButtonContainer
+                    icon={<Battery20Icon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
+                    caption='Pathology'
+                    onClick={() => { gotoPage("search/pathology") }}
+                    hideInSmallScreen
+                />
 
             </div>
+
+            <div className="signInTab">
+                <div className='signInButtonContainer'>
+                    <IconContext.Provider value={{ className: 'signInButtonIcon' }}>
+                        <MdLocationOn />
+                    </IconContext.Provider>
+                    <Button type='button'>Sign IN</Button>
+                </div>
+            </div>
+
             <div className="buttonTab">
 
                 <ButtonContainer label='Book Appointment / Order' />
                 <ButtonContainer label='Upload Prescription' />
                 <ButtonContainer label='Reorder or Reappointment' />
                 <ButtonContainer label='Setup Your Business Website' />
-
+                <div className="appLogo">
+                    appLogo
+                </div>
             </div>
         </div>
     );

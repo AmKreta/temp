@@ -1,0 +1,68 @@
+@import '../../../../../../../assets/globalStyles.scss';
+@import '../../search.sharableStyle.scss';
+
+//$searchHeight,$flexWidth,maxFlexItemWidth defined in search.sharableStyles.scss
+//$blueGradient is defined in globalStyles.scss
+
+
+.search {
+    height: $searchHeight;
+    width: Min($flexItemWidth, $maxFlexItemWidth);
+    margin: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+
+    .searchInput {
+        height: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        justify-content: space-evenly;
+
+        .searchButtonContainer {
+            &>button {
+                height: 100%;
+                color: white;
+                background: $blueGradient;
+                border: none;
+                padding: 0 4%;
+                font-weight: bold;
+                border-radius: 5px;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    .recentSearch {
+        width: $flexItemWidth;
+        margin: auto;
+
+        &>div {
+            min-width: min-content;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: flex-start;
+            align-items: flex-end;
+            padding-top: 1%;
+            padding-left: 2%;
+
+            &>p {
+                &:not(:first-child) {
+                    color: $lightBlue;
+                }
+
+                padding:0 5px;
+            }
+
+        }
+    }
+}

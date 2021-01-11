@@ -1,14 +1,21 @@
 @import '../../../../../../assets/globalStyles.scss';
+@import '../search.sharableStyle.scss';
+
+//$filterHeight,$flexWidth,maxFlexItemWidth is defined in search.sharableStyles.scss
 
 $highLightSize:15px;
 
 .filter {
-    height: 7%;
+    height: $filterHeight;
+    width: Min($flexItemWidth, $maxFlexItemWidth);
+    margin: auto;
     display: flex;
-    align-items: center;
+    flex-flow: row nowrap;
     justify-content: space-around;
-    align-items: stretch;
-    margin:0 4%;
+    align-items: center;
+    position: relative;
+    font-size: .8em;
+    color: lighten(#000000, 50%);
 
     .filterItem {
         position: relative;
@@ -16,21 +23,45 @@ $highLightSize:15px;
         align-items: flex-end;
 
         .filterLabel {
-            color: lighten(#000000, 50%);
+            &.active {
+                //background-color: #ccc;
+                color: black;
+            }
         }
 
         .highlight {
             position: absolute;
             background: red;
-            top: 0;
-            right: 0;
-            transform: translate(50%, 60%);
+            top: -80%;
+            right: -20%;
+            //bottom: 30%;
+            //right: -15%;
             border-radius: 50%;
             color: white;
             height: $highLightSize;
             width: $highLightSize;
-            font-size: .8em;
+            font-size: .75em;
             @include centerElement();
+        }
+    }
+
+    .customFilterButton {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: Min($flexItemWidth, $maxFlexItemWidth);
+        left:50%;
+        transform:translate(-50%);
+        text-align:left;
+        display:flex;
+        align-items:center;
+    }
+}
+
+@media only screen and ( min-width: $medium ){
+    .filter{
+        .customFilterButton{
+            padding:0 4%;
         }
     }
 }

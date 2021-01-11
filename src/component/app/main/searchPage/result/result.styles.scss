@@ -1,6 +1,33 @@
+@import '../search.sharableStyle.scss';
+@import '../../../../../../assets/globalStyles.scss';
+
+//$resultHeight,$flexWidth,maxFlexItemWidth is defined in search.sharableStyles.scss
+
+$padding: 2%;
+
 .result {
-    height: 82%;
+    height: $resultHeight;
+    width: calc($flexItemWidth + 2* $padding);
+    margin: auto;
     overflow-y: scroll;
     scrollbar-width: none;
-    padding: 0 2%;
+    padding: 0 $padding;
+}
+
+@media only screen and (min-width : $large) {
+    .result {
+        grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    }
+}
+
+@media only screen and (min-width : $medium) {
+    .result {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(340px, .8fr));
+        grid-gap: 2%;
+        justify-items: center;
+        align-items: start;
+        justify-content: center;
+        align-items: start;
+    }
 }

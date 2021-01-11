@@ -18,6 +18,15 @@ const Search = () => {
             {
                 data.map((item, index) => <SearchResultcard {...item} key={index} />)
             }
+            {
+                data.map((item, index) => <SearchResultcard {...item} key={index} />)
+            }
+            {
+                data.map((item, index) => <SearchResultcard {...item} key={index} />)
+            }
+            {
+                data.map((item, index) => <SearchResultcard {...item} key={index} />)
+            }
         </div>
     );
 }

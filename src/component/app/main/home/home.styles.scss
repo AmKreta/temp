@@ -20,32 +20,42 @@
             height: 60px;
             width: 60px;
             text-align: center;
-            position:relative;
+            position: relative;
+            @include centerElement();
+
+            &.hiddenIconButton {
+                display: none;
+            }
 
             .iconContainer {
+                @include centerElement();
                 height: 100%;
                 width: 100%;
                 background: $blue;
                 border-radius: 50%;
             }
 
-            .caption{
-                margin-top:3px;
+            .caption {
+                margin-top: 3px;
                 font-size: .8em;
             }
 
-            .iconTabNotification{
-                position:absolute;
-                height:20px;
-                width:20px;
-                border-radius:50%;
-                background:red;
-                color:white;
-                top:0;
-                right:0;
+            .iconTabNotification {
+                position: absolute;
+                height: 20px;
+                width: 20px;
+                border-radius: 50%;
+                background: red;
+                color: white;
+                top: 0;
+                right: 0;
             }
 
         }
+    }
+
+    .signInTab {
+        display: none;
     }
 
     .buttonTab {
@@ -53,16 +63,97 @@
         flex-flow: column nowrap;
         align-items: center;
         justify-content: flex-start;
-        margin-top:5%;
+        margin-top: 5%;
+
+        .appLogo {
+            display: none;
+        }
 
         .buttonContainer {
             width: 80%;
-            margin-top:3%;
+            margin-top: 3%;
             text-align: left;
-            border:1px solid #ccc;
-            border-radius:10px;
-            box-shadow:0 0 10px 0px #ccc;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px 0px #ccc;
         }
     }
 }
 
+@media only screen and (min-width : $medium) {
+    .home {
+        .iconTab {
+            -ms-flex-order: 2;
+            order: 3;
+            margin-top: 0;
+            height: 20%;
+            justify-content: center;
+
+            .iconButton {
+                margin: 0 2%;
+
+                &.hiddenIconButton {
+                    display: Grid;
+                }
+            }
+        }
+
+        .buttonTab {
+            -ms-flex-order: 0;
+            order: 1;
+            margin-top: 0;
+            flex-flow: row nowrap;
+            justify-content: flex-end;
+            align-items: center;
+            padding: .5%;
+            height: 10%;
+            position: relative;
+
+            .appLogo {
+                display: block;
+                position: absolute;
+                left: 0;
+            }
+
+            .buttonContainer {
+                width: auto;
+                margin-top: 0;
+
+                transform: scale(.9);
+            }
+        }
+
+        .signInTab {
+            display: block;
+            -ms-flex-order: 2;
+            order: 2;
+            height: 70%;
+            position: relative;
+
+            .signInButtonContainer {
+                background-color: $blue;
+                position: absolute;
+                left: 10%;
+                bottom: 10%;
+                display: flex;
+                align-items: center;
+                border-radius: 10px;
+                width: Max(15%, 130px);
+
+                .signInButtonIcon {
+                    background-image: $pinkGradient;
+                    border-radius: 50%;
+                    padding: 2px;
+                    height: 40px;
+                    width: 40px;
+                    color: white;
+                }
+
+                &>button {
+                    flex-grow: 1;
+                    color: white;
+                }
+            }
+        }
+    }
+}

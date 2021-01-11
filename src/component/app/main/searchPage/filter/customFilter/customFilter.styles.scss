@@ -1,0 +1,62 @@
+@import '../../../../../../../assets/globalStyles.scss';
+
+$cardHeight:50%;
+$cardWidth:Min(85%, 350px);
+$cardMarginTop:Min(20%, 100px);
+
+.customFilterContainer {
+    background-color: rgba(255, 255, 255, .85);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+
+    .customFilter {
+        background-color: white;
+        height: $cardHeight;
+        width: $cardWidth;
+        margin: auto;
+        margin-top: $cardMarginTop;
+        padding: 0 2%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: space-evenly;
+        position: relative;
+        @include card();
+
+        .closeIcon {
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+
+        .filterBy {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 0 5%;
+
+            &>div {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+
+                &>span {
+                    margin-left: 10%;
+                }
+
+                &>input[ type="radio"] {
+                    background-color: $blue;
+                }
+            }
+        }
+
+        &>input {
+            padding: 2.5% 1%;
+            font-size: 1.1em;
+        }
+    }
+}

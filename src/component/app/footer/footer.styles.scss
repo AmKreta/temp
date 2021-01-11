@@ -17,3 +17,9 @@
         color: rgba(0, 0, 0, .9);
     }
 }
+
+@media only screen and ( min-width : $medium ){
+    .appFooter{
+        display:none;
+    }
+}

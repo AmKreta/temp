@@ -3,8 +3,8 @@
 $locationIconSize:20px;
 $starIconSize:13px;
 $starIconColor:orange;
-$cardHeight:33%;
-
+$cardHeight:160px;
+$maxCardWidth:100%;//50px;
 
 @mixin dispFlex($alignItems, $justifyContent) {
     display: flex;
@@ -17,21 +17,17 @@ $cardHeight:33%;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(4, 1fr);
     grid-template-areas:
-        "name  name   name    isVarified isVarified"
+        "name   name   name    isVarified isVarified"
         "avatar avatar address address    stars"
         "avatar avatar address address    distance"
         "type   type   type    type       closeBy"
     ;
-    border-radius: 10px;
+    @include card();
     margin-top: 15px;
     grid-gap: 1px;
-    box-shadow: 0 0 10px #ccc;
-    overflow: hidden;
     padding: 2%;
-    border-bottom: 1px solid #ccc;
-
-    width: 100%;
     height: $cardHeight;
+    width: Min(100%, $maxCardWidth);
 
     .name {
         grid-area: name;
@@ -72,54 +68,54 @@ $cardHeight:33%;
         overflow: hidden;
         @include dispFlex(flex-end, flex-end);
 
-            &>img {
-                max-width: 100%;
-                max-height: 100%;
-            }
-        }
-
-        .stars {
-            grid-area: stars;
-
-            @include dispFlex(flex-end, center);
-
-            .starIcons {
-                height: $starIconSize;
-                width: $starIconSize;
-                color: $starIconColor;
-            }
-        }
-
-        .distance {
-            grid-area: distance;
-            font-weight: 400px;
-            @include dispFlex(flex-end, space-between);
-
-            .distanceIcon {
-                color: lighten(#000000, 20%);
-                height: $locationIconSize;
-                width: $locationIconSize;
-            }
-        }
-
-        .type {
-            grid-area: type;
-            font-size: .7em;
-            font-weight: bold;
-            @include dispFlex(stretch, space-around);
-
-            .typeOption {
-                @include dispFlex(center, space-around);
-                flex-flow: column nowrap;
-                text-align: left;
-            }
-
-            color:$brown;
-        }
-
-        .closeBy {
-            grid-area: closeBy;
-            font-size: .6em;
-            @include dispFlex(flex-end, center)
+        &>img {
+            max-width: 100%;
+            max-height: 100%;
         }
     }
+
+    .stars {
+        grid-area: stars;
+
+        @include dispFlex(flex-end, center);
+
+        .starIcons {
+            height: $starIconSize;
+            width: $starIconSize;
+            color: $starIconColor;
+        }
+    }
+
+    .distance {
+        grid-area: distance;
+        font-weight: 400px;
+        @include dispFlex(flex-end, space-between);
+
+        .distanceIcon {
+            color: lighten(#000000, 20%);
+            height: $locationIconSize;
+            width: $locationIconSize;
+        }
+    }
+
+    .type {
+        grid-area: type;
+        font-size: .7em;
+        font-weight: bold;
+        @include dispFlex(stretch, space-around);
+
+        .typeOption {
+            @include dispFlex(center, space-around);
+            flex-flow: column nowrap;
+            text-align: left;
+        }
+
+        color:$brown;
+    }
+
+    .closeBy {
+        grid-area: closeBy;
+        font-size: .6em;
+        @include dispFlex(flex-end, center)
+    }
+}
