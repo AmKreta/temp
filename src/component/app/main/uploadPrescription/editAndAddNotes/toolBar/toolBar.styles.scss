@@ -1,0 +1,20 @@
+@import '../tools.sharableStyle.scss';
+@import '../../../../../../../assets/globalStyles.scss';
+
+.toolBar {
+    height: $height;
+    width: $width;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    bottom: $bottom;
+    background-color: $backgroundColor;
+}
+
+@media only screen and(min-width: $medium) {
+    .toolBar {
+        height: $heightInMediumDevices
+    }
+}

@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { connect } from 'react-redux';
 import './customFilter.styles.scss';
 
 //reusable component
@@ -7,7 +8,10 @@ import PrimaryButton from '../../../../../reusableComponent/primaryButton.compon
 import Icon from '../../../../../reusableComponent/icon/icon.component';
 import { AiOutlineClose } from 'react-icons/ai';
 
-const CustomFilter = ({ setFilter, toggleCustomFilterModal }) => {
+//importing actions
+import { setSearchFilterLocation, setSearchFilterSpeciality } from '../../../../../../actions/action';
+
+const CustomFilter = ({ filter, setSearchFilterLocation, setSearchFilterSpeciality, toggleCustomFilterModal }) => {
     const customFilterRef = useRef();
 
     useEffect(() => {
@@ -22,7 +26,13 @@ const CustomFilter = ({ setFilter, toggleCustomFilterModal }) => {
     }, [setInput]);
 
     const setFliters = () => {
-        setFilter(input);
+        /*if () {
+            setSearchFilterLocation(input);
+        }
+        else {
+            setSearchFilterSpeciality(input);
+        }*/
+        console.log('setFilter');
     }
 
     return (
@@ -53,4 +63,13 @@ const CustomFilter = ({ setFilter, toggleCustomFilterModal }) => {
     );
 }
 
-export default CustomFilter;
+const mapStateToProps = state => ({
+    filter: state.search.filter //{location:bool,speciality:bool,value:any}
+});
+
+const mapDispatchToProps = dispatch => ({
+    setSearchFilterLocation: location => dispatch(setSearchFilterLocation(location)),
+    setSearchFilterSpeciality: speciality => dispatch(setSearchFilterSpeciality(speciality))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomFilter);

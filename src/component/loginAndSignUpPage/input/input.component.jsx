@@ -1,11 +1,11 @@
 import React from 'react';
 import './input.styles.scss';
 
-const InputWithIcon = ({ children, value, onChange, placeHolder }) => {
+const InputWithIcon = ({ children, value, onChange, placeholder, type = 'text' }) => {
     return (
         <div className="input">
             {children}
-            <input value={value} onChange={onChange} placeholder={placeHolder} />
+            <input type={type} value={value} onChange={onChange} placeholder={placeholder} />
         </div>
     );
 }

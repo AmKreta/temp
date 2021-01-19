@@ -10,9 +10,6 @@ const locationReducer = (state = initialSatte, action) => {
         case SET_LOCATION:
             return { state: action.payload.city, city: action.payload.city };
         default:
-            if (!action.type.includes('@@redux/')) {
-                console.log(`action type ${action.type} is not defined for locationReducer`);
-            }
             return state;
     }
 }

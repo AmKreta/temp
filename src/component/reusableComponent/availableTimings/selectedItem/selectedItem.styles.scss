@@ -1,0 +1,35 @@
+.activeListItem {
+
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+
+    .availablityListItem {
+
+        .card {
+            grid-template-areas:
+                "avatar name           close"
+                "avatar specialization time"
+                "avatar fees           time";
+
+            .viewAllTimings {
+                display: none;
+            }
+
+            .close {
+                grid-area: close;
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    .timings {
+        flex-grow: 1;
+        border-radius: 10px;
+    }
+}

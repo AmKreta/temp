@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import React, { useEffect } from 'react';
+import axios from 'axios';
 import './loginPage.styles.scss';
+import { connect } from 'react-redux';
 
+//importing icons
+import { Button } from '@material-ui/core';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PhoneIcon from '@material-ui/icons/Phone';
 import StorefrontIcon from '@material-ui/icons/Storefront';
@@ -13,49 +16,86 @@ import Input from './input/input.component';
 //reusableComponent
 import SecondaryIconButton from '../reusableComponent/secondaryIconButton.component';
 
+//importing actions
+import { setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue, setOtpErrorTrue } from '../../actions/action';
 
-const LoginPage = ({ history }) => {
-    const [username, setUserName] = useState('');
-    const [phoneNo, setPhoneNo] = useState('');
-    const [otp, setOtp] = useState({ enabled: false, sending: false, sent: false, value: ['', '', '', '', '', ''] });
+//importing services
+import { VERIFY_OTP } from '../../services/services';
+
+
+const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue }) => {
 
     useEffect(() => {
         if (phoneNo.length === 10 && !otp.enabled) {
-            setOtp(prevState => ({ ...prevState, enabled: true }));
+            setOtpEnabledTrue();
+            setOtpSendingTrue();
         }
     }, [phoneNo]);
+
+    const signIn = (e) => {
+        axios
+            .get(VERIFY_OTP, { phoneNo: phoneNo, otp: otp })
+            .then(res => res.data)
+            .then(data => {
+                if (data.status) {
+
+                    history.push('/allowAccess')
+                }
+                else {
+                    setOtpErrorTrue();
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     return (
         <div className="loginPage">
 
-            <SecondaryIconButton label='User Login'>
-                <AccountCircleIcon />
-            </SecondaryIconButton>
+            <div className="signUpContent">
+                <SecondaryIconButton label='User Login'>
+                    <AccountCircleIcon />
+                </SecondaryIconButton>
 
-            <Input value={username} onChange={(e) => { setUserName(e.target.value) }} placeHolder='user name'>
-                <AccountCircleIcon />
-            </Input>
+                <Input value={userName} onChange={(e) => { setUserName(e.target.value) }} placeholder='user name'>
+                    <AccountCircleIcon />
+                </Input>
 
-            <Input value={phoneNo} onChange={(e) => { setPhoneNo(e.target.value) }} placeHolder='phone no.' >
-                <PhoneIcon />
-            </Input>
+                <Input type='number' value={phoneNo} onChange={(e) => { setPhoneNo(e.target.value) }} placeholder='phone no.'>
+                    <PhoneIcon />
+                </Input>
 
-            <OtpInput {...{ otp, setOtp }} />
+                <OtpInput />
 
-            <Button fullWidth variant='contained' color='primary' onClick={()=>history.push('/allowAccess')} >Sign In</Button>
+                <Button fullWidth variant='contained' color='primary' onClick={() => { history.push('/allowAccess') }} >Sign In</Button>
+            </div>
 
             <div className="signUpPageFooter">
                 <SecondaryIconButton label='Store Login'>
                     <StorefrontIcon />
                 </SecondaryIconButton>
-                <hgroup>
-                    <h4>Or</h4>
-                    <h4>Set up your stor here </h4>
-                </hgroup>
+                <h4>Or</h4>
+                <h4>Set up your store here </h4>
             </div>
 
         </div>
     );
 }
 
-export default LoginPage;
+const mapStateToProps = state => ({
+    userName: state.login.userName,
+    phoneNo: state.login.phoneNo,
+    otp: state.login.otp
+});
+
+const mapDispatchToProps = dispatch => ({
+    setUserName: (val) => dispatch(setUserName(val)),
+    setPhoneNo: (val) => dispatch(setPhoneNo(val)),
+    setOtpEnabledTrue: () => dispatch(setOtpEnabledTrue()),
+    setOtpSendingTrue: () => dispatch(setOtpSendingTrue()),
+    setOtpErrorTrue: () => dispatch(setOtpErrorTrue())
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

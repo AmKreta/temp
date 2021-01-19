@@ -1,0 +1,15 @@
+@import '../tools.sharableStyle.scss';
+
+.toolsContainer {
+    height: $height;
+    width: $width;
+    position: absolute;
+    background-color: $backgroundColor;
+    bottom: $bottom;
+
+    .exitTools {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+}

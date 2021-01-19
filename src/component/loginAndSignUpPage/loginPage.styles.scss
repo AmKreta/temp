@@ -4,27 +4,37 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: Min(400px, 100%);
-    height:90%;
-    padding:2%;
+    height: 90%;
+    padding: 1% 2%;
 
-    
-    
-    .signUpPageFooter{
-        height:15%;
-        display:flex;
-        flex-flow:column nowrap;
+    .signUpContent {
+        height: 75%;
+        width: 100%;
+        display: flex;
+        @include card();
+        flex-flow: column nowrap;
+        align-items: center;
         justify-content: space-between;
+        padding: 3% 5%;
+    }
+
+    .signUpPageFooter {
+        height: 18%;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+
+        &>h4:nth-child(2) {
+            color: $blue;
+        }
     }
 }
 
-@media only screen and ( min-width : $medium ){
-    .login{
-        height:50%;
-        border:1px solid red;
-        .signUpPageFooter{
-            height:30%;
-        }
+@media only screen and (min-width : $medium) {
+    .loginPage {
+        padding: 0 1%;
+        height: 95%;
     }
 }

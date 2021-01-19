@@ -10,13 +10,13 @@ const SearchPage = ({ location }) => {
 
     const [searchInput, setSearchInput] = useState('');
     const [filter, setFilter] = useState(null);       //to show result based on custom filter
-    const [showOnly, setShowOnly] = useState('All');  //to show results from one of doctor,hospital,pharmacy,lab
+    const [category, setCategory] = useState('All');  //to show results from one of doctor,hospital,pharmacy,lab
     const [results, setResults] = useState([]);
 
     return (
         <div className="searchPage">
-            <Search {...{ searchInput, setSearchInput }} />
-            <Filter {...{ searchInput, setFilter, showOnly, setShowOnly }} />
+            <Search />
+            <Filter />
             <Result {...{ results }} />
         </div>
     );

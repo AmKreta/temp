@@ -1,6 +1,8 @@
 import React from 'react';
-import './searchResultcard.styles.scss';
+import './infoCard.styles.scss';
+import { withRouter } from 'react-router-dom';
 
+//importing icons 
 import { MdLocationOn } from 'react-icons/md';
 import { IconContext } from 'react-icons';
 import { RiStarSFill, RiWalletFill } from 'react-icons/ri';
@@ -9,9 +11,23 @@ import { BsCalendarFill } from 'react-icons/bs';
 
 import logo from './check.svg';
 
-const SearchResultCard = ({ id, name, type, avatar, address, isVarified, distance, stars, closeBy }) => {
+const SearchResultCard = ({ history, id, name, type, avatar, address, isVarified, distance, stars, closeBy, small, bio, location }) => {
+
+    const gotoPage = (e) => {
+        if (type === 'doctor') {
+            history.push(`/home/doctorBooking/${id}`);
+        }
+        else if (type === 'hospital') {
+            history.push(`/home/hospitalBooking/${id}`);
+        } else if (type === 'pharmacy') {
+            history.push(`/home/pharmacyOrder/${id}`);
+        } else if (type === 'pathology') {
+            history.push(`/home/labOrder/${id}`);
+        }
+    }
+
     return (
-        <div className="searchResultCard" id={id}>
+        <div className={`searchResultCard ${small ? 'small' : null}`} id={id} onClick={gotoPage}>
             <div className="name">
                 <p>
                     {name}
@@ -74,8 +90,15 @@ const SearchResultCard = ({ id, name, type, avatar, address, isVarified, distanc
                     </IconContext.Provider>
                 </div>
             </div>
+            <div className="bio">
+                multi speciality hospital
+            </div>
+            <div className="location">
+                pune
+            </div>
         </div>
     );
+
 }
 
-export default SearchResultCard;
+export default withRouter(SearchResultCard);

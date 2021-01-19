@@ -4,6 +4,7 @@
 //$searchHeight,$flexWidth,maxFlexItemWidth defined in search.sharableStyles.scss
 
 $iconSize:43px;
+$searchesAndSuggestionPadding:4%;
 
 .searchInputContainer {
     background: rgba(0, 0, 0, .7);
@@ -22,10 +23,10 @@ $iconSize:43px;
 
     //@include card();
     &>div {
-        background: white;
+        background-color: white;
         overflow-y: scroll;
         overflow-x: auto;
-        max-height: 350px;
+        max-height: 400px;
     }
 
     .searchInput {
@@ -36,6 +37,10 @@ $iconSize:43px;
         padding: 0 1%;
         border-bottom: 1px solid #ccc;
         height: 50px;
+        position: sticky;
+        top: 0;
+        background-color:white;
+
 
         &>input {
             flex-grow: 1;
@@ -51,12 +56,36 @@ $iconSize:43px;
 
     }
 
-    .recentSearch {
+    .recentSearchesAndSuggestion {
         text-align: left;
-    }
 
-    .suggestions {
-        text-align: left;
+        color:lighten(black,40%);
+
+        &>p:nth-child(1) {
+            color: #ccc;
+            padding: 1% $searchesAndSuggestionPadding;
+        }
+
+        .searchesAndSuggestion {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            border-bottom: 1px solid lighten(#ccc, 10%);
+            padding:0 $searchesAndSuggestionPadding;
+            padding-top: 3%;
+            &:hover{
+                cursor:pointer;
+            }
+        }
+
+        &.suggestion {
+
+            //removing border form last suggested item
+            &>.searchesAndSuggestion:last-child {
+                border-bottom: none;
+            }
+        }
     }
 }
 
@@ -67,7 +96,7 @@ $iconSize:43px;
         background: none;
         height: auto;
         max-height: 400px;
-        margin-left:1%;
+        margin-left: 1%;
 
         &>div {
             @include card();
@@ -75,6 +104,17 @@ $iconSize:43px;
 
         .searchInput {
             height: auto;
+        }
+    }
+
+    .recentSearchesAndSuggestion {
+        &>p:nth-child(1) {
+            color: #ccc;
+            padding: 1% 0;
+        }
+
+        .searchesAndSuggestion {
+            padding-top: 1.5%;
         }
     }
 }

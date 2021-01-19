@@ -1,4 +1,4 @@
-@import '../../../../../../../assets/globalStyles.scss';
+@import '../../../../assets/globalStyles.scss';
 
 $locationIconSize:20px;
 $starIconSize:13px;
@@ -13,21 +13,34 @@ $maxCardWidth:100%; //50px;
 }
 
 .searchResultCard {
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    transition: .5s ease-in-out;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    grid-template-areas:
-        "name   name   name   name    isVarified isVarified"
-        "avatar avatar address address address    stars"
-        "avatar avatar address address address    distance"
-        "type   type   type   type    type       closeBy"
-    ;
+    grid-template-areas: "name    name    name     name     isVarified  isVarified"
+    "avatar  avatar  address  address  address     stars"
+    "avatar  avatar  address  address  address     distance"
+    "type    type    type     type     type        closeBy";
+
     @include card();
     margin-top: 15px;
     grid-gap: 1px;
     padding: 2%;
     height: $cardHeight;
     width: Min(100%, $maxCardWidth);
+
+    .bio {
+        display: none;
+    }
+
+    .location {
+        display: none;
+    }
 
     .name {
         grid-area: name;
@@ -103,7 +116,7 @@ $maxCardWidth:100%; //50px;
         @include dispFlex(stretch, space-between);
 
         .typeOption {
-            margin-top:3%;
+            margin-top: 3%;
             @include dispFlex(center, space-evenly);
             flex-flow: column nowrap;
             text-align: left;
@@ -116,5 +129,48 @@ $maxCardWidth:100%; //50px;
         grid-area: closeBy;
         font-size: .6em;
         @include dispFlex(flex-end, flex-end);
+    }
+
+
+    &.small {
+        transition: .5s ease-in-out;
+        grid-template-columns: 2fr 5fr 2fr;
+        grid-template-rows: repeat(3, 1fr);
+        grid-template-areas:
+            "avatar name empty"
+            "avatar bio  empty"
+            "avatar bio  location ";
+        height: calc(#{$cardHeight} / 2);
+        grid-gap: 1%;
+
+        &>div {
+            display: none;
+        }
+
+        .avatar {
+            display: block;
+        }
+
+        .name {
+            display: block;
+            text-align: left;
+        }
+
+        .bio {
+            display: block;
+            grid-area: bio;
+            display: flex;
+            @include dispFlex(center, flex-start);
+            color: lighten(black, 40%);
+            overflow: hidden;
+        }
+
+        .location {
+            display: block;
+            grid-area: location;
+            font-size: .9em;
+            @include dispFlex(flex-end, flex-end);
+            overflow: hidden;
+        }
     }
 }

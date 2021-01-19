@@ -1,0 +1,45 @@
+.doctorBooking {
+    padding: 0 2%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+
+    .infoCardContainer {
+        max-height: 33.3%;
+    }
+
+    .info {
+        height: 32%;
+        width: 100%;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        position: relative;
+        transition: .5s ease-in-out;
+        margin: 1% 0;
+        position: relative;
+
+        &.activeTab {
+            flex-grow: 1;
+            transition: .5s ease-in-out;
+        }
+
+        &>p {
+            color: lighten(black, 10%);
+            text-align: left;
+            font-size: 1.1em;
+        }
+
+        &>p:nth-child(2) {
+            position: absolute;
+            top: 0;
+            right: 0;
+            color: lighten(black, 40%);
+            font-size: 1em;
+        }
+
+    }
+}

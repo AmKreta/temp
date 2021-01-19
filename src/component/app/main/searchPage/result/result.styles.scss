@@ -7,7 +7,7 @@ $padding: 2%;
 
 .result {
     height: $resultHeight;
-    width: calc($flexItemWidth + 2* $padding);
+    width: calc( #{$flexItemWidth} + 2* #{$padding});
     margin: auto;
     overflow-y: scroll;
     scrollbar-width: none;

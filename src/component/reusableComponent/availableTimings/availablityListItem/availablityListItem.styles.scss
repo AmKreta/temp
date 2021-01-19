@@ -1,0 +1,88 @@
+@import '../../../../../assets/globalStyles.scss';
+
+
+.availablityListItem {
+    max-height: 75px;
+    height: 100%;
+    width: 100%;
+    background: rgb(245, 243, 242);
+    border-radius: 10px;
+    position: relative;
+
+    &:not(:last-child) {
+        margin-bottom: 1%;
+    }
+
+    .card {
+        padding: 1%;
+        height: 100%;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 3fr 7fr 4fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-areas:
+            "avatar name           time"
+            "avatar specialization time"
+            "avatar fees           timings";
+
+        &>div {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .name {
+            grid-area: name;
+            color: black;
+            justify-content: flex-start;
+        }
+
+        .avatar {
+            grid-area: avatar;
+
+            &>img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+        }
+
+        .specialization {
+            grid-area: specialization;
+            color: lighten(black, 40%);
+            justify-content: flex-start;
+            font-size: .9em;
+        }
+
+        .fees {
+            grid-area: fees;
+            justify-content: flex-start;
+
+            &>p {
+                color: white;
+                font-weight: bold;
+                background-color: $blue;
+                display: inline;
+                padding: 0 4%;
+                border-radius: 10px;
+            }
+        }
+
+        .timingToday {
+            grid-area: time;
+            text-align: right;
+            color: lighten(black, 40%);
+            font-size: .9em;
+            flex-flow: column nowrap;
+            align-items: stretch;
+            justify-content: space-evenly;
+        }
+
+        .viewAllTimings {
+            grid-area: timings;
+            font-size: .8em;
+            color: $blue;
+        }
+    }
+}

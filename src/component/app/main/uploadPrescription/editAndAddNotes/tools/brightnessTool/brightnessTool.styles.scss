@@ -1,0 +1,10 @@
+.brightness {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    &>input {
+        width: 80%;
+    }
+}

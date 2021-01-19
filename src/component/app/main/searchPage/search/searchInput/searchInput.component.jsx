@@ -1,17 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './searchInput.styles.scss';
 
 //reusable component
 import InputWithIcon from '../../../../../reusableComponent/InputwithIcon/inputWithIcon.component';
 
-const SearchInput = ({ searchInput, focusHandler, recentSearches }) => {
+const SearchInput = ({ query, focusHandler, recentSearches }) => {
     return (
         <div className="search">
             <div className="searchInput">
                 <InputWithIcon
                     width='80%'
                     padding='0 2%'
-                    value={searchInput}
+                    value={query}
                     onFocus={focusHandler}
                     height='100%'
                     onChange={() => { }}
@@ -32,4 +33,8 @@ const SearchInput = ({ searchInput, focusHandler, recentSearches }) => {
     );
 }
 
-export default SearchInput;
+const mapStateToProps = state => ({
+    query: state.search.query
+});
+
+export default connect(mapStateToProps)(SearchInput);

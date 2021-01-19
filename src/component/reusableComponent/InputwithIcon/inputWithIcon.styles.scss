@@ -1,23 +1,20 @@
 @import '../../../../assets/globalStyles.scss';
 
-$iconSize:convert(150, percent, px);
+$iconSize:30px;
 
 .inputContainer {
-    margin:0 auto;
     width: var(--width);
     height: Min(100%, var(--height));
     background: white;
     box-shadow: 0 0 15px #ccc;
-    display: flex;
-    align-items: center;
     border-radius: 5px;
     padding: var(--padding);
-    overflow: hidden;
+    position:relative;
 
     &>input {
         padding: 10px;
+        width:100%;
         border: none;
-        flex-grow: 1;
         color: darken(#ccc, 20%);
         font-size:1.1em;
 
@@ -27,6 +24,10 @@ $iconSize:convert(150, percent, px);
     }
 
     .inputIcon {
+        position:absolute;
+        right:0;
+        top:50%;
+        transform:translateY(-50%);
         color: $lightBlue;
         height: $iconSize;
         width: $iconSize;

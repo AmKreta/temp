@@ -20,6 +20,18 @@ import StoreIcon from '@material-ui/icons/Store';
     ** visiblity of icons excluding middle icon will change acc to active pages
  */
 
+
+/*
+   there are three types of footer-
+       1)with blue background and white icons with a bigger middle button
+       2)with white background and blue icons with all small icons
+       3)no footer
+*/
+
+/*
+    render props have been used for this 
+*/
+
 const useStyles = makeStyles(theme => ({
     colorWhite: {
         color: 'white'

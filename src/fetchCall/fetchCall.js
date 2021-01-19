@@ -1,6 +1,6 @@
 const fetchCall = async (endpoint, method, jwt, body) => {
 	let data;
-	const response = await fetch(`/api/${endpoint}`, {
+	const response = await fetch(endpoint, {
 		method: `${method}`,
 		headers: {
 			Accept: "application/json",

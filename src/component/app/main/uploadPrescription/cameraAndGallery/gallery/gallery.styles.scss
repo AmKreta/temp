@@ -1,0 +1,45 @@
+@import '../../../../../../../assets/globalStyles.scss';
+
+.gallery {
+    position: absolute;
+    bottom: 3%;
+    height: 18%;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    white-space: nowrap;
+    overflow: scroll;
+    align-items: center;
+    justify-content: flex-start;
+    background: rgba(0, 0, 0, .7);
+    transition: .5s ease-in-out;
+
+    .galleryImage {
+        max-width: 100%;
+        max-height: 100%;
+        margin: 5px 5px;
+
+        &:hover {
+            border: 5px solid $lightBlue;
+        }
+
+        &.activeImage{
+            border:5px solid $lightBlue;
+        }
+    }
+
+    &.active {
+        bottom: 0;
+        max-height: 80%;
+        height: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-gap: 3px;
+        transition: .5s ease-in-out;
+
+        .galleryImage {
+            width: 100%;
+            max-height: 100%;
+        }
+    }
+}

@@ -1,25 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+import { Button } from '@material-ui/core';
+import { connect } from 'react-redux';
 import './otpInput.styles.scss';
 
-import axios from 'axios';
+//reusable component
+import Loader from '../../reusableComponent/loading/loading.component';
 
-const OtpInput = ({ otp, setOtp }) => {
+//importing actions
+import { setOtpSendingTrue, setOtpSentTrue, setOtp } from '../../../actions/action';
 
-    var timerInterval = null;
-    const [timer, setTimer] = useState({ min: 2, sec: 0 });
+//importing services
+import { GET_OTP, VERIFY_OTP } from '../../../services/services';
+
+const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue }) => {
+
+    var timerInterval = useRef(null);
+    const [timer, setTimer] = useState({ min: 0, sec: 10 });
     const [isTimerStatrted, setTimerStarted] = useState(false);
 
+    const otpInputRef = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+
+    //making request to get otp ,otp.enabled only runs once
+    useEffect(() => {
+        if (otp.enabled) {
+            axios.get(GET_OTP)
+                .then(res => {
+                    console.log(res.data);
+                    setOtpSentTrue();
+                    //starting the timer
+                    setTimerStarted(true);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
+    }, [otp.enabled]);
+
+    //starting timer when user have entered 10 digits mobile no.
     useEffect(() => {
         if (isTimerStatrted) {
-            timerInterval = setInterval(() => {
-                if (timer.min == 0 && timer.sec == 0) {
+            timerInterval.current = setInterval(() => {
+                if (timer.min === 0 && timer.sec === 0) {
                     //if timer is 00:00
-                    clearInterval(timerInterval);
+                    clearInterval(timerInterval.current);
                     setTimerStarted(false);
                 }
                 else {
                     setTimer(prevState => {
-                        if (prevState.sec == 0) {
+                        console.log(timerInterval);
+                        if (prevState.sec === 0) {
                             //if timer is XX:00
                             return ({ min: prevState.min - 1, sec: 59 });
                         }
@@ -30,50 +60,80 @@ const OtpInput = ({ otp, setOtp }) => {
                     })
                 }
             }, 1000);
+            return () => {
+                clearInterval(timerInterval.current);
+            }
         }
-    }, [isTimerStatrted]);
+    }, [isTimerStatrted, timer]);
 
-    useEffect(() => {
-        //if otp is enabled set sending to true
-        //then make async call 
-        //tnen set sent to true and isTimerStarted to true to start the timer
-        if (otp.enabled) {
-            setOtp(prevState => ({ ...prevState, sending: true }));
-            axios
-                .post('', {})
-                .then(res => {
-                    setOtp(prevState => ({ ...prevState, sent: true, sending: false }));
-                    setTimerStarted(true);
-                })
-                .catch(err => {
-                    alert('something went wrong, refresh and start again');
-                })
+    const setOtpByIndex = (value, index) => {
+        let newOtpArray = otp.value;
+        newOtpArray[index] = value;
+        setOtp(newOtpArray);
+        if (index < 5 && otpInputRef[index + 1].current.value == '' && otpInputRef[index].current.value !== '') {
+            otpInputRef[index + 1].current.focus();
         }
-    }, [otp]);
+    }
+
+    const RresendHandler = (e) => {
+        setOtpSendingTrue();
+        setTimer({ min: 2, sec: 0 });
+        axios.get(GET_OTP)
+            .then(res => {
+                console.log(res.data);
+                setOtpSentTrue();
+                //starting the timer
+                setTimerStarted(true);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    }
 
     return (
         <div className={`otpInputContainer ${otp.enabled ? 'endabled' : 'disabled'}`}>
             <p>Enter sms code/otp</p>
             <div className="otpInput">
-                <input />
-                <input />
-                <input />
-                <input />
-                <input />
-                <input />
+                <input type='number' value={otp.value[0]} onChange={(e) => { setOtpByIndex(e.target.value, 0) }} maxLength={1} ref={otpInputRef[0]} />
+                <input type='number' value={otp.value[1]} onChange={(e) => { setOtpByIndex(e.target.value, 1) }} maxLength={1} ref={otpInputRef[1]} />
+                <input type='number' value={otp.value[2]} onChange={(e) => { setOtpByIndex(e.target.value, 2) }} maxLength={1} ref={otpInputRef[2]} />
+                <input type='number' value={otp.value[3]} onChange={(e) => { setOtpByIndex(e.target.value, 3) }} maxLength={1} ref={otpInputRef[3]} />
+                <input type='number' value={otp.value[4]} onChange={(e) => { setOtpByIndex(e.target.value, 4) }} maxLength={1} ref={otpInputRef[4]} />
+                <input type='number' value={otp.value[5]} onChange={(e) => { setOtpByIndex(e.target.value, 5) }} maxLength={1} ref={otpInputRef[5]} />
             </div>
-            {
-                otp.sent
-                    ? <p className='resendIn'>Resend in - {timer.min < 10 ? `0${timer.min}` : timer.min}:{timer.sec < 10 ? `0${timer.sec}` : timer.sec}</p>
-                    : null
-            }
-            {
-                otp.sending
-                    ? 'loader'
-                    : null
-            }
+            <div className="rightAlignedText">
+                {
+                    otp.error
+                        ? <span className="incorrectOtp">
+                            entered otp is incorrect
+                        </span>
+                        : null
+                }
+                {
+                    otp.sent
+                        ? isTimerStatrted
+                            ? <p className='resendIn'>Resend in - {timer.min < 10 ? `0${timer.min}` : timer.min}:{timer.sec < 10 ? `0${timer.sec}` : timer.sec}</p>
+                            : <Button color='primary' onClick={RresendHandler}>Resend</Button>
+                        : null
+                }
+                {
+                    otp.sending
+                        ? <Loader />
+                        : null
+                }
+            </div>
         </div>
     );
 }
 
-export default OtpInput;
+const mapStateToProps = state => ({
+    otp: state.login.otp
+});
+
+const mapDispatchToProps = dispatch => ({
+    setOtpSendingTrue: () => dispatch(setOtpSendingTrue()),
+    setOtpSentTrue: () => dispatch(setOtpSentTrue()),
+    setOtp: (otpArray) => dispatch(setOtp(otpArray))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(OtpInput);

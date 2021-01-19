@@ -19,7 +19,7 @@
         display: flex;
         flex-flow: row nowrap;
         align-items: stretch;
-        justify-content: flex-start;
+        justify-content: space-evenly;
 
         .searchButtonContainer {
             &>button {

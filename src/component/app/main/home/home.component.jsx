@@ -3,6 +3,9 @@ import './home.styles.scss';
 
 import clsx from 'clsx';
 
+import { HOSPITAL, DOCTOR, PATHOLOGY, PHARMACY, AMBULANCE } from '../categories';
+
+//icons
 import { IconButton, makeStyles, Button } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import ApartmentIcon from '@material-ui/icons/Apartment';
@@ -10,6 +13,9 @@ import Battery20Icon from '@material-ui/icons/Battery20';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { MdLocationOn } from 'react-icons/md';
 import { IconContext } from 'react-icons';
+
+//images
+//import BackgroundImage from '../../../../assets/images/background.png';
 
 const useStyles = makeStyles((theme) => ({
     colorWhite: {
@@ -41,14 +47,14 @@ const IconButtonContainer = ({ icon, caption, onClick, hideInSmallScreen }) => {
     );
 }
 
-const ButtonContainer = ({ label }) => {
+const ButtonContainer = ({ label, onClick }) => {
     const classes = useStyles();
     return (
-        <div className="buttonContainer">
-            <IconButton className={classes.blueColor}>
+        <div className="buttonContainer" onClick={onClick}>
+            <IconButton className={classes.blueColor} >
                 <ExitToAppIcon />
             </IconButton>
-            <Button className={classes.blueColor}>
+            <Button className={classes.blueColor} >
                 {label}
             </Button>
         </div>
@@ -63,33 +69,33 @@ const Home = ({ history, match }) => {
     }
 
     return (
-        <div className="home">
+        <div className="home" /*style={{ background: `transparent url(${BackgroundImage}) 0% 0% repeat padding-box`, backgroundSize: 'contain' }}*/>
             <div className="iconTab">
 
                 <IconButtonContainer
                     icon={<PersonIcon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Doctor'
-                    onClick={() => { gotoPage("search/doctor") }}
+                    onClick={() => { gotoPage(`search/${DOCTOR}`) }}
                 />
                 <IconButtonContainer
                     icon={<ApartmentIcon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Pharmacy'
-                    onClick={() => { gotoPage("search/pharmacy") }}
+                    onClick={() => { gotoPage(`search/${PHARMACY}`) }}
                 />
                 <IconButtonContainer
                     icon={<PersonIcon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Hospital'
-                    onClick={() => { gotoPage("search/hospital") }}
+                    onClick={() => { gotoPage(`search/${HOSPITAL}`) }}
                 />
                 <IconButtonContainer
                     icon={<Battery20Icon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
                     caption='Pathology'
-                    onClick={() => { gotoPage("search/pathology") }}
+                    onClick={() => { gotoPage(`search/${PATHOLOGY}`) }}
                 />
                 <IconButtonContainer
                     icon={<Battery20Icon fontSize='large' className={clsx([classes.colorWhite, classes.large])} />}
-                    caption='Pathology'
-                    onClick={() => { gotoPage("search/pathology") }}
+                    caption='Ambulance'
+                    onClick={() => { gotoPage(`search/${AMBULANCE}`) }}
                     hideInSmallScreen
                 />
                 <IconButtonContainer
@@ -113,12 +119,13 @@ const Home = ({ history, match }) => {
             <div className="buttonTab">
 
                 <ButtonContainer label='Book Appointment / Order' />
-                <ButtonContainer label='Upload Prescription' />
+                <ButtonContainer label='Upload Prescription' onClick={() => { gotoPage('uploadPrescription') }} />
                 <ButtonContainer label='Reorder or Reappointment' />
                 <ButtonContainer label='Setup Your Business Website' />
                 <div className="appLogo">
                     appLogo
                 </div>
+
             </div>
         </div>
     );
