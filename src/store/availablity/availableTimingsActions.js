@@ -1,4 +1,4 @@
-import { SET_AVAILABLE_TODAY, SET_AVAILABLE_TOMORROW, SET_ACTIVE_TAB } from './availableTimingsActionTypes';
+import { SET_AVAILABLE_TODAY, SET_AVAILABLE_TOMORROW, SET_ACTIVE_TAB, SET_ACTIVE_ITEM } from './availableTimingsActionTypes';
 import axios from 'axios';
 
 export const fetchAvailableToday = function () {
@@ -30,5 +30,18 @@ export const fetchAvailableTomorrow = function () {
 }
 
 export const setActiveTab = function (tab) {
-    return { type: SET_ACTIVE_TAB, payload: { activeTab: tab } }
+    return { type: SET_ACTIVE_TAB, payload: tab }
+}
+
+export const setActiveTabNull = function () {
+    return { type: SET_ACTIVE_TAB, payload: null }
+}
+
+export const setActiveItem = function (item) {
+    //store all data required to form a card
+    return { type: SET_ACTIVE_ITEM, payload: item }
+}
+
+export const setActiveItemNull = function () {
+    return { type: SET_ACTIVE_ITEM, payload: null }
 }

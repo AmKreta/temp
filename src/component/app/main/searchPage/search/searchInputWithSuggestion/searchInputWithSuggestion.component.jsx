@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import './searchInputWithSuggestion.styles.scss';
 
@@ -12,7 +12,7 @@ import { BiBook } from 'react-icons/bi';
 import Icon from '../../../../../reusableComponent/icon/icon.component';
 
 //importing actions
-import { setSearchQuery } from '../../../../../../actions/action';
+import { setSearchQuery, fetchSearchResult, fetchSearchSuggestion } from '../../../../../../actions/action';
 
 const SearchesAndSuggestions = ({ label, children, setSearchQuery, blurHandler }) => {
     return (
@@ -27,6 +27,7 @@ const SearchesAndSuggestions = ({ label, children, setSearchQuery, blurHandler }
 
 const SearchInputWithSuggestion = ({ recentSearches, query, blurHandler, setSearchQuery }) => {
     const inputRef = useRef(null);
+    const [searchInput, setSearchInput] = useState(query);
 
     useEffect(() => {
         if (inputRef) {
@@ -40,10 +41,10 @@ const SearchInputWithSuggestion = ({ recentSearches, query, blurHandler, setSear
 
                 <div className="searchInput">
                     <Icon>
-                        <BiArrowBack />
+                        <BiArrowBack onClick={blurHandler} />
                     </Icon>
-                    <input value={query} onChange={(e) => setSearchQuery(e.target.value)} ref={inputRef} />
-                    <Icon onClick={blurHandler}>
+                    <input value={searchInput} onChange={(e) => setSearchInput(e.target.value)} ref={inputRef} />
+                    <Icon onClick={(e) => { blurHandler(); setSearchQuery(searchInput); }}>
                         <AiOutlineSearch />
                     </Icon>
                 </div>
@@ -84,7 +85,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setSearchQuery: (val) => dispatch(setSearchQuery(val))
+    setSearchQuery: (val) => dispatch(setSearchQuery(val)),
+    fetchSearchResult: () => dispatch(fetchSearchResult()),
+    fetchSearchSuggestion: () => dispatch(fetchSearchSuggestion())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchInputWithSuggestion);

@@ -1,6 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './infoCard.styles.scss';
 import { withRouter } from 'react-router-dom';
+
+//importing actions
+import { selectData } from '../../../actions/action';
 
 //importing icons 
 import { MdLocationOn } from 'react-icons/md';
@@ -9,39 +13,59 @@ import { RiStarSFill, RiWalletFill } from 'react-icons/ri';
 import { GrAdd } from 'react-icons/gr';
 import { BsCalendarFill } from 'react-icons/bs';
 
+
+//verified logo
 import logo from './check.svg';
 
-const SearchResultCard = ({ history, id, name, type, avatar, address, isVarified, distance, stars, closeBy, small, bio, location }) => {
+const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, small, selectData }) => {
+    const {
+        _id,
+        firstName,
+        lastName,
+        businessName,
+        type,
+        image,
+        area,
+        city,
+        state,
+        pincode,
+        isVerified,
+        //isActive,
+        specialist
+    } = data;
 
     const gotoPage = (e) => {
+        selectData(data);
         if (type === 'doctor') {
-            history.push(`/home/doctorBooking/${id}`);
+            history.push(`/home/doctorBooking/${_id}`);
         }
         else if (type === 'hospital') {
-            history.push(`/home/hospitalBooking/${id}`);
+            history.push(`/home/hospitalBooking/${_id}`);
         } else if (type === 'pharmacy') {
-            history.push(`/home/pharmacyOrder/${id}`);
+            history.push(`/home/pharmacyOrder/${_id}`);
         } else if (type === 'pathology') {
-            history.push(`/home/labOrder/${id}`);
+            history.push(`/home/labOrder/${_id}`);
         }
     }
 
     return (
-        <div className={`searchResultCard ${small ? 'small' : null}`} id={id} onClick={gotoPage}>
+        <div className={`searchResultCard ${small ? 'small' : null}`} id={_id} onClick={gotoPage}>
             <div className="name">
                 <p>
-                    {name}
+                    {businessName}
                 </p>
             </div>
             <div className="avatar">
-                <img src={avatar} className='avatarImage' alt={`profile pic of ${name}`} />
+                <img src={image} className='avatarImage' alt={`profile pic of ${firstName + lastName}`} />
             </div>
             <div className="address">
-                <p>{address}</p>
+                <p>{area}</p>
+                <p>{city}</p>
+                <p>{state},{' ' + pincode}</p>
             </div>
             <div className="isVarified">
                 {
-                    isVarified ? <img src={logo} alt='verified' /> : null
+                    isVerified ? <img src={logo} alt='verified' /> : null
                 }
             </div>
             <div className="stars">
@@ -83,7 +107,7 @@ const SearchResultCard = ({ history, id, name, type, avatar, address, isVarified
                         <BsCalendarFill />
                     </IconContext.Provider>
                 </div>
-                <div className="typeOption option2">
+                <div className="typeOption option3">
                     <p>COD/UPI</p>
                     <IconContext.Provider value={{ className: 'typeOptionIcon' }}>
                         <RiWalletFill />
@@ -91,7 +115,7 @@ const SearchResultCard = ({ history, id, name, type, avatar, address, isVarified
                 </div>
             </div>
             <div className="bio">
-                multi speciality hospital
+                {specialist}
             </div>
             <div className="location">
                 pune
@@ -101,4 +125,8 @@ const SearchResultCard = ({ history, id, name, type, avatar, address, isVarified
 
 }
 
-export default withRouter(SearchResultCard);
+const mapDispatchToProps = dispatch => ({
+    selectData: (data) => dispatch(selectData(data))
+});
+
+export default connect(null,mapDispatchToProps)(withRouter(InfoCard));

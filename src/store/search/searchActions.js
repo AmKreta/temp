@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { SET_SEARCH_RESULT, SET_SEARCH_QUERY, SET_SEARCH_SUGGESTION, SET_SEARCH_CATEGORY, SET_SEARCH_FILTER } from './searchActionTypes';
+import { SET_SEARCH_RESULT, SET_SEARCH_QUERY, SET_SEARCH_SUGGESTION, SET_SEARCH_CATEGORY, SET_SEARCH_FILTER, SELECT_DATA } from './searchActionTypes';
+import { SEARCH_BUSINESS } from '../../services/services';
 
 const setSearchresult = function (data) {
     return { type: SET_SEARCH_RESULT, payload: { loading: false, data: data } }
@@ -29,9 +30,15 @@ export const fetchSearchResult = function (query, category, filter) {
     return dispatch => {
         dispatch(setSearchResultLoadingTrue());
         axios
-            .get('')
+            .get(SEARCH_BUSINESS(category, query, filter))
             .then(res => {
-                dispatch(setSearchresult(res.data));
+                let result = res.data;
+                if (result.status) {
+                    dispatch(setSearchresult(result.payload));
+                }
+                else {
+                    dispatch(setSearchResultErrorTrue());
+                }
             })
             .catch(err => {
                 dispatch(setSearchResultErrorTrue());
@@ -53,6 +60,10 @@ export const fetchSearchSuggestion = function () {
     }
 }
 
+export const selectData = function (data) {
+    return { type: SELECT_DATA, payload:data }
+}
+
 export const setSearchQuery = function (query) {
     return { type: SET_SEARCH_QUERY, payload: query }
 }
@@ -68,3 +79,4 @@ export const setSearchFilterLocation = function (location) {
 export const setSearchFilterSpeciality = function (speciality) {
     return { type: SET_SEARCH_FILTER, payload: { location: false, speciality: true, value: speciality } }
 }
+

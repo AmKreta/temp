@@ -43,12 +43,12 @@ const Filter = ({ match, setSearchCategory, category, query }) => {
     }, [setShowCustomFilterModal]);
 
     useEffect(() => {
-        setSearchCategory(match.url.split('/').slice(-2)[0]);
+        setSearchCategory(match.params.category);
     }, []);
 
     return (
         <div className="filter">
-            <FilterItem label={'All'} />
+            <FilterItem label={'All'} {...{ category, setSearchCategory }} />
             <FilterItem label={HOSPITAL} highlight={4}  {...{ category, setSearchCategory }} />
             <FilterItem label={DOCTOR} highlight={7} {...{ category, setSearchCategory }} />
             <FilterItem label={PHARMACY} highlight={8} {...{ category, setSearchCategory }} />
@@ -74,7 +74,7 @@ const Filter = ({ match, setSearchCategory, category, query }) => {
     );
 }
 
-const mapStateToprops = state => ({
+const mapStateToProps = state => ({
     category: state.search.category,
     query: state.search.query
 });
@@ -83,4 +83,4 @@ const mapDispatchToProps = dispatch => ({
     setSearchCategory: val => dispatch(setSearchCategory(val)),
 });
 
-export default connect(mapStateToprops, mapDispatchToProps)(withRouter(Filter));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Filter));

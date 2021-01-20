@@ -1,26 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 import './result.styles.scss';
 
-//reusable component
+//custom component
+//import SearchResultcard from './searchResultCard/searchResultCard.component';
 import InfoCard from '../../../../reusableComponent/infoCard/infoCard.component.';
 
-const data = [
-    { name: 'Name', type: 'doctor', avatar: 'https://pickaface.net/gallery/avatar/20130418_030937_4133_dp.png', address: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore', stars: 5, isVarified: true, distance: '5.5km', closeBy: '10pm', id: 1 },
-    { name: 'Name', type: 'pharmacy', avatar: 'https://pickaface.net/gallery/avatar/20130418_030937_4133_dp.png', address: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ', stars: 4, isVarified: true, distance: '3.0km', closeBy: '10pm', id: 2 },
-    { name: 'Medical Store', type: 'hospital', avatar: 'https://pickaface.net/gallery/avatar/20130418_030937_4133_dp.png', address: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore', stars: 3, isVarified: true, distance: '1.0km', closeBy: '10pm', id: 3 },
-    { name: 'Name', type: 'pathology', avatar: 'https://pickaface.net/gallery/avatar/20130418_030937_4133_dp.png', address: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ', stars: 1, isVarified: true, distance: '3.5km', closeBy: '10pm', id: 4 },
-    { name: 'Medical Store', type: 'doctor', avatar: 'https://pickaface.net/gallery/avatar/20130418_030937_4133_dp.png', address: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ', stars: 4, isVarified: true, distance: '4.0km', closeBy: '10pm', id: 5 }
-]
+//importing actions
+import { fetchSearchResult } from '../../../../../actions/action';
 
-const Search = ({ results }) => {
+const Search = ({ result, query, category, filter, fetchSearchResult }) => {
+
+    useEffect(() => {
+        fetchSearchResult(query, category, filter);
+    }, [query, category, filter]);
 
     return (
         <div className="result">
             {
-                data.map((item, index) => <InfoCard {...item} key={index} />)
+                result.data.map((item) => <InfoCard data={item} key={item._id} />)
             }
         </div>
     );
 }
 
-export default Search;
+const mapStateToProps = state => ({
+    result: state.search.result,
+    query: state.search.query,
+    category: state.search.category,
+    filter: state.search.filter,
+    accessToken: state.token.accessToken
+});
+
+const mapDispatchToProps = dispatch => ({
+    fetchSearchResult: (query, category, filter) => dispatch(fetchSearchResult(query, category, filter))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

@@ -22,10 +22,10 @@ $maxCardWidth:100%; //50px;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    grid-template-areas: "name    name    name     name     isVarified  isVarified"
-    "avatar  avatar  address  address  address     stars"
-    "avatar  avatar  address  address  address     distance"
-    "type    type    type     type     type        closeBy";
+    grid-template-areas: "name     name     name     name     isVarified  isVarified"
+    "avatar   avatar   address  address  address     stars"
+    "avatar   avatar   address  address  address     distance"
+    "type     type     type     type     type     closeBy";
 
     @include card();
     margin-top: 15px;
@@ -49,7 +49,6 @@ $maxCardWidth:100%; //50px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        padding-left: 2%;
     }
 
     .avatar {
@@ -64,13 +63,19 @@ $maxCardWidth:100%; //50px;
 
     .address {
         grid-area: address;
-        font-size: .7em;
+        font-size: .8em;
         text-align: left;
         overflow: hidden;
         scrollbar-width: none;
         font-weight: bold;
         color: lighten(#000000, 20%);
-        @include dispFlex(center, center);
+        @include dispFlex(stretch, center);
+        flex-flow: column nowrap;
+
+        &>p {
+            text-align: left;
+        }
+
         padding: 0 3%;
     }
 
@@ -110,10 +115,15 @@ $maxCardWidth:100%; //50px;
     }
 
     .type {
-        grid-area: type;
         font-size: .7em;
         font-weight: bold;
-        @include dispFlex(stretch, space-between);
+        color: $brown;
+        grid-area: type;
+        width:100%;
+        display:grid;
+        grid-template-columns: 2fr 2fr 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas: "option1 option2 option3";
 
         .typeOption {
             margin-top: 3%;
@@ -122,7 +132,17 @@ $maxCardWidth:100%; //50px;
             text-align: left;
         }
 
-        color:$brown;
+        .option1 {
+            grid-area: option1;
+        }
+
+        .option2 {
+            grid-area: option2;
+        }
+
+        .option3 {
+            grid-area: option3;
+        }
     }
 
     .closeBy {
@@ -136,8 +156,7 @@ $maxCardWidth:100%; //50px;
         transition: .5s ease-in-out;
         grid-template-columns: 2fr 5fr 2fr;
         grid-template-rows: repeat(3, 1fr);
-        grid-template-areas:
-            "avatar name empty"
+        grid-template-areas: "avatar name empty"
             "avatar bio  empty"
             "avatar bio  location ";
         height: calc(#{$cardHeight} / 2);

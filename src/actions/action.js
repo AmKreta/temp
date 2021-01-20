@@ -16,6 +16,16 @@ import {
     setOtpWrongTrue
 } from '../store/login/loginActions';
 
+//availablity reducer to fecth available today and tomorrow list
+import {
+    fetchAvailableToday,
+    fetchAvailableTomorrow,
+    setActiveTab,
+    setActiveTabNull,
+    setActiveItem,
+    setActiveItemNull
+} from '../store/availablity/availableTimingsActions';
+
 //search Reducer
 import {
     fetchSearchResult,
@@ -23,7 +33,8 @@ import {
     setSearchQuery,
     setSearchCategory,
     setSearchFilterLocation,
-    setSearchFilterSpeciality
+    setSearchFilterSpeciality,
+    selectData
 } from '../store/search/searchActions';
 
 //exporting all actions
@@ -43,5 +54,12 @@ export {
     fetchSearchSuggestion,
     setSearchCategory,
     setSearchFilterLocation,
-    setSearchFilterSpeciality
+    setSearchFilterSpeciality,
+    selectData,
+    fetchAvailableToday,
+    fetchAvailableTomorrow,
+    setActiveTab,
+    setActiveTabNull,
+    setActiveItem,
+    setActiveItemNull
 };

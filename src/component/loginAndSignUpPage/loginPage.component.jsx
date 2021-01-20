@@ -17,7 +17,7 @@ import Input from './input/input.component';
 import SecondaryIconButton from '../reusableComponent/secondaryIconButton.component';
 
 //importing actions
-import { setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue, setOtpWrongTrue, setOtpErrorTrue } from '../../actions/action';
+import { setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue, setOtpWrongTrue, setOtpErrorTrue, updateAccessToken } from '../../actions/action';
 
 //importing services
 import { VERIFY_OTP } from '../../services/services';
@@ -40,6 +40,8 @@ const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, s
             .then(res => res.data)
             .then(data => {
                 if (data.status) {
+                    updateAccessToken(data.payload);
+                    console.log(data.payload);
                     history.push('/allowAccess');
                 }
                 else {
@@ -96,7 +98,8 @@ const mapDispatchToProps = dispatch => ({
     setOtpEnabledTrue: () => dispatch(setOtpEnabledTrue()),
     setOtpSendingTrue: () => dispatch(setOtpSendingTrue()),
     setOtpWrongTrue: () => dispatch(setOtpWrongTrue()),
-    setOtpErrorTrue: () => dispatch(setOtpErrorTrue())
+    setOtpErrorTrue: () => dispatch(setOtpErrorTrue()),
+    updateAccessToken: () => dispatch(updateAccessToken())
 })
 
 

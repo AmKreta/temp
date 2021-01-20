@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 //custom components
 import AvailablityList from './availablityList/availablityList.component';
@@ -15,17 +16,21 @@ const data = {
 };
 
 
-const availableToday = ({ item, selectItem }) => {
-    if (item) {
+const availableToday = ({ activeItem, isActive }) => {
+    if (activeItem && isActive) {
         return (
-            <SelectedItem data={data} {...{ item, selectItem }} />
+            <SelectedItem data={data} />
         );
     }
     else {
         return (
-            <AvailablityList data={data} {...{ item, selectItem }} />
+            <AvailablityList data={data} />
         );
     }
 }
 
-export default availableToday;
+const mapStateToProps = state => ({
+    activeItem: state.availableTimings.activeItem
+});
+
+export default connect(mapStateToProps)(availableToday);
