@@ -9,7 +9,7 @@ export const setPhoneNo = function (phoneNo) {
 }
 
 export const setOtpSendingTrue = function () {
-    return { type: SET_OTP, payload: { sending: true, sent: false } }
+    return { type: SET_OTP, payload: { sending: true, sent: false, error: false, wrong: false } }
 }
 
 export const setOtpSentTrue = function () {
@@ -25,5 +25,9 @@ export const setOtp = function (otpArray) {
 }
 
 export const setOtpErrorTrue = function () {
-    return { type: SET_OTP, payload: { error: true } }
+    return { type: SET_OTP, payload: { error: true, sending: false } }
+}
+
+export const setOtpWrongTrue = function () {
+    return { type: SET_OTP, payload: { wrong: true } }
 }

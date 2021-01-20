@@ -1,0 +1,27 @@
+@import '../../../../../assets/globalStyles.scss';
+
+$borderRadius:20px;
+
+.bookOrder {
+    height: 100%;
+    width: 100%;
+
+    .bookOrderChild {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: $purple;
+        z-index: 1;
+
+        .bookOrderChildMain {
+            background-color: white;
+            height: 88%;
+            border-top-left-radius: $borderRadius;
+            border-top-right-radius: $borderRadius;
+            padding:2% 3%;
+            overflow:hidden;
+        }
+    }
+}

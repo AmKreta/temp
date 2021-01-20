@@ -1,6 +1,8 @@
+const server = 'http://13.126.113.214:5001/';
 
-export const GET_OTP = "http://6431db0683c4.ngrok.io/api/auth/user-get-otp";
+
+export const GET_OTP = `${server}api/auth/user-get-otp`;
 
 // @reqBody={phoneNo,otp}
 // @res={ status:true/false, payload:jwt }
-export const VERIFY_OTP = 'http://6431db0683c4.ngrok.io/api/auth/user-verify-otp';
+export const VERIFY_OTP = `${server}api/auth/user-verify-otp`;

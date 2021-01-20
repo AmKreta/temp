@@ -10,6 +10,7 @@ import HospitalBooking from './hospitalBooking/hospitalBooking.component';
 import LabOrder from './labOrder/labOrder.component';
 import SearchPage from './searchPage/searchPage.component';
 import UploadPrescription from './uploadPrescription/uploadPrescription.component';
+import BookOrder from './bookOrder/bookOrder.component';
 import AboutPage from './aboutPage/aboutPage.component';
 
 const main = ({ match }) => {
@@ -24,6 +25,7 @@ const main = ({ match }) => {
                 <Route path={`${match.url}/search/:category`} component={SearchPage} />
                 <Route path={`${match.url}/uploadPrescription`} component={UploadPrescription} />
                 <Route path={`${match.url}/about/:id`} component={AboutPage} />
+                <Route path={`${match.url}/bookOrder/:category/:subCategory`} component={BookOrder} />
                 <Redirect to='/404' />
             </Switch>
         </main>

@@ -8,12 +8,12 @@ import './otpInput.styles.scss';
 import Loader from '../../reusableComponent/loading/loading.component';
 
 //importing actions
-import { setOtpSendingTrue, setOtpSentTrue, setOtp } from '../../../actions/action';
+import { setOtpSendingTrue, setOtpSentTrue, setOtp, setOtpErrorTrue } from '../../../actions/action';
 
 //importing services
-import { GET_OTP, VERIFY_OTP } from '../../../services/services';
+import { GET_OTP } from '../../../services/services';
 
-const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue }) => {
+const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorTrue }) => {
 
     var timerInterval = useRef(null);
     const [timer, setTimer] = useState({ min: 0, sec: 10 });
@@ -32,10 +32,10 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue }) => {
                     setTimerStarted(true);
                 })
                 .catch(err => {
-                    console.log(err);
+                    setOtpErrorTrue();
                 });
         }
-    }, [otp.enabled]);
+    }, [otp.enabled, setOtpErrorTrue, setOtpSentTrue]);
 
     //starting timer when user have entered 10 digits mobile no.
     useEffect(() => {
@@ -70,7 +70,7 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue }) => {
         let newOtpArray = otp.value;
         newOtpArray[index] = value;
         setOtp(newOtpArray);
-        if (index < 5 && otpInputRef[index + 1].current.value == '' && otpInputRef[index].current.value !== '') {
+        if (index < 5 && otpInputRef[index + 1].current.value === '' && otpInputRef[index].current.value !== '') {
             otpInputRef[index + 1].current.focus();
         }
     }
@@ -86,7 +86,7 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue }) => {
                 setTimerStarted(true);
             })
             .catch(err => {
-                console.log(err);
+                setOtpErrorTrue();
             });
     }
 
@@ -104,9 +104,22 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue }) => {
             <div className="rightAlignedText">
                 {
                     otp.error
-                        ? <span className="incorrectOtp">
-                            entered otp is incorrect
-                        </span>
+                        ? <React.Fragment>
+                            <span className="otpError">
+                                something went wrong
+                            </span>
+                            <Button color='primary' onClick={RresendHandler}>Resend</Button>
+                        </React.Fragment>
+                        : null
+                }
+                {
+                    otp.wrong
+                        ? <React.Fragment>
+                            <span className='otpError'>
+                                otp entered is wrong
+                            </span>
+                            <Button color='primary' onClick={RresendHandler}>Resend</Button>
+                        </React.Fragment>
                         : null
                 }
                 {
@@ -133,7 +146,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     setOtpSendingTrue: () => dispatch(setOtpSendingTrue()),
     setOtpSentTrue: () => dispatch(setOtpSentTrue()),
-    setOtp: (otpArray) => dispatch(setOtp(otpArray))
+    setOtp: (otpArray) => dispatch(setOtp(otpArray)),
+    setOtpErrorTrue: () => { dispatch(setOtpErrorTrue()) }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(OtpInput);

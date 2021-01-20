@@ -11,28 +11,30 @@
     .iconTab {
         margin-top: 2%;
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: row nowrap;
         align-items: center;
         justify-content: space-around;
         height: 15%;
-
+        width:100%;
+        
         .iconButton {
             height: 60px;
             width: 60px;
             text-align: center;
             position: relative;
-            @include centerElement();
 
             &.hiddenIconButton {
                 display: none;
             }
 
             .iconContainer {
-                @include centerElement();
                 height: 100%;
                 width: 100%;
                 background: $blue;
                 border-radius: 50%;
+                display:flex;
+                align-items:center;
+                justify-content:center;
             }
 
             .caption {

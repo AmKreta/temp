@@ -1,3 +1,5 @@
+@import '../../../../../assets/globalStyles.scss';
+
 .activeListItem {
 
     height: 100%;
@@ -6,6 +8,32 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
+
+    .availablity {
+        display: flex;
+        width:96%;
+        margin:auto;
+        flex-flow: row nowrap;
+        align-content: center;
+        justify-content: flex-start;
+        color: $blue;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: auto;
+
+        &>p {
+            margin: 0 3px;
+            padding:0 1px;
+            font-size:.8em;
+            padding-top:1%;
+
+            &.active {
+                background: rgb(245, 243, 242);
+
+            }
+        }
+    }
 
     .availablityListItem {
 

@@ -10,8 +10,8 @@ import Icon from '../../icon/icon.component';
 const AvailableTodayListItem = ({ id, name, specialization, fees, profilePicture, timingsToday, timings, item, selectItem }) => {
 
     return (
-        <div id={id} className={`availablityListItem ${item == id ? 'selected' : null}`} onClick={() => { selectItem(id) }}>
-            <div className="card">
+        <div id={id} className={`availablityListItem ${item === id ? 'selected' : null}`}>
+            <div className="card" onClick={() => { selectItem(id) }}>
                 <div className="name">
                     <p>{name}</p>
                 </div>
@@ -32,7 +32,7 @@ const AvailableTodayListItem = ({ id, name, specialization, fees, profilePicture
                     view All Timings
                 </div>
                 <div className="close">
-                    <Icon iconColor='grey' size='15px' onClick={() => { selectItem(3) }} >
+                    <Icon iconColor='grey' size='15px' onClick={(e) => { e.stopPropagation(); selectItem(null) }} >
                         <AiFillCloseCircle />
                     </Icon>
                 </div>

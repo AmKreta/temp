@@ -8,7 +8,8 @@ const initialState = {
         sending: false,
         sent: false,
         value: ['', '', '', '', '', ''],
-        error: false
+        error: false,
+        wrong:false
     }
 }
 

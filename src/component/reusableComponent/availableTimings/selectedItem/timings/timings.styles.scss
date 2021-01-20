@@ -1,0 +1,30 @@
+@import '../../../../../../assets/globalStyles.scss';
+
+.timings {
+    font-size: .9em;
+    background: rgb(245, 243, 242);
+    overflow-y: scroll;
+    overflow-x: auto;
+    flex-grow: 1;
+
+    table {
+        margin: 0 auto;
+        width: 90%;
+        height: 89%;
+        caption-side: bottom;
+        caption{
+            color:$blue;
+            font-weight:bold;
+            font-size:.9em;
+        }
+    }
+
+    table thead {
+        color: $lightBlue;
+    }
+
+    table tbody {
+        color: lighten(black, 40%);
+        font-size: .8em;
+    }
+}

@@ -8,9 +8,6 @@ import Result from './result/result.component';
 
 const SearchPage = ({ location }) => {
 
-    const [searchInput, setSearchInput] = useState('');
-    const [filter, setFilter] = useState(null);       //to show result based on custom filter
-    const [category, setCategory] = useState('All');  //to show results from one of doctor,hospital,pharmacy,lab
     const [results, setResults] = useState([]);
 
     return (

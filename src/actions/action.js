@@ -12,17 +12,14 @@ import {
     setOtpEnabledTrue,
     setOtpSendingTrue,
     setOtpSentTrue,
-    setOtpErrorTrue
+    setOtpErrorTrue,
+    setOtpWrongTrue
 } from '../store/login/loginActions';
 
 //search Reducer
 import {
-    setSearchresult,
-    setSearchResultLoadingTrue,
-    setSearchResultErrorTrue,
-    setSearchSuggestion,
-    setSearchSuggestionLoadingTrue,
-    setSearchSuggestionErrorTrue,
+    fetchSearchResult,
+    fetchSearchSuggestion,
     setSearchQuery,
     setSearchCategory,
     setSearchFilterLocation,
@@ -40,13 +37,10 @@ export {
     setOtpSendingTrue,
     setOtpSentTrue,
     setOtpErrorTrue,
+    setOtpWrongTrue,
     setSearchQuery,
-    setSearchresult,
-    setSearchResultLoadingTrue,
-    setSearchSuggestionLoadingTrue,
-    setSearchSuggestionErrorTrue,
-    setSearchResultErrorTrue,
-    setSearchSuggestion,
+    fetchSearchResult,
+    fetchSearchSuggestion,
     setSearchCategory,
     setSearchFilterLocation,
     setSearchFilterSpeciality

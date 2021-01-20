@@ -9,7 +9,7 @@ import { IconContext } from 'react-icons';
 const inputWithIcon = ({ width = '100%', padding = '0 2%', height = 'auto', value = '', onChange, onFocus, placeHolder = '' }) => {
     return (
         <div className="inputContainer" style={{ '--width': width, '--padding': padding, '--height': height }}>
-            <input type='text' value={value} onChange={onChange} onFocus={onFocus} placeHolder={placeHolder} />
+            <input type='text' value={value} onChange={onChange} onFocus={onFocus} placeholder={placeHolder} />
             <IconContext.Provider value={{ className: 'inputIcon' }}>
                 <AiOutlineSearch />
             </IconContext.Provider>

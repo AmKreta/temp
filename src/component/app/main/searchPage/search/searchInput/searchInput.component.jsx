@@ -16,6 +16,7 @@ const SearchInput = ({ query, focusHandler, recentSearches }) => {
                     onFocus={focusHandler}
                     height='100%'
                     onChange={() => { }}
+                    placeHolder='search'
                 />
                 <div className="searchButtonContainer">
                     <button type='button' >ReOrder</button>

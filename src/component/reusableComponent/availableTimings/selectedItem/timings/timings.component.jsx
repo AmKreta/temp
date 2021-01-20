@@ -5,6 +5,7 @@ const Timings = () => {
     return (
         <div className="timings">
             <table>
+                <caption>collapse timings</caption>
                 <thead>
                     <tr>
                         <th>Morning</th>
@@ -14,10 +15,39 @@ const Timings = () => {
                 </thead>
                 <tbody>
                     <tr>
-                        <td>2:00 AM-3:00 PM </td>
-                        <td>2:00 AM-3:00 PM </td>
-                        <td>2:00 AM-3:00 PM </td>
-                        <td>2:00 AM-3:00 PM </td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                    </tr>
+                    <tr>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td>2:00 AM</td>
                     </tr>
                 </tbody>
             </table>

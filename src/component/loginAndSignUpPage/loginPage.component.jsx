@@ -17,36 +17,37 @@ import Input from './input/input.component';
 import SecondaryIconButton from '../reusableComponent/secondaryIconButton.component';
 
 //importing actions
-import { setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue, setOtpErrorTrue } from '../../actions/action';
+import { setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue, setOtpWrongTrue, setOtpErrorTrue } from '../../actions/action';
 
 //importing services
 import { VERIFY_OTP } from '../../services/services';
 
 
-const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue }) => {
+const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, setOtpEnabledTrue, setOtpSendingTrue, setOtpWrongTrue }) => {
 
     useEffect(() => {
         if (phoneNo.length === 10 && !otp.enabled) {
             setOtpEnabledTrue();
             setOtpSendingTrue();
         }
-    }, [phoneNo]);
+    }, [phoneNo, otp.enabled, setOtpEnabledTrue, setOtpSendingTrue]);
 
     const signIn = (e) => {
+        const reqBody = { phoneNumber: phoneNo.toString(), otp: otp.value.join('') };
+        //const headers = { "Access-Control-Allow-Origin": "*" }
         axios
-            .get(VERIFY_OTP, { phoneNo: phoneNo, otp: otp })
+            .post(VERIFY_OTP, reqBody)
             .then(res => res.data)
             .then(data => {
                 if (data.status) {
-
-                    history.push('/allowAccess')
+                    history.push('/allowAccess');
                 }
                 else {
-                    setOtpErrorTrue();
+                    setOtpWrongTrue();
                 }
             })
             .catch(err => {
-                console.log(err);
+                setOtpErrorTrue();
             });
     }
 
@@ -68,7 +69,7 @@ const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, s
 
                 <OtpInput />
 
-                <Button fullWidth variant='contained' color='primary' onClick={() => { history.push('/allowAccess') }} >Sign In</Button>
+                <Button fullWidth variant='contained' color='primary' onClick={signIn} >Sign In</Button>
             </div>
 
             <div className="signUpPageFooter">
@@ -79,7 +80,7 @@ const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, s
                 <h4>Set up your store here </h4>
             </div>
 
-        </div>
+        </div >
     );
 }
 
@@ -94,6 +95,7 @@ const mapDispatchToProps = dispatch => ({
     setPhoneNo: (val) => dispatch(setPhoneNo(val)),
     setOtpEnabledTrue: () => dispatch(setOtpEnabledTrue()),
     setOtpSendingTrue: () => dispatch(setOtpSendingTrue()),
+    setOtpWrongTrue: () => dispatch(setOtpWrongTrue()),
     setOtpErrorTrue: () => dispatch(setOtpErrorTrue())
 })
 

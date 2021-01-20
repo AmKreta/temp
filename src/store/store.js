@@ -1,4 +1,5 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 import locationReducer from './location/locationReducer';
 import tokenReducer from './token/tokenReducer';
@@ -11,7 +12,7 @@ const rootReducer = combineReducers({
     search: searchReducer
 });
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
 

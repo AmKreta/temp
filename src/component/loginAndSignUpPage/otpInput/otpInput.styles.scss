@@ -1,20 +1,20 @@
 .otpInputContainer {
     text-align: left;
-    position:relative;
+    position: relative;
 
     &.enabled {
         opacity: 1;
-        transition:opacity .5s ease-in-out;
+        transition: opacity .5s ease-in-out;
     }
 
-    .incorrectOtp{
-        color:red;
-        font-size:.7em;
-        position:absolute;
-        left:0;
-        top:70%;
-        opacity:.7;
-        
+    .otpError {
+        color: red;
+        font-size: .7em;
+        position: absolute;
+        left: 0;
+        top: 70%;
+        opacity: .7;
+
     }
 
     &.disabled {
@@ -28,7 +28,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        flex-flow:row nowrap;
+        flex-flow: row nowrap;
     }
 
     .otpInput {
