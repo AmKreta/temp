@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import LoginPage from './loginAndSignUpPage/loginPage.component';
 import AllowAccess from './allowAccess/allowAccess.component';
 import App from './app/app.component';
+import VendorsPannel from './vendorsPannel/vendorsPannel.component';
 
 // creating style
 const useStyles = makeStyles(theme => ({
@@ -40,6 +41,7 @@ const Components = () => {
                     <Route exact path='/' component={LoginPage} />
                     <Route path='/allowAccess' component={AllowAccess} />
                     <Route path='/home' component={App} />
+                    <Route path='/vendor' component={VendorsPannel} />
                 </Switch>
             </Grid>
         </ThemeProvider>

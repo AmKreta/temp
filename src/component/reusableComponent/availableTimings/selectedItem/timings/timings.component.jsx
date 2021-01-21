@@ -1,5 +1,5 @@
 import React from 'react';
-import { withrouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import './timings.styles.scss';
 
 const Timings = () => {
@@ -56,4 +56,4 @@ const Timings = () => {
     );
 }
 
-export default withrouter(Timings);
+export default withRouter(Timings);

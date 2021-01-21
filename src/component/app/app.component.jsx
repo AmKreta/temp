@@ -6,10 +6,6 @@ import Header from './header/header.component';
 import Main from './main/main.component';
 import Footer from './footer/footer.component';
 
-// when user will login in this component will be mounted 
-
-//to
-import FooterContext from './context/footer.context';
 
 const App = ({ match }) => {
     return (

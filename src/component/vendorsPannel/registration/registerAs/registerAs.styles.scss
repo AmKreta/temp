@@ -1,0 +1,51 @@
+@import '../../../../../assets/globalStyles.scss';
+
+$circleSize:40px;
+$borderRadius:20px;
+
+.registerAs {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .registration {
+        width: 90%;
+        font-size: 1.5em;
+        font-weight: bold;
+        padding: 5% 0;
+
+        .registerAsHeader {
+            color: $green;
+            font-size: 1.6em;
+        }
+
+        .registerAsButtons {
+            .registerAsButton {
+                background: white;
+                box-shadow: 0 0 15px #ccc;
+                margin-top: 5%;
+                padding: 7% 2%;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                border-radius: $borderRadius;
+                text-transform: capitalize;
+                position: relative;
+
+                .circle {
+                    height: $circleSize;
+                    width: $circleSize;
+                    border-radius: 50%;
+                    background-color: $green;
+                    position: absolute;
+                }
+
+                .buttonLabel {
+                    flex-grow: 1;
+                }
+            }
+        }
+    }
+}

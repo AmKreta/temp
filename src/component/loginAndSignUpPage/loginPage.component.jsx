@@ -33,8 +33,8 @@ const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, s
     }, [phoneNo, otp.enabled, setOtpEnabledTrue, setOtpSendingTrue]);
 
     const signIn = (e) => {
-        const reqBody = { phoneNumber: phoneNo.toString(), otp: otp.value.join('') };
-        //const headers = { "Access-Control-Allow-Origin": "*" }
+        const reqBody = { mobileNumber: phoneNo.toString(), otp: otp.value.join('') };
+        console.log(reqBody);
         axios
             .post(VERIFY_OTP, reqBody)
             .then(res => res.data)

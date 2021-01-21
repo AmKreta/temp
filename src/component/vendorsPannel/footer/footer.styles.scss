@@ -1,0 +1,30 @@
+@import '../../../../assets/globalStyles.scss';
+
+$circleSize:50px;
+
+.vendorsPannelFooter {
+    height: 10%;
+    background: white;
+    box-shadow: 0 0 15px #ccc;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+
+    &.hidden {
+        display: none;
+    }
+
+    &>div {
+        height: $circleSize;
+        width: $circleSize;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &>div:last-child {
+        background: $green;
+    }
+}

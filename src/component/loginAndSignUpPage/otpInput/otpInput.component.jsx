@@ -13,7 +13,7 @@ import { setOtpSendingTrue, setOtpSentTrue, setOtp, setOtpErrorTrue } from '../.
 //importing services
 import { GET_OTP } from '../../../services/services';
 
-const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorTrue }) => {
+const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorTrue, phoneNo }) => {
 
     var timerInterval = useRef(null);
     const [timer, setTimer] = useState({ min: 0, sec: 10 });
@@ -24,7 +24,9 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     //making request to get otp ,otp.enabled only runs once
     useEffect(() => {
         if (otp.enabled) {
-            axios.get(GET_OTP)
+            let body = { mobileNumber: phoneNo.toString() };
+            console.log(body);
+            axios.post(GET_OTP, { mobileNumber: phoneNo })
                 .then(res => {
                     console.log(res.data);
                     setOtpSentTrue();
@@ -78,7 +80,9 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     const RresendHandler = (e) => {
         setOtpSendingTrue();
         setTimer({ min: 2, sec: 0 });
-        axios.get(GET_OTP)
+        let body = { mobileNumber: phoneNo };
+        console.log(body);
+        axios.post(GET_OTP, { mobileNumber: phoneNo.toString() })
             .then(res => {
                 console.log(res.data);
                 setOtpSentTrue();
@@ -140,7 +144,8 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
 }
 
 const mapStateToProps = state => ({
-    otp: state.login.otp
+    otp: state.login.otp,
+    phoneNo: state.login.phoneNo
 });
 
 const mapDispatchToProps = dispatch => ({
