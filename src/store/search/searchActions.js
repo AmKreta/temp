@@ -33,6 +33,7 @@ export const fetchSearchResult = function (query, category, filter) {
             .get(SEARCH_BUSINESS(category, query, filter))
             .then(res => {
                 let result = res.data;
+                console.log(result.payload)
                 if (result.status) {
                     dispatch(setSearchresult(result.payload));
                 }
@@ -61,7 +62,7 @@ export const fetchSearchSuggestion = function () {
 }
 
 export const selectData = function (data) {
-    return { type: SELECT_DATA, payload:data }
+    return { type: SELECT_DATA, payload: data }
 }
 
 export const setSearchQuery = function (query) {

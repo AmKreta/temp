@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import './search.styles.scss';
+
 
 import SearchInput from './searchInput/searchInput.component';
 import SearchInputWithSuggestion from './searchInputWithSuggestion/searchInputWithSuggestion.component';

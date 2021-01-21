@@ -14,6 +14,7 @@ const Search = ({ result, query, category, filter, fetchSearchResult }) => {
 
     useEffect(() => {
         fetchSearchResult(query, category, filter);
+        console.log('fetched');
     }, [query, category, filter]);
 
     return (

@@ -8,11 +8,12 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
+    border-radius: 10px;
 
     .availablity {
         display: flex;
-        width:96%;
-        margin:auto;
+        width: 96%;
+        margin: auto;
         flex-flow: row nowrap;
         align-content: center;
         justify-content: flex-start;
@@ -21,23 +22,27 @@
         white-space: nowrap;
         overflow-x: scroll;
         overflow-y: auto;
+        background: white;
 
         &>p {
             margin: 0 3px;
-            padding:0 1px;
-            font-size:.8em;
-            padding-top:1%;
+            padding: 0 1px;
+            font-size: .8em;
+            padding-top: 1%;
 
             &.active {
                 background: rgb(245, 243, 242);
-
             }
         }
     }
 
     .availablityListItem {
+        margin-bottom: 0 !important;
+        border-bottom-left-radius: 0% !important;
+        border-bottom-right-radius: 0% !important;
 
         .card {
+
             grid-template-areas:
                 "avatar name           close"
                 "avatar specialization time"
@@ -58,6 +63,5 @@
 
     .timings {
         flex-grow: 1;
-        border-radius: 10px;
     }
 }

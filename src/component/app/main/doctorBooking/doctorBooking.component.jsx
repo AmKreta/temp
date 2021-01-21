@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './doctorBooking.styles.scss';
 
@@ -17,9 +17,7 @@ import InfoCard from '../../../reusableComponent/infoCard/infoCard.component.';
 import AvailableTimings from '../../../reusableComponent/availableTimings/availableTimings.component';
 
 const DoctorBooking = ({ history, selectedData, activeTab, setActiveTabNull, setActiveItemNull, setActiveTab, setActiveItem }) => {
-    useEffect(() => {
-        console.log(activeTab);
-    }, [activeTab]);
+  
     return (
         <div className="doctorBooking">
             <div className="infoCardContainer" onClick={() => { setActiveTabNull(); setActiveItemNull(); }}>

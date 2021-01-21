@@ -1,11 +1,12 @@
 import React from 'react';
+import { withrouter } from 'react-router-dom';
 import './timings.styles.scss';
 
 const Timings = () => {
     return (
         <div className="timings">
             <table>
-                <caption>collapse timings</caption>
+                {/*<caption>collapse timings</caption>*/}
                 <thead>
                     <tr>
                         <th>Morning</th>
@@ -55,4 +56,4 @@ const Timings = () => {
     );
 }
 
-export default Timings;
+export default withrouter(Timings);

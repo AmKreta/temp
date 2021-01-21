@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import './availablityListItem.styles.scss';
 
@@ -12,9 +12,6 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import Icon from '../../icon/icon.component';
 
 const AvailableTodayListItem = ({ id, name, specialization, fees, profilePicture, activeItem, setActiveItem, setActiveItemNull }) => {
-    useEffect(() => {
-        console.log('activeItem ', activeItem);
-    }, [activeItem]);
     return (
         <div id={id} className={`availablityListItem ${activeItem === id ? 'selected' : null}`}>
             <div className="card" onClick={(e) => { setActiveItem(id) }}>
