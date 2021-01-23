@@ -15,16 +15,14 @@ const Registration = ({ match }) => {
     return (
         <div className="registrationContainer">
             <Header />
-            {
-                <Switch>
-                    <Route exact path={`${match.url}/`} component={RegisterAs} />
-                    <Route exact path={`${match.url}/registerAsDoctor`} component={RegisterAsDoctor} />
-                    <Route exact path={`${match.url}/registerAsHospital`} component={RegisterAsHospital} />
-                    <Route exact path={`${match.url}/registerAsPharmacy`} component={RegisterAsPharmacy} />
-                    <Route exact path={`${match.url}/registerAsPathology`} component={RegisterAsPathology} />
-                    <Redirect to='/404' />
-                </Switch>
-            }
+            <Switch>
+                <Route exact path={`${match.url}/`} component={RegisterAs} />
+                <Route path={`${match.url}/registerAsDoctor`} component={RegisterAsDoctor} />
+                <Route path={`${match.url}/registerAsHospital`} component={RegisterAsHospital} />
+                <Route path={`${match.url}/registerAsPharmacy`} component={RegisterAsPharmacy} />
+                <Route path={`${match.url}/registerAsPathology`} component={RegisterAsPathology} />
+                <Redirect to='/404' />
+            </Switch>
             <Footer />
         </div>
     );

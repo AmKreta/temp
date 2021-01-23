@@ -14,7 +14,6 @@ export const SEARCH_BUSINESS = (category, query, filter) => {
     let specialityQuery = filter.speciality ? `&speciality=${filter.value}` : '';
     let categoryQuery = category !== 'All' ? `&category=${category}` : '';
     let url = `${server}api/business?${searchQuery}${locationQuery}${specialityQuery}${categoryQuery}`;
-    console.log(url);
     return url;
 }
 

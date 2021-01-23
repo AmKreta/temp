@@ -24,9 +24,7 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     //making request to get otp ,otp.enabled only runs once
     useEffect(() => {
         if (otp.enabled) {
-            let body = { mobileNumber: phoneNo.toString() };
-            console.log(body);
-            axios.post(GET_OTP, { mobileNumber: phoneNo })
+            axios.post(GET_OTP, { mobileNumber: phoneNo.toString() })
                 .then(res => {
                     console.log(res.data);
                     setOtpSentTrue();
@@ -80,8 +78,6 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     const RresendHandler = (e) => {
         setOtpSendingTrue();
         setTimer({ min: 2, sec: 0 });
-        let body = { mobileNumber: phoneNo };
-        console.log(body);
         axios.post(GET_OTP, { mobileNumber: phoneNo.toString() })
             .then(res => {
                 console.log(res.data);

@@ -1,0 +1,50 @@
+@import '../../../../assets/globalStyles.scss';
+
+$buttonPadding:5% 3%;
+$strongFontSize:1.2em;
+$fontSize:1.05em;
+$circleSize:55px;
+$borderRadius:20px;
+
+.flexContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: $buttonPadding;
+    border-radius: $borderRadius;
+    line-height:1.5em;
+
+    &:hover {
+        background: rgba(0, 0, 0, .1);
+        transition: .5s ease-in-out;
+    }
+
+    .flexContainerLabel {
+        flex-grow: 1;
+        text-align: left;
+        padding-left: 5%;
+        font-size: $fontSize;
+        font-weight: bold;
+
+        strong {
+            font-size: $strongFontSize;
+        }
+    }
+
+    .businessInformationIcon {
+        height: $circleSize;
+        width: $circleSize;
+        min-width: $circleSize;
+        border-radius: 50%;
+        background: $green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+}

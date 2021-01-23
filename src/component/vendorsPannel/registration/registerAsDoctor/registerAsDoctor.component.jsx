@@ -1,65 +1,22 @@
 import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import './registerAsDoctor.styles.scss';
 
-//importing icons
-import Doctin from '../../../../assets/images/doctInApiLogo.webp';
-import { FaCapsules } from 'react-icons/fa';
-import { BiWallet } from 'react-icons/bi';
-import { IoLogoWhatsapp } from 'react-icons/io';
-import { GoPlus } from 'react-icons/go';
+//routes names
+import { ADD_DETAILS, PAYMENT_SETTING, PROFILE } from '../routes';
 
-//importing reusable components
-import Icon from '../../../reusableComponent/icon/icon.component';
+//custom components
+import DoctorsRegistrationHome from './doctorsRegistrationHome/doctorsRegistrationHome.component';
+import DoctorsRegistrationForm from './doctorRegistrationForm/doctorsRegistrationForm.component';
 
-const iconColor = 'white';
-const iconSize = '2em';
-
-
-const RegisterAsDoctor = () => {
+const RegisterAsDoctor = ({ match }) => {
     return (
         <div className="registerAsDoctor">
-            <div className="businessInformation">
-                <h4>Information about your business</h4>
-                <div className="hospitalAndTiming flexContainer">
-                    <div className='businessInformationIcon'>
-                        <Icon iconColor={iconColor} size={iconSize}>
-                            <FaCapsules />
-                        </Icon>
-                    </div>
-                    <p>Add Hospital & Timing</p>
-                    <Icon>
-                        <GoPlus />
-                    </Icon>
-                </div>
-                <div className="paymentSetting flexContainer">
-                    <div className='businessInformationIcon'>
-                        <Icon iconColor={iconColor} size={iconSize}>
-                            <BiWallet />
-                        </Icon>
-                    </div>
-                    <p>Payment Setting</p>
-                    <Icon>
-                        <GoPlus />
-                    </Icon>
-                </div>
-            </div>
-            <div className="doctin flexContainer">
-                <div className='businessInformationIcon'>
-                    <img src={Doctin} alt='doctin logo' />
-                </div>
-                <p>
-                    <p>Or verify Your <strong>Doctin</strong> user ID</p>
-                    <p>And we will fetch all details</p>
-                </p>
-            </div>
-            <div className="chat flexContainer">
-                <div className='businessInformationIcon'>
-                    <Icon iconColor={iconColor} size={iconSize}>
-                        <IoLogoWhatsapp />
-                    </Icon>
-                </div>
-                <p>if you are facing problem chat with us</p>
-            </div>
+            <Switch>
+                <Route exact path={`${match.url}/`} component={DoctorsRegistrationHome} />
+                <Route path={`${match.url}/${ADD_DETAILS}`} component={DoctorsRegistrationForm} />
+                <Redirect to='/404' />
+            </Switch>
         </div>
     );
 }

@@ -37,6 +37,19 @@ import {
     selectData
 } from '../store/search/searchActions';
 
+//doctorHospitalRegistrationForm
+import {
+    setName,
+    setAddress,
+    setDegree,
+    setFees,
+    setPhoneNumber,
+    setTimeSlotForpatient,
+    setFeesCollectionOnAccountOf,
+    setTeleconsulting,
+    setTimings
+} from '../store/doctorAndHospitalRegistration/doctorAndHospitalRegistrationAction';
+
 //exporting all actions
 export {
     setLocation,
@@ -61,5 +74,14 @@ export {
     setActiveTab,
     setActiveTabNull,
     setActiveItem,
-    setActiveItemNull
+    setActiveItemNull,
+    setName,
+    setAddress,
+    setDegree,
+    setFees,
+    setPhoneNumber,
+    setTimeSlotForpatient,
+    setFeesCollectionOnAccountOf,
+    setTeleconsulting,
+    setTimings
 };

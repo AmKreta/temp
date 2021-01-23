@@ -6,13 +6,15 @@ import tokenReducer from './token/tokenReducer';
 import loginReducer from './login/loginReducer';
 import searchReducer from './search/searchReducer';
 import availableTimingsReducer from './availablity/availableTimingsReducer';
+import doctorAndHospitalRegistration from './doctorAndHospitalRegistration/doctorAndRegistrationReducer';
 
 const rootReducer = combineReducers({
     location: locationReducer,
     token: tokenReducer,
     login: loginReducer,
     search: searchReducer,
-    availableTimings: availableTimingsReducer
+    availableTimings: availableTimingsReducer,
+    doctorAndHospitalRegistration: doctorAndHospitalRegistration
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

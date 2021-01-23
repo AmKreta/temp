@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import clsx from 'clsx';
 import './footer.styles.scss';
 
@@ -48,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Footer = () => {
+const Footer = ({ history }) => {
     const classes = useStyles();
     return (
         <footer className="appFooter purpleAppFooter">
@@ -64,11 +65,11 @@ const Footer = () => {
             <IconButton className={classes.colorWhite}>
                 <WhatsAppIcon fontSize='large' />
             </IconButton>
-            <IconButton className={classes.colorWhite}>
+            <IconButton className={classes.colorWhite} onClick={(e)=>history.push('/vendor')}>
                 <StoreIcon fontSize='large' />
             </IconButton>
         </footer>
     );
 }
 
-export default Footer;
+export default withRouter(Footer);
