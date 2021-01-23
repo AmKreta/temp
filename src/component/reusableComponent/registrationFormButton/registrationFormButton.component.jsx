@@ -4,10 +4,7 @@ import './registrationFormButton.styles.scss';
 //importing reusable components
 import Icon from '../icon/icon.component';
 
-const iconColor = 'white';
-const iconSize = '2.5em';
-
-const RegistrationFormButton = ({ icon1, label = [], icon2, img, alt = 'broken', onClick = () => { } }) => {
+const RegistrationFormButton = ({ icon1, label = [], icon2, img, alt = 'broken', onClick = () => { }, iconSize='1.8em', iconColor='white' } ) => {
     return (
         <div className="flexContainer" onClick={onClick}>
             <div className='businessInformationIcon'>

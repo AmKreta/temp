@@ -19,13 +19,14 @@ $padding:1% 4%;
 
     &>h3 {
         text-align: left;
-        padding:$padding
+        padding: $padding
     }
 
     & .labelInput {
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
+
     }
 
     &>div {
@@ -34,6 +35,10 @@ $padding:1% 4%;
         align-items: center;
         justify-content: center;
         padding: $padding;
+    }
+
+    & input[type=radio] {
+        margin-right: 2px;
     }
 
     & input[type=text] {
@@ -99,9 +104,9 @@ $padding:1% 4%;
         padding: $padding;
         display: block;
 
-        &>h3{
-            text-align:left;
-            margin-top:10px;
+        &>h3 {
+            text-align: left;
+            margin-top: 10px;
         }
 
         .timingInput {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './doctorAndHospitalRegistrationForm.styles.scss';
 
@@ -64,6 +65,16 @@ const Timings = ({ day, setTimings }) => {
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 const DoctorAndHospitalRegistrationForm = (props) => {
+    const goBack = (e) => {
+        e.preventDefault();
+        props.history.goBack();
+    }
+
+    const save = (e) => {
+        e.preventDefault();
+        props.history.goBack();
+    }
+
     return (
         <form className="doctorAndHospitalRegistrationForm">
             <h3>Add {props.type === 'addHospital' ? 'Hospital/Clinic' : 'Doctor'}</h3>
@@ -159,8 +170,8 @@ const DoctorAndHospitalRegistrationForm = (props) => {
                 }
             </div>
             <div className="formButtons">
-                <button>Go Back</button>
-                <button>Save</button>
+                <button onClick={goBack}>Go Back</button>
+                <button onClick={save}>Save</button>
             </div>
         </form>
     );
@@ -190,4 +201,4 @@ const mapDispatchToProps = dispatch => ({
     setTimings: (day, timings) => dispatch(setTimings(day, timings))
 });
 
-export default connect(mapStatetoProps, mapDispatchToProps)(DoctorAndHospitalRegistrationForm);
+export default connect(mapStatetoProps, mapDispatchToProps)(withRouter(DoctorAndHospitalRegistrationForm));

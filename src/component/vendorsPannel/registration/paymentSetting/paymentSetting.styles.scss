@@ -1,0 +1,166 @@
+@import '../../../../../assets/globalStyles.scss';
+
+$buttonHeight:40px;
+$buttonWidth:80px;
+$inputHeight:40px;
+$iconCircleSize:30px;
+$marginTop:10px;
+$padding:4%;
+$height1:10%;
+$height2:10%;
+$formHeight:80%;
+$formRadioInputHeight:10%;
+$formInputFieldHeight:65%;
+$formButtonFieldHeight:15%;
+
+.paymentSettingContainer {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+    font-weight: bold;
+    padding: $padding;
+
+    & button {
+        height: $buttonHeight;
+        margin: 0 3%;
+        padding: 0 3%;
+        width: 40%;
+        font-weight: bold;
+        border-radius: 10px;
+        font-size: 1.1em;
+
+        &:focus {
+            outline: none;
+        }
+
+        &.whiteButton {
+            border: 1px solid lightgrey;
+            background: white;
+            color: grey;
+        }
+
+        &.greenButton {
+            background-color: $green;
+            color: white;
+            border: none;
+        }
+    }
+
+    .skipButton {
+        text-align: left;
+        background: white;
+        height: $height1;
+
+        &>button {
+            margin-left: 0;
+        }
+    }
+
+    .paymentSettingLabel {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        font-size: 1em;
+        height: $height2;
+
+        .labelIconContainer {
+            height: $iconCircleSize;
+            width: $iconCircleSize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: $green;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 5px;
+        }
+    }
+
+    #paymentSettingForm {
+        height: $formHeight;
+        margin-top: $marginTop;
+
+        .radioInputLabelContainer {
+            font-size: .9em;
+            font-weight: bold;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-evenly;
+            height: $formRadioInputHeight;
+
+            .radioInputLabelLabel {
+                width: 50%;
+                text-align: left;
+            }
+
+            .radioInputLabelOptions {
+                width: 50%;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+
+                .radioInputLabel {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+
+                    &>input[type='radio'] {
+                        margin-right: 2px;
+                    }
+
+                    &:nth-child(1) {
+                        width: 30%;
+                    }
+
+                    &:nth-child(2) {
+                        width: 70%;
+                        text-align: left;
+                    }
+                }
+            }
+        }
+
+        .inputInfoContainer {
+            height: $formInputFieldHeight;
+
+            .inputInfo {
+                margin-top: $marginTop;
+
+                &>label {
+                    text-align: left;
+                    display: block;
+                    text-align: left;
+                    font-size: .9em;
+                }
+
+                &>input[type=text],
+                &>input[type='number'] {
+                    height: $inputHeight;
+                    width: 100%;
+                    padding: 0 10px;
+                    margin: 1% 0;
+                    font-size: 1.1em;
+                    border: 1px solid rgb(131, 123, 123);
+                    border-radius: 5px;
+
+                    &:focus {
+                        outline: none;
+                        box-shadow: 0 0 5px #ccc inset;
+                    }
+                }
+            }
+        }
+
+        .paymentSettingButton {
+            height: $formButtonFieldHeight;
+        }
+    }
+}

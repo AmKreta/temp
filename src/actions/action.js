@@ -50,6 +50,15 @@ import {
     setTimings
 } from '../store/doctorAndHospitalRegistration/doctorAndHospitalRegistrationAction';
 
+//payment Details reducer
+import {
+    setOnlinePayment,
+    setPaymentOption,
+    setUpiID,
+    setBankIFSC,
+    setBankAccountNumber
+} from '../store/paymentDetails/paymentDetailsActions';
+
 //exporting all actions
 export {
     setLocation,
@@ -83,5 +92,10 @@ export {
     setTimeSlotForpatient,
     setFeesCollectionOnAccountOf,
     setTeleconsulting,
-    setTimings
+    setTimings,
+    setOnlinePayment,
+    setPaymentOption,
+    setUpiID,
+    setBankIFSC,
+    setBankAccountNumber
 };

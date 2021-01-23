@@ -43,6 +43,7 @@ const DoctorsRegistrationHome = ({ history, match }) => {
             <RegistrationFormButton
                 icon1={<IoLogoWhatsapp />}
                 label={[<p>if you are facing problem chat with us</p>]}
+                iconSize='2.5em'
             />
         </div>
     );

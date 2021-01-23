@@ -7,6 +7,7 @@ import loginReducer from './login/loginReducer';
 import searchReducer from './search/searchReducer';
 import availableTimingsReducer from './availablity/availableTimingsReducer';
 import doctorAndHospitalRegistration from './doctorAndHospitalRegistration/doctorAndRegistrationReducer';
+import paymentDetailsReducer from './paymentDetails/paymentDetailsReducer';
 
 const rootReducer = combineReducers({
     location: locationReducer,
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
     login: loginReducer,
     search: searchReducer,
     availableTimings: availableTimingsReducer,
-    doctorAndHospitalRegistration: doctorAndHospitalRegistration
+    doctorAndHospitalRegistration: doctorAndHospitalRegistration,
+    paymentDetails: paymentDetailsReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
