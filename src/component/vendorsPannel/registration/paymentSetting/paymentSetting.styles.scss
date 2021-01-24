@@ -2,9 +2,7 @@
 @import '../registration.sharableStyles.scss';
 
 $buttonHeight:40px;
-$buttonWidth:80px;
 $inputHeight:40px;
-$iconCircleSize:30px;
 $marginTop:10px;
 $padding:4%;
 $height1:10%;
@@ -51,22 +49,10 @@ $formButtonFieldHeight:15%;
     }
 
     .paymentSettingLabel {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        font-size: 1em;
-        height: $height2;
+        @include greenIconContainer($height2);
 
         .labelIconContainer {
-            height: $iconCircleSize;
-            width: $iconCircleSize;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: $green;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 5px;
+           @include greenIcon();
         }
     }
 
@@ -98,13 +84,7 @@ $formButtonFieldHeight:15%;
                 align-items: center;
 
                 .radioInputLabel {
-                    display: flex;
-                    flex-flow: row nowrap;
-                    align-items: center;
-
-                    &>input[type='radio'] {
-                        margin-right: 2px;
-                    }
+                    @include radio();
 
                     &:nth-child(1) {
                         width: 30%;
@@ -124,27 +104,16 @@ $formButtonFieldHeight:15%;
             .inputInfo {
                 margin-top: $marginTop;
 
+                &>input[type=text],
+                &>input[type=number] {
+                    @include input($inputHeight);
+                }
+
                 &>label {
                     text-align: left;
                     display: block;
                     text-align: left;
                     font-size: .9em;
-                }
-
-                &>input[type=text],
-                &>input[type='number'] {
-                    height: $inputHeight;
-                    width: 100%;
-                    padding: 0 10px;
-                    margin: 1% 0;
-                    font-size: 1.1em;
-                    border: 1px solid rgb(131, 123, 123);
-                    border-radius: 5px;
-
-                    &:focus {
-                        outline: none;
-                        box-shadow: 0 0 5px #ccc inset;
-                    }
                 }
             }
         }

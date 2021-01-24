@@ -1,0 +1,178 @@
+@import '../registration.sharableStyles.scss';
+
+$skipButtonContainerHeight:10%;
+$labelHeight:10%;
+$formHeight:80%;
+$buttonsHeight:10%;
+
+.addStaff {
+    height: 100%;
+    width: 100%;
+    padding: $padding;
+    overflow-y: scroll;
+    overflow-x: auto;
+
+    & button.greenButton {
+        @include greenButton();
+    }
+
+    & button.whiteButton {
+        @include whiteButton();
+    }
+
+    & input[type='text'] {
+        @include input();
+    }
+
+    & .skipForNow {
+        text-align: left;
+        height: $skipButtonContainerHeight;
+
+        &>button {
+            margin-left: 0;
+        }
+    }
+
+    .addStaffLabelContainer {
+        @include greenIconContainer($labelHeight);
+
+        .addStaffLabelIcon {
+            @include greenIcon();
+        }
+    }
+
+    .formContainer {
+        min-height: $formHeight;
+        position: relative;
+
+        .addStaffIntro {
+            padding: 2% 0;
+            font-size: .95em;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+
+            &>h5 {
+                text-align: left;
+            }
+        }
+
+        .addStaffDefinations {
+            padding: 2% 0;
+            text-align: left;
+            font-weight: bold;
+
+            dl {
+
+                dt {
+                    float: left;
+                    width: 25%;
+                    clear: left;
+                    font-size: .8em;
+                }
+
+                dd {
+                    float: left;
+                    width: 75%;
+                    font-size: .75em;
+                    line-height: 1.5em;
+                }
+
+                &:after {
+                    content: " ";
+                    display: block;
+                    clear: both;
+                }
+            }
+        }
+
+        .addStaffInfo {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            padding: 2% 0;
+
+            .inputInfo {
+                width: 67%;
+
+                &>label {
+                    display: block;
+                    text-align: left;
+                    font-weight: bold;
+                }
+
+                &>input {
+                    @include input(35px);
+
+                    &::-webkit-input-placeholder {
+                        /* Chrome/Opera/Safari */
+                        font-size: .6em;
+                    }
+
+                    &::-moz-placeholder {
+                        /* Firefox 19+ */
+                        font-size: .6em;
+                    }
+
+                    &:-ms-input-placeholder {
+                        /* IE 10+ */
+                        font-size: .6em;
+                    }
+
+                    &:-moz-placeholder {
+                        /* Firefox 18- */
+                        font-size: .6em;
+                    }
+                }
+            }
+
+            &>select {
+                border: none;
+                height: 35px;
+                margin-bottom: 1%;
+                font-weight: bold;
+
+                &:focus {
+                    outline: none;
+                }
+
+                &>option {
+                    border: none;
+                    outline: none;
+                }
+            }
+        }
+
+        table {
+            width: 100%;
+            text-align: left;
+            font-weight: bold;
+            font-size: .9em;
+
+            tr {
+                td {
+                    padding: 2% 0;
+                }
+            }
+        }
+
+        .addNewStaff {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            font-weight: bold;
+
+            &>p {
+                margin-right: 5px;
+            }
+        }
+
+        .addStaffButtonContainer {
+            position: absolute;
+            left: 2%;
+            bottom: 2%;
+            width: 100%;
+        }
+    }
+}

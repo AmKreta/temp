@@ -1,11 +1,12 @@
 @import '../../../../../../assets/globalStyles.scss';
+@import '../../registration.sharableStyles.scss';
 
 $spacing:10%;
 $headerFontSize:1.2em;
 
 .doctorsRegistrationHome {
     height: 100%;
-    padding: 2% 5%;
+    padding: $padding;
     overflow-y: scroll;
     overflow-x: auto;
     display: flex;

@@ -27,7 +27,7 @@ $padding:1% 4%;
         display: flex;
         flex-flow: row nowrap;
         align-items: center;
-
+        @include radio();
     }
 
     &>div {
@@ -38,23 +38,9 @@ $padding:1% 4%;
         padding: $padding;
     }
 
-    & input[type=radio] {
-        margin-right: 2px;
-    }
-
-    & input[type=text] {
-        height: 40px;
-        width: 100%;
-        padding: 0 10px;
-        margin: 1% 0;
-        font-size: 1.1em;
-        border: 1px solid rgb(131, 123, 123);
-        border-radius: 5px;
-
-        &:focus {
-            outline: none;
-            box-shadow: 0 0 5px #ccc inset;
-        }
+    & input[type=text],
+    & input[type=number] {
+        @include input();
     }
 
     .timeSlotAndFees {

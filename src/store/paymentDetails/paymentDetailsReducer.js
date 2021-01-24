@@ -7,7 +7,7 @@ import {
 } from './paymentDetailsActionTypes';
 
 const initialState = {
-    onlinePaymentAvailable: false,
+    onlinePaymentAvailable: true,
     mode: { upi: true, bankTransfer: false },
     upiID: '',
     IFSC: '',

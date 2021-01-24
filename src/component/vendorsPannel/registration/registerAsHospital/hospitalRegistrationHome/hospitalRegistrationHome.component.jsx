@@ -13,7 +13,7 @@ import { GoPlus } from 'react-icons/go';
 import logo from './logo.svg';
 
 //importing routes
-import { PAYMENT_SETTING, ADD_DOCTORS } from '../../routes';
+import { PAYMENT_SETTING, ADD_DOCTORS, ADD_STAFF } from '../../routes';
 
 const HospitalRegistrationHome = ({ history, match }) => {
     return (
@@ -36,6 +36,7 @@ const HospitalRegistrationHome = ({ history, match }) => {
                     icon1={<BsFillPeopleFill />}
                     label={[<p>Add Support Staff</p>]}
                     icon2={<GoPlus />}
+                    onClick={(e) => { history.push(`${match.url}/${ADD_STAFF}`) }}
                 />
             </div>
             <RegistrationFormButton
