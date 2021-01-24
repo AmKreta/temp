@@ -1,0 +1,23 @@
+@mixin Button($height) {
+    height:$height;
+    margin: 0 3%;
+    padding: 0 3%;
+    width: 40%;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 1.1em;
+}
+
+@mixin whiteButton( $height : 40px ) {
+    @include Button($height);
+    border: 1px solid lightgrey;
+    background: white;
+    color: grey;
+}
+
+@mixin greenButton( $height : 40px ) {
+    @include Button($height);
+    background-color: $green;
+    color: white;
+    border: none;
+}

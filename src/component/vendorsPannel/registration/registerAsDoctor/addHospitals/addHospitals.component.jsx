@@ -1,14 +1,14 @@
 import React from 'react';
-import './doctorsRegistrationForm.styles.scss';
+import './addHospitals.styles.scss';
 
 //custom component
 import DoctorAndHospitalRegistrationForm from '../../doctorAndHospitalRegistrationForm/doctorAndHospitalRegistrationForm.component';
 
 
-const DoctorsRegistrationForm = () => {
+const AddHospitals = () => {
     return (
-        <DoctorAndHospitalRegistrationForm type='addHospital'/>
+        <DoctorAndHospitalRegistrationForm type='addHospital' />
     );
 }
 
-export default DoctorsRegistrationForm;
+export default AddHospitals;

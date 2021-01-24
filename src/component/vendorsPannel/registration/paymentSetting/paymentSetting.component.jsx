@@ -18,15 +18,15 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 import { BiWallet } from 'react-icons/bi';
 
 const PaymentSetting = (props) => {
-    
-    const back = (e) => { 
+
+    const back = (e) => {
         e.preventDefault();
         props.history.goBack();
     }
 
-    const save = (e) => { 
-        e.preventdefault();
-        props.history.push();
+    const save = (e) => {
+        e.preventDefault();
+        props.history.goBack();
     }
 
     return (
@@ -140,8 +140,8 @@ const PaymentSetting = (props) => {
                     }
                 </div>
                 <div className="paymentSettingButton">
-                    <button className='whiteButton'>Back</button>
-                    <button className='greenButton' variant='contained' >Save</button>
+                    <button className='whiteButton' onClick={back}>Back</button>
+                    <button className='greenButton' onClick={save} >Save</button>
                 </div>
             </form>
         </div>

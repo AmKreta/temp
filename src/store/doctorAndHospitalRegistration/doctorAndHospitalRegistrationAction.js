@@ -42,6 +42,6 @@ export const setTeleconsulting = (option = false) => {
     return { type: SET_TELECONSULTING, payload: option };
 }
 
-export const setTimings = ({ day, timings = { isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' } } }) => {
+export const setTimings = ({ day, timings = { isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' } } }) => {
     return { type: SET_TIMINGS, payload: { day, timings } }
 }

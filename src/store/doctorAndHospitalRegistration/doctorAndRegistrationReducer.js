@@ -17,29 +17,29 @@ const initialState = {
     phoneNumber: '',
     fees: '',
     timeSlotPerPatient: '',
-    feesCollectOnAccountOf: { Hospital: false, doctor: false },
-    teleConsluting: false,
+    feesCollectOnAccountOf: { hospital: true, doctor: false },
+    teleConsulting: false,
     timing: {
         monday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         },
         tuesday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         },
         wednesday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         },
         thursday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         },
         friday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         },
         saturday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         },
         sunday: {
-            isSelected:false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
+            isSelected: false, morning: { from: '', to: '' }, evening: { from: '', to: '' }
         }
     }
 }
@@ -61,9 +61,9 @@ const doctorAndHospitalRegistrationReducer = (state = initialState, action) => {
         case SET_FEES_COLLECT_ON_ACCOUNT_OF:
             return { ...state, feesCollectOnAccountOf: action.payload };
         case SET_TELECONSULTING:
-            return { ...state, teleConsluting: action.payload };
+            return { ...state, teleConsulting: action.payload };
         case SET_TIMINGS:
-                return {
+            return {
                 ...state,
                 timing: {
                     ...state.timing,

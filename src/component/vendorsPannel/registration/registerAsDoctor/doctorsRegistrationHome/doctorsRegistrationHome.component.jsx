@@ -2,7 +2,7 @@ import React from 'react';
 import './doctorsRegistrationHome.styles.scss';
 
 //routes names
-import { ADD_DETAILS, PAYMENT_SETTING } from '../../routes';
+import { ADD_HOSPITALS, PAYMENT_SETTING } from '../../routes';
 
 //importing icons
 import Doctin from '../../../../../assets/images/doctInApiLogo.webp';
@@ -24,7 +24,7 @@ const DoctorsRegistrationHome = ({ history, match }) => {
                     icon1={<FaCapsules />}
                     label={[<p>Add Hospital & Timing</p>]}
                     icon2={<GoPlus />}
-                    onClick={(e) => history.push(`${match.url}/${ADD_DETAILS}`)}
+                    onClick={(e) => history.push(`${match.url}/${ADD_HOSPITALS}`)}
                 />
                 <RegistrationFormButton
                     icon1={<BiWallet />}

@@ -43,7 +43,7 @@ const Timings = ({ day, setTimings }) => {
     return (
         <div className={`timingInput ${day}`}>
             <div className="daySelect labelInput">
-                <input type='radio' value={day} checked={isSelected ? true : false} onClick={(e) => { setIsSelected(prevState => !prevState) }} />
+                <input type='radio' readOnly value={day} checked={isSelected ? true : false} onClick={(e) => { setIsSelected(prevState => !prevState) }} />
                 <label htmlFor={day}>{day}</label>
             </div>
             <div className="timeSelect" style={{ pointerEvents: `${isSelected ? 'auto' : 'none'}`, opacity: isSelected ? 1 : .4, transition: '.5s ease-in-out' }}>
@@ -142,11 +142,22 @@ const DoctorAndHospitalRegistrationForm = (props) => {
                 </div>
                 <div className='labelInput'>
                     <input
-                        type='radio' name='feeCollcetionBy' value='hospital' />
+                        type='radio'
+                        name='feeCollcetionBy'
+                        value='hospital'
+                        checked={props.feesCollectOnAccountOf.hospital ? true : false}
+                        onChange={(e) => props.setFeesCollectionOnAccountOf({ hospital: true, doctor: false })}
+                    />
                     <label htmlFor="hospital">hospital</label>
                 </div>
                 <div className='labelInput'>
-                    <input type='radio' name='feeCollcetionBy' value='doctor' />
+                    <input
+                        type='radio'
+                        name='feeCollcetionBy'
+                        value='doctor'
+                        checked={props.feesCollectOnAccountOf.doctor ? true : false}
+                        onChange={(e) => props.setFeesCollectionOnAccountOf({ hospital: false, doctor: true })}
+                    />
                     <label htmlFor="doctor">doctor</label>
                 </div>
             </div>
@@ -155,11 +166,23 @@ const DoctorAndHospitalRegistrationForm = (props) => {
                     <label htmlFor="teteConsulting">Teleconsulting</label>
                 </div>
                 <div className='labelInput'>
-                    <input type='radio' name='teleConsulting' value='no' />
+                    <input
+                        type='radio'
+                        name='teleConsulting'
+                        value='no'
+                        checked={props.teleConsulting ? false : true}
+                        onChange={(e) => props.setTeleconsulting(false)}
+                    />
                     <label htmlFor="no">no</label>
                 </div>
                 <div className='labelInput'>
-                    <input type='radio' name='teleConsulting' value='yes' />
+                    <input
+                        type='radio'
+                        name='teleConsulting'
+                        value='yes'
+                        checked={props.teleConsulting ? true : false}
+                        onChange={(e) => props.setTeleconsulting(true)}
+                    />
                     <label htmlFor="yes">yes</label>
                 </div>
             </div>
@@ -184,7 +207,7 @@ const mapStatetoProps = state => ({
     phoneNumber: state.doctorAndHospitalRegistration.phoneNumber,
     fees: state.doctorAndHospitalRegistration.fees,
     timeSlot: state.doctorAndHospitalRegistration.timeSlotPerPatient,
-    feesCollectedby: state.doctorAndHospitalRegistration.feeCollectionOnAccountOf,
+    feesCollectOnAccountOf: state.doctorAndHospitalRegistration.feesCollectOnAccountOf,
     teleConsulting: state.doctorAndHospitalRegistration.teleConsulting,
     timing: state.doctorAndHospitalRegistration.timing
 });
@@ -197,7 +220,7 @@ const mapDispatchToProps = dispatch => ({
     setFees: (fees) => dispatch(setFees(fees)),
     setTimeSlotForpatient: (time) => dispatch(setTimeSlotForpatient(time)),
     setTeleconsulting: (option) => dispatch(setTeleconsulting(option)),
-    setFeesCollectionOnAccountOf: () => dispatch(setFeesCollectionOnAccountOf()),
+    setFeesCollectionOnAccountOf: ({ doctor = false, hospital = true }) => dispatch(setFeesCollectionOnAccountOf({ doctor, hospital })),
     setTimings: (day, timings) => dispatch(setTimings(day, timings))
 });
 
