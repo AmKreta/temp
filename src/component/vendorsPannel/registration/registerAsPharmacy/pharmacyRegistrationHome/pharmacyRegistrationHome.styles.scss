@@ -1,0 +1,24 @@
+@import '../../registration.sharableStyles.scss';
+
+.pharmacyRegistrationHome {
+    height: 100%;
+    width: 100%;
+    padding: $padding;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: stretch;
+
+    &>div {
+        &:nth-child(1) {
+            flex-grow: 1;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: stretch;
+            justify-content: center;
+
+            h4 {
+                font-size: $registerAsHomeHeaderSize;
+            }
+        }
+    }
+}

@@ -23,17 +23,8 @@ $headerFontSize:1.2em;
         margin-bottom: $spacing;
 
         &>h4 {
-            font-size: $headerFontSize;
+            font-size: $registerAsHomeHeaderSize;
         }
 
-        &>div {
-            opacity: .5;
-            transition: .5s ease-in-out;
-
-            &:hover {
-                opacity: 1;
-                transition: .5s ease-in-out;
-            }
-        }
     }
 }

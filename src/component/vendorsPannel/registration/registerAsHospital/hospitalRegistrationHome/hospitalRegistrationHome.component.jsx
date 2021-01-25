@@ -25,18 +25,21 @@ const HospitalRegistrationHome = ({ history, match }) => {
                     label={[<p>Add Pannel & Timing</p>]}
                     icon2={<GoPlus />}
                     onClick={(e) => { history.push(`${match.url}/${ADD_DOCTORS}`) }}
+                    translucent
                 />
                 <RegistrationFormButton
                     icon1={<BiWallet />}
                     label={[<p>Payment Setting</p>]}
                     icon2={<GoPlus />}
                     onClick={(e) => { history.push(`${match.url}/${PAYMENT_SETTING}`) }}
+                    translucent
                 />
                 <RegistrationFormButton
                     icon1={<BsFillPeopleFill />}
                     label={[<p>Add Support Staff</p>]}
                     icon2={<GoPlus />}
                     onClick={(e) => { history.push(`${match.url}/${ADD_STAFF}`) }}
+                    translucent
                 />
             </div>
             <RegistrationFormButton

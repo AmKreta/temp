@@ -95,40 +95,6 @@ $padding:1% 4%;
             text-align: left;
             margin-top: 10px;
         }
-
-        .timingInput {
-            display: flex;
-            flex-flow: row nowrap;
-            align-items: flex-start;
-            margin-top: 15px;
-            text-align: left;
-
-            .timeSelect {
-                width: 60%;
-                display: flex;
-                flex-flow: column nowrap;
-                align-items: stretch;
-
-                .morningShift,
-                .eveningShift {
-                    display: flex;
-                    flex-flow: row nowrap;
-                    align-items: center;
-                    justify-content: space-between;
-
-                    &>input {
-                        width: 33%;
-                        text-align: center;
-                    }
-                }
-            }
-
-            .daySelect {
-                width: 40%;
-                position: relative;
-                top: 10px;
-            }
-        }
     }
 
     .formButtons {

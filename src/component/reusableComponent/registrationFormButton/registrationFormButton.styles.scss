@@ -12,7 +12,15 @@ $borderRadius:20px;
     justify-content: space-evenly;
     padding: $buttonPadding;
     border-radius: $borderRadius;
-    line-height:1.5em;
+    line-height: 1.5em;
+
+    &.translucent {
+        opacity: .5;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
 
     &:hover {
         background: rgba(0, 0, 0, .1);

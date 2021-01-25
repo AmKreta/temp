@@ -59,6 +59,12 @@ import {
     setBankAccountNumber
 } from '../store/paymentDetails/paymentDetailsActions';
 
+//timing and staff reducer
+import {
+    setStaffTiming,
+    setStoreOpen
+} from '../store/staffTiming/staffTimingActions';
+
 //exporting all actions
 export {
     setLocation,
@@ -97,5 +103,7 @@ export {
     setPaymentOption,
     setUpiID,
     setBankIFSC,
-    setBankAccountNumber
+    setBankAccountNumber,
+    setStaffTiming,
+    setStoreOpen
 };

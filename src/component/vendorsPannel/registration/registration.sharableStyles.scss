@@ -1,5 +1,7 @@
 @import '../../../../assets/globalStyles.scss';
 
+$registerAsHomeHeaderSize:1.2em;
+
 @mixin Button($height) {
     height: $height;
     margin: 0 3%;
@@ -8,6 +10,9 @@
     font-weight: bold;
     border-radius: 10px;
     font-size: 1.1em;
+    &:focus{
+        outline:none;
+    }
 }
 
 @mixin whiteButton($height : 40px) {

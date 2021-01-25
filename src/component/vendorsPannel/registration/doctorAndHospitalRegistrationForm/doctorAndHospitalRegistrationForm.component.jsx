@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './doctorAndHospitalRegistrationForm.styles.scss';
 
+//importing custom components
+import AddDayAndTime from '../addDayAndTime/addDayAndTime.component';
+
 //importing actions
 import {
     setName,
@@ -16,51 +19,6 @@ import {
     setTeleconsulting
 } from '../../../../actions/action';
 
-const Timings = ({ day, setTimings }) => {
-    const [isSelected, setIsSelected] = useState(false);
-    const [morningFrom, setMorningFrom] = useState('');
-    const [morningTo, setMorningTo] = useState('');
-    const [eveningFrom, setEveningFrom] = useState('');
-    const [eveningTo, setEveningTo] = useState('');
-
-    useEffect(() => {
-        setTimings({
-            day,
-            timings: {
-                isSelected: isSelected,
-                morning: {
-                    from: morningFrom,
-                    to: morningTo
-                },
-                evening: {
-                    from: eveningFrom,
-                    to: eveningTo
-                }
-            }
-        });
-    }, [day, morningFrom, morningTo, eveningFrom, eveningTo, isSelected]);
-
-    return (
-        <div className={`timingInput ${day}`}>
-            <div className="daySelect labelInput">
-                <input type='radio' readOnly value={day} checked={isSelected ? true : false} onClick={(e) => { setIsSelected(prevState => !prevState) }} />
-                <label htmlFor={day}>{day}</label>
-            </div>
-            <div className="timeSelect" style={{ pointerEvents: `${isSelected ? 'auto' : 'none'}`, opacity: isSelected ? 1 : .4, transition: '.5s ease-in-out' }}>
-                <div className="morningShift">
-                    <input type='text' value={morningFrom} onChange={(e) => setMorningFrom(e.target.value)} />
-                    <p>To</p>
-                    <input type='text' value={morningTo} onChange={(e) => setMorningTo(e.target.value)} />
-                </div>
-                <div className="eveningShift">
-                    <input type='text' value={eveningFrom} onChange={(e) => setEveningFrom(e.target.value)} />
-                    <p>To</p>
-                    <input type='text' value={eveningTo} onChange={(e) => setEveningTo(e.target.value)} />
-                </div>
-            </div>
-        </div>
-    );
-}
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -189,7 +147,7 @@ const DoctorAndHospitalRegistrationForm = (props) => {
             <div className="setTimings">
                 <h3>Add Timing For Hospital</h3>
                 {
-                    days.map((item, index) => <Timings key={index} day={item} setTimings={props.setTimings} />)
+                    days.map((item, index) => <AddDayAndTime key={index} day={item} setTimings={props.setTimings} />)
                 }
             </div>
             <div className="formButtons">

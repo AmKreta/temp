@@ -17,15 +17,5 @@ $headerFontSize:1.2em;
             font-size: $headerFontSize;
         }
 
-        &>div {
-            opacity: .5;
-            transition: .5s ease-in-out;
-
-            &:hover {
-                opacity: 1;
-                transition: .5s ease-in-out;
-            }
-        }
-
     }
 }

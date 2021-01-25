@@ -1,0 +1,70 @@
+@import '../registration.sharableStyles.scss';
+
+$marginTop:10px;
+
+.addTimings {
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding: $padding;
+
+    & .whiteButton {
+        @include whiteButton();
+    }
+
+    & .greenButton {
+        @include greenButton();
+    }
+
+    .skipForNowButton {
+        text-align: left;
+
+        .whiteButton {
+            margin-left: 0;
+        }
+    }
+
+    .addTimingsLabelContainer {
+        margin-top: $marginTop;
+        @include greenIconContainer();
+
+        .addTimingsLabelIconContainer {
+            @include greenIcon();
+        }
+    }
+
+    .addTimingsForm {
+        font-size: .9em;
+        margin-top: $marginTop;
+
+        .formHeader {
+            margin-top: $marginTop;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .openHours {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            font-weight: bold;
+            text-align: left;
+            margin-top: $marginTop;
+
+            .openHoursLabel {
+                width: 40%;
+            }
+
+            .radioInput {
+                @include radio();
+                width: 20%;
+            }
+        }
+
+        .dayAndtimeInputButtons {
+            margin-top: calc(3 * #{$marginTop});
+        }
+    }
+}
