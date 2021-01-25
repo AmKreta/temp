@@ -1,5 +1,5 @@
 import React from 'react';
-import './pharmacyRegistrationHome.styles.scss';
+import './pathologyRegistrationHome.styles.scss';
 
 //importing icons
 import { AiOutlineClockCircle } from 'react-icons/ai';
@@ -12,11 +12,11 @@ import { GoPlus } from 'react-icons/go';
 import RegistrationFormButton from '../../../../reusableComponent/registrationFormButton/registrationFormButton.component';
 
 //importing routes
-import { ADD_TIMINGS, DELIVERY_SETTING, ADD_PRODUCTS } from '../../routes';
+import { ADD_TIMINGS, COLLECTION_SETTING, ADD_TESTS } from '../../routes';
 
-const PharmacyRegistrationHome = ({ history, match }) => {
+const PathologyRegistrationHome = ({ history, match }) => {
     return (
-        <div className="pharmacyRegistrationHome">
+        <div className="pathologyRegistrationHome">
             <div>
                 <h4>information about your business</h4>
                 <RegistrationFormButton
@@ -28,17 +28,17 @@ const PharmacyRegistrationHome = ({ history, match }) => {
                 />
                 <RegistrationFormButton
                     icon1={<BsFillPeopleFill />}
-                    label={[<p>Dilevery & Payment Setting</p>]}
+                    label={[<p>Collection & Payment Setting</p>]}
                     icon2={<GoPlus />}
                     translucent
-                    onClick={(e) => history.push(`${match.url}/${DELIVERY_SETTING}/`)}
+                    onClick={(e) => history.push(`${match.url}/${COLLECTION_SETTING}/`)}
                 />
                 <RegistrationFormButton
                     icon1={<BiWallet />}
-                    label={[<p>Add Or Import Products</p>]}
+                    label={[<p>Add Or Import Test</p>]}
                     icon2={<GoPlus />}
                     translucent
-                    onClick={(e) => history.push(`${match.url}/${ADD_PRODUCTS}/`)}
+                    onClick={(e) => history.push(`${match.url}/${ADD_TESTS}/`)}
                 />
             </div>
             <div>
@@ -51,4 +51,4 @@ const PharmacyRegistrationHome = ({ history, match }) => {
     );
 }
 
-export default PharmacyRegistrationHome;
+export default PathologyRegistrationHome;
