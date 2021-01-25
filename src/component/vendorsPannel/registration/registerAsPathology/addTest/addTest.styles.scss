@@ -1,0 +1,217 @@
+@import '../../../../../../assets/globalStyles.scss';
+@import '../../registration.sharableStyles.scss';
+
+$imageInputSize:70px;
+$iconCircleSize:55px;
+$inputHeight:30px;
+$inputBorder:1px solid #ccc;
+
+.addProductsAndTest {
+    padding: $padding;
+    height: 100%;
+    width: 100%;
+
+    .greenButton {
+        &>button {
+            @include greenButton();
+        }
+
+        margin:15px 0;
+    }
+
+    & .selectInputContainer {
+        height: $inputHeight;
+        display: flex;
+        flex-flow: row norwap;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: $inputBorder;
+        margin-top: 10px;
+        color: darken(#ccc, 10%);
+        font-size: .9em;
+
+        .selectInput {
+            position: relative;
+
+            &>select {
+                border: none;
+                outline: none;
+                background-color: white;
+            }
+        }
+    }
+
+    .addProductsAndTestHeader {
+        height: 10%;
+        width: 100%;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+
+        .addProductsAndTestSearch {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            margin-right: 2%;
+            box-shadow: 0 0 5px #ccc;
+
+            &.focused {
+                box-shadow: 0 0 5px #ccc, 0 0 5px #ccc inset;
+            }
+
+            &>input {
+                flex-grow: 1;
+                border: none;
+                font-size: 1.1em;
+                padding: 0 2%;
+                height: 35px;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .addProductsAndTestBarCode {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: stretch;
+
+            &>p {
+                font-size: .5em;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .addImages {
+        min-height: $imageInputSize;
+        width: $imageInputSize;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+
+        .addImagesIconContainer {
+            height: $imageInputSize;
+            width: $imageInputSize;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .addImagesCaption {
+            font-weight: bold;
+            font-size: .6em;
+        }
+    }
+
+    .addProductsAndTestInputContainer {
+
+        .flexInputContainer {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+
+            &>div:nth-child(1) {
+                width: 40%;
+                text-align: left;
+            }
+
+            &>div:nth-child(2) {
+                width: 40%;
+                text-align: right;
+            }
+
+            .mrp,
+            .sellingPrice {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: flex-start;
+                border-bottom: 1px solid #ccc;
+
+                &>input {
+                    border: none;
+                }
+
+                &>div {
+                    margin-top: 10px;
+                }
+
+                &:focus {
+                    background: red;
+                }
+            }
+        }
+
+        .fastingRequired {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+            font-weight: bold;
+            font-size: .9em;
+            margin-top: 15px;
+
+            &>div:nth-child(1) {
+                text-align: left;
+            }
+
+            &>div:nth-child(2) {
+                margin-left: 3%;
+                height: 20px;
+                width: 20px;
+
+                & input[type=checkbox] {
+                    height: 20px;
+                    margin-top: 0px;
+                }
+            }
+        }
+
+
+        & input,
+        option {
+            border: none;
+            border-bottom: $inputBorder;
+            transition: .5s ease-in-out;
+            width: 100%;
+            height: $inputHeight;
+            margin-top: 10px;
+
+            &:focus {
+                outline: none;
+                border-bottom: 2px solid #ccc;
+                transition: .5s ease-in-out;
+            }
+        }
+    }
+
+    .uploadtestList {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        font-weight: bold;
+
+        &>div:nth-child(1) {
+            background: $green;
+            height: $iconCircleSize;
+            width: $iconCircleSize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            min-width: 55px;
+        }
+
+        &>div:nth-child(2) {
+            text-align: left;
+            padding-left: 1%;
+        }
+    }
+}

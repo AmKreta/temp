@@ -65,6 +65,17 @@ import {
     setStoreOpen
 } from '../store/staffTiming/staffTimingActions';
 
+import {
+    setDeliveryAndCollectionAvailableAt,
+    setDeliveryAndCollectionChargesperOrder,
+    setDeliveryAndCollectionCodAvailable,
+    setDeliveryAndCollectionDistance,
+    setDeliveryAndCollectionHardcopyDeliveryCharges,
+    setDeliveryAndCollectionMininumAmmount
+} from '../store/deliveryAndCollection/deliveryAndCollectionActions';
+
+import { setStaff, removeStaff } from '../store/addStaff/addStaffActions';
+
 //exporting all actions
 export {
     setLocation,
@@ -105,5 +116,13 @@ export {
     setBankIFSC,
     setBankAccountNumber,
     setStaffTiming,
-    setStoreOpen
+    setStoreOpen,
+    setDeliveryAndCollectionAvailableAt,
+    setDeliveryAndCollectionChargesperOrder,
+    setDeliveryAndCollectionCodAvailable,
+    setDeliveryAndCollectionDistance,
+    setDeliveryAndCollectionHardcopyDeliveryCharges,
+    setDeliveryAndCollectionMininumAmmount,
+    setStaff,
+    removeStaff
 };
