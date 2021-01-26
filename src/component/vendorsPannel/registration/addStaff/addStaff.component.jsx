@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './addStaff.styles.scss';
 
 //importing actions
@@ -38,6 +39,33 @@ const AddStaff = (props) => {
     const [name, setName] = useState('');
     const [phoneNo, setPhoneNo] = useState('');
     const [designation, setDesignation] = useState('Manager');
+    const [subDesignation, setSubDesignation] = useState('');
+
+    useEffect(() => {
+        //picking secondlast element in match.url
+        let type = props.match.url.split('/').slice(-2)[0];
+        if (type === 'registerAsHospital') {
+            setSubDesignation('Receptionist');
+        } else if (type === 'registerAsPharmacy') {
+            setSubDesignation('Delivery Boy');
+        } else if (type === 'registerAsPathology') {
+            setSubDesignation('Collection Boy');
+        }
+    }, [props.match.url]);
+
+    const save = (e) => {
+        e.preventDefault();
+        let nextUrl = props.match.url.split('/');
+        nextUrl.pop();
+        nextUrl.shift();
+        nextUrl = '/' + nextUrl.join('/');
+        props.history.push(nextUrl);
+    }
+
+    const back = (e) => {
+        e.preventDefault();
+        props.history.goBack();
+    }
 
     return (
         <div className="addStaff">
@@ -91,7 +119,7 @@ const AddStaff = (props) => {
                             <div className='selectDesignation'>
                                 <select value={designation} onChange={(e) => setDesignation(e.target.value)}>
                                     <option value='Manager'>Manager</option>
-                                    <option value='Delivery Boy'>Delivery Boy</option>
+                                    <option value={subDesignation}>{subDesignation}</option>
                                 </select>
                             </div>
                         </div>
@@ -117,8 +145,8 @@ const AddStaff = (props) => {
                     </tbody>
                 </table>
                 <div className='addStaffButtonContainer'>
-                    <button className='whiteButton'>Back</button>
-                    <button className='greenButton'>Save</button>
+                    <button className='whiteButton' onClick={back}>Back</button>
+                    <button className='greenButton' onClick={save}>Save</button>
                 </div>
             </form>
         </div>
@@ -134,4 +162,4 @@ const mapDispatchToProps = dispatch => ({
     removeStaff: (index) => dispatch(removeStaff(index))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddStaff);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddStaff));

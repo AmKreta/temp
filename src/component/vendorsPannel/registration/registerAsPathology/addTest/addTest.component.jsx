@@ -8,7 +8,6 @@ import Icon from '../../../../reusableComponent/icon/icon.component';
 import { IoMdBarcode } from 'react-icons/io';
 import { BiSearch } from 'react-icons/bi';
 import { AiOutlineCamera } from 'react-icons/ai';
-import { ImUpload3 } from 'react-icons/im';
 import { BiRupee } from 'react-icons/bi';
 
 //importing jss
@@ -16,12 +15,12 @@ import { lightBlue } from '../../../../../assets/globalJSS';
 
 const AddTests = () => {
 
-    const [testTypes, setTestTypes] = useState([]);
-    const [tests, setTests] = useState([]);
+    const [category, setCategory] = useState([]);
+    const [type, setType] = useState([]);
 
     useEffect(() => {
-        setTestTypes(['a', 'b', 'c']);
-        setTests(['a', 'b', 'c', 'd']);
+        setCategory(['a', 'b', 'c']);
+        setType(['a', 'b', 'c', 'd']);
     }, [])
 
     const inputContainerRef = useRef(null);
@@ -65,16 +64,16 @@ const AddTests = () => {
             </div>
             <div className="addProductsAndTestInputContainer">
                 <div className="testName addProductsAndTestInput">
-                    <input type='text' placeholder='Test Name / Package Name' />
+                    <input type='text' placeholder='Product Name' />
                 </div>
                 <div className="selectTest addProductsAndTestInput selectInputContainer">
                     <div className='selectInputCaption'>
-                        <p>Select Test</p>
+                        <p>Choose Category</p>
                     </div>
                     <div className='selectInput'>
                         <select>
                             {
-                                testTypes.map((item, index) => <option key={index} value={item}>{item}</option>)
+                                category.map((item, index) => <option key={index} value={item}>{item}</option>)
                             }
                         </select>
                     </div>
@@ -99,40 +98,28 @@ const AddTests = () => {
                     </div>
                     <div className="selectTest addProductsAndTestInput selectInputContainer">
                         <div className='selectInputCaption'>
-                            <p>Tests</p>
+                            <p>Tablets</p>
                         </div>
                         <div className='selectInput'>
                             <select>
                                 {
-                                    tests.map((item, index) => <option key={index} value={item}>{item}</option>)
+                                    type.map((item, index) => <option key={index} value={item}>{item}</option>)
                                 }
                             </select>
                         </div>
                     </div>
                 </div>
                 <div className="testDetail addProductsAndTestInput">
-                    <input type='text' placeholder='Test Details' />
+                    <input type='text' placeholder='Product Details' />
                 </div>
-                <div className="fastingRequired addProductsAndTestInput">
-                    <div>
-                        <p>Fasting Required</p>
-                    </div>
-                    <div>
-                        <input type="checkbox" />
-                    </div>
+                <div className="Company addProductsAndTestInput">
+                    <input type='text' placeholder='Company' />
                 </div>
-            </div>
-            <div className="greenButton">
-                <button>Add Test</button>
-            </div>
-            <div className="uploadtestList">
-                <div>
-                    <Icon iconColor='white' size='2em'>
-                        <ImUpload3 />
-                    </Icon>
+                <div className="Barcode addProductsAndTestInput">
+                    <input type='text' placeholder='Bar Code' />
                 </div>
-                <div>
-                    <p>or Upload test list excel to Mediseen Whatsaap</p>
+                <div className="greenButton">
+                    <button>Add Test</button>
                 </div>
             </div>
         </div >

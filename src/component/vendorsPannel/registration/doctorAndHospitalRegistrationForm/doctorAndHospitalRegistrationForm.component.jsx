@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './doctorAndHospitalRegistrationForm.styles.scss';
@@ -23,6 +23,7 @@ import {
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 const DoctorAndHospitalRegistrationForm = (props) => {
+
     const goBack = (e) => {
         e.preventDefault();
         props.history.goBack();

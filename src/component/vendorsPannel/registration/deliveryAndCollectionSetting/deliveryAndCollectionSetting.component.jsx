@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './deliveryAndCollectionSetting.styles.scss';
 import { Slider, Typography } from '@material-ui/core';
@@ -18,9 +19,27 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 
 //importing icons
 import { GiScooter } from 'react-icons/gi';
+import { PanToolSharp } from '@material-ui/icons';
 
 //own props=['collectionSetting','deliverySetting']
 const DeliveryAndCollectionSetting = (props) => {
+    const save = (e) => {
+        e.preventDefault();
+        let nextUrl = props.match.url.split('/');
+        console.log(nextUrl);
+        //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
+        nextUrl.pop();//removing last two element
+        nextUrl.pop();
+        nextUrl.shift();//removing first element
+        nextUrl.push('paymentSetting');
+        props.history.push('/' + nextUrl.join('/'));
+    }
+
+    const back = (e) => {
+        e.preventDefault();
+        props.history.goBack();
+    }
+
     const Type = useRef(props.type === 'deliverySetting' ? 'Delivery' : 'Collection');
     return (
         <div className="deliveryAndCollectionSetting">
@@ -147,8 +166,8 @@ const DeliveryAndCollectionSetting = (props) => {
                 </div>
 
                 <div className="deliveryAndCollectionButtonContainer">
-                    <button className='whiteButton'>Back</button>
-                    <button className='greenButton'>Save</button>
+                    <button className='whiteButton' onClick={back}>Back</button>
+                    <button className='greenButton' onClick={save}>Save</button>
                 </div>
             </form>
         </div>
@@ -173,4 +192,4 @@ const mapDispatchToProps = dispatch => ({
     setDeliveryAndCollectionMininumAmmount: (minAmmount) => dispatch(setDeliveryAndCollectionMininumAmmount(minAmmount))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAndCollectionSetting);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(DeliveryAndCollectionSetting));

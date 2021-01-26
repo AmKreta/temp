@@ -23,9 +23,13 @@ const AddTimings = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-        //match.url current value = /vendor/registration/registerAsPharmacy/addTimings
-        //match.url/../ = /vendor/registration/registerAsPharmacy/
-        props.history.push(`${props.match.url}/../${ADD_STAFF}`);
+        let nextUrl = props.match.url.split('/');
+        //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
+        nextUrl.pop();//removing last two element
+        nextUrl.pop();
+        nextUrl.shift();//removing first element
+        nextUrl.push(ADD_STAFF);
+        props.history.push('/' + nextUrl.join('/'));
     }
 
     const back = (e) => {

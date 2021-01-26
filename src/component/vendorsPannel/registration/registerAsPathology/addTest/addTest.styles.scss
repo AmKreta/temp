@@ -5,6 +5,9 @@ $imageInputSize:70px;
 $iconCircleSize:55px;
 $inputHeight:30px;
 $inputBorder:1px solid #ccc;
+$headerHeight:10%;
+$inputImageHeight:20%;
+$formHeight:70%;
 
 .addProductsAndTest {
     padding: $padding;
@@ -42,7 +45,7 @@ $inputBorder:1px solid #ccc;
     }
 
     .addProductsAndTestHeader {
-        height: 10%;
+        height: $headerHeight;
         width: 100%;
         display: flex;
         flex-flow: row nowrap;
@@ -87,6 +90,7 @@ $inputBorder:1px solid #ccc;
     }
 
     .addImages {
+        height: $inputImageHeight;
         min-height: $imageInputSize;
         width: $imageInputSize;
         display: flex;
@@ -110,6 +114,11 @@ $inputBorder:1px solid #ccc;
     }
 
     .addProductsAndTestInputContainer {
+        height: $formHeight;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: space-between;
 
         .flexInputContainer {
             display: flex;
@@ -189,29 +198,6 @@ $inputBorder:1px solid #ccc;
                 border-bottom: 2px solid #ccc;
                 transition: .5s ease-in-out;
             }
-        }
-    }
-
-    .uploadtestList {
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        font-weight: bold;
-
-        &>div:nth-child(1) {
-            background: $green;
-            height: $iconCircleSize;
-            width: $iconCircleSize;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            min-width: 55px;
-        }
-
-        &>div:nth-child(2) {
-            text-align: left;
-            padding-left: 1%;
         }
     }
 }

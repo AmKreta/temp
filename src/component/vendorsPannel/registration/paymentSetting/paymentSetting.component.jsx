@@ -26,7 +26,11 @@ const PaymentSetting = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-        props.history.goBack();
+        let nextUrl = props.match.url.split('/');
+        nextUrl.pop();
+        nextUrl.shift();
+        nextUrl = '/' + nextUrl.join('/');
+        props.history.push(nextUrl);
     }
 
     return (
