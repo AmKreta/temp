@@ -1,0 +1,21 @@
+.welcomeScreenOtpInputContainer {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 40%;
+    margin: 4% 0;
+    padding: 2%;
+    margin: auto;
+
+    &>input {
+        width: 15%;
+        height: 35px;
+        border: none;
+        outline: none;
+        border-bottom: 1px solid black;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+}

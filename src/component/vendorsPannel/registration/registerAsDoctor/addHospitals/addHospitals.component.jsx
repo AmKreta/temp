@@ -7,7 +7,7 @@ import DoctorAndHospitalRegistrationForm from '../../doctorAndHospitalRegistrati
 
 const AddHospitals = () => {
     return (
-        <DoctorAndHospitalRegistrationForm type='addHospital' />
+        <DoctorAndHospitalRegistrationForm />
     );
 }
 

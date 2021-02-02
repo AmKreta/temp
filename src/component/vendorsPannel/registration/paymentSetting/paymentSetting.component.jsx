@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import './paymentSetting.styles.scss';
 
@@ -17,6 +18,14 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 //importing icon
 import { BiWallet } from 'react-icons/bi';
 
+//importing services
+import {
+    REGISTER_AS_DOCTOR_LINK,
+    REGISTER_AS_HOSPITAL_LINK,
+    REGISTER_AS_PHARMACY_LINK,
+    REGISTER_AS_PATHOLOGY_LINK
+} from '../../../../services/services';
+
 const PaymentSetting = (props) => {
 
     const back = (e) => {
@@ -26,11 +35,45 @@ const PaymentSetting = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-        let nextUrl = props.match.url.split('/');
-        nextUrl.pop();
-        nextUrl.shift();
-        nextUrl = '/' + nextUrl.join('/');
-        props.history.push(nextUrl);
+
+        let url;
+        if (props.currentVendor.businessType === 'doctor') {
+            url = REGISTER_AS_DOCTOR_LINK;
+        }
+        else if (props.currentVendor.businessType === 'hospital') {
+            url = REGISTER_AS_HOSPITAL_LINK;
+        }
+        else if (props.currentVendor.businessType === 'pharmacy') {
+            url = REGISTER_AS_PHARMACY_LINK;
+        }
+        else if (props.currentVendor.businessType === 'pathology') {
+            url = REGISTER_AS_PATHOLOGY_LINK;
+        }
+
+        let data = {
+            payment: {
+                onlinePayment: props.onlinePayment,
+                type: props.paymentOption.upi ? 'upi' : 'bank',
+                upiId: props.upiID,
+                bankInfo: {
+                    ifsc: props.IFSC,
+                    accNum: props.accountNumber
+                }
+            }
+        }
+        console.log(data);
+        axios
+            .put(`${url}/${props.currentVendor._id}`, data)
+            .then(res => {
+                let nextUrl = props.match.url.split('/');
+                nextUrl.pop();
+                nextUrl.shift();
+                nextUrl = '/' + nextUrl.join('/');
+                props.history.push(nextUrl);
+            })
+            .catch(err => {
+                alert('something went wrong');
+            });
     }
 
     return (
@@ -109,7 +152,7 @@ const PaymentSetting = (props) => {
                                     type='text'
                                     placeholder='Upi ID'
                                     value={props.upiID}
-                                    onChange={(e) => setUpiID(e.target.value)}
+                                    onChange={(e) => props.setUpiID(e.target.value)}
                                 />
                             </div>
                             : null
@@ -157,7 +200,8 @@ const mapStatetoProps = state => ({
     paymentOption: state.paymentDetails.mode,
     upiID: state.paymentDetails.upiID,
     IFSC: state.paymentDetails.IFSC,
-    accountNumber: state.paymentDetails.accountNumber
+    accountNumber: state.paymentDetails.accountNumber,
+    currentVendor: state.currentVendor
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import './deliveryAndCollectionSetting.styles.scss';
 import { Slider, Typography } from '@material-ui/core';
 
@@ -19,20 +19,60 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 
 //importing icons
 import { GiScooter } from 'react-icons/gi';
-import { PanToolSharp } from '@material-ui/icons';
+
+//importing services
+import {
+    REGISTER_AS_PATHOLOGY_LINK,
+    REGISTER_AS_PHARMACY_LINK
+} from '../../../../services/services';
+import axios from 'axios';
+
 
 //own props=['collectionSetting','deliverySetting']
 const DeliveryAndCollectionSetting = (props) => {
     const save = (e) => {
         e.preventDefault();
-        let nextUrl = props.match.url.split('/');
-        console.log(nextUrl);
-        //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
-        nextUrl.pop();//removing last two element
-        nextUrl.pop();
-        nextUrl.shift();//removing first element
-        nextUrl.push('paymentSetting');
-        props.history.push('/' + nextUrl.join('/'));
+
+        let url;
+        let data;
+
+        if (props.currentVendor.businessType === 'pharmacy') {
+            url = REGISTER_AS_PHARMACY_LINK;
+            data = {
+                type: props.availableAt.customerAddress ? 'delivery' : 'pickup',
+                deliveryCharges: props.chargesPerOrder,
+                minimumAmmount: props.minimumAmmount,
+                codAvailable: props.codAvailable,
+                deliveryDistance: props.distance
+            }
+        }
+        else if (props.currentVendor.businessType === 'pathology') {
+            url = REGISTER_AS_PATHOLOGY_LINK;
+            data = {
+                availablity: props.availableAt.customerAddress ? 'customer' : 'center',
+                collectionChargesPerVisit: props.chargesPerOrder,
+                minCollectionAmmount: props.minimumAmmount,
+                hardCopyReportDeliveryCharges: props.hardcopyDeliveryCharges,
+                codAvailable: props.codAvailable,
+                collectionDistance: props.distance
+            }
+        }
+
+        axios
+            .put(`${url}/${props.currentVendor._id}`, data)
+            .then(res => {
+                let nextUrl = props.match.url.split('/');
+                //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
+                nextUrl.pop();//removing last two element
+                nextUrl.pop();
+                nextUrl.shift();//removing first element
+                nextUrl.push('paymentSetting');
+                props.history.push('/' + nextUrl.join('/'));
+            })
+            .catch(err => {
+                console.log(err);
+                alert('something went wrong');
+            })
     }
 
     const back = (e) => {
@@ -180,7 +220,8 @@ const mapStateToProps = state => ({
     minimumAmmount: state.deliveryAndCollection.minimumAmmount,
     hardcopyDeliveryCharges: state.deliveryAndCollection.hardcopyDeliveryCharges,
     codAvailable: state.deliveryAndCollection.codAvailable,
-    distance: state.deliveryAndCollection.distance
+    distance: state.deliveryAndCollection.distance,
+    currentVendor: state.currentVendor
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -65,6 +65,7 @@ import {
     setStoreOpen
 } from '../store/staffTiming/staffTimingActions';
 
+//delivery and payment setting 
 import {
     setDeliveryAndCollectionAvailableAt,
     setDeliveryAndCollectionChargesperOrder,
@@ -74,7 +75,12 @@ import {
     setDeliveryAndCollectionMininumAmmount
 } from '../store/deliveryAndCollection/deliveryAndCollectionActions';
 
+
+//staff 
 import { setStaff, removeStaff } from '../store/addStaff/addStaffActions';
+
+//current vendor
+import { setCurrentVendor } from '../store/currentVendor/currentVendorActions';
 
 //exporting all actions
 export {
@@ -124,5 +130,6 @@ export {
     setDeliveryAndCollectionHardcopyDeliveryCharges,
     setDeliveryAndCollectionMininumAmmount,
     setStaff,
-    removeStaff
+    removeStaff,
+    setCurrentVendor
 };

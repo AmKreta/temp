@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './doctorAndHospitalRegistrationForm.styles.scss';
@@ -19,6 +20,8 @@ import {
     setTeleconsulting
 } from '../../../../actions/action';
 
+//importing services
+import { REGISTER_AS_DOCTOR_LINK, REGISTER_AS_HOSPITAL_LINK } from '../../../../services/services';
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -31,7 +34,61 @@ const DoctorAndHospitalRegistrationForm = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-        props.history.goBack();
+        let link;
+        let data;
+
+        //extracting times
+        let timing = {};
+        Object.keys(props.timing).forEach(item => {
+            if (props.timing[item].isSelected) {
+                timing[item.charAt(0).toUpperCase() + item.slice(1)] = { morning: props.timing[item].morning, evening: props.timing[item].morning }
+            }
+        });
+
+        if (props.currentVendor.businessType === 'hospital') {
+            link = REGISTER_AS_HOSPITAL_LINK;
+            data = {
+                doctors: {
+                    name: props.name,
+                    degree: props.degree,
+                    mobileNumber: props.phoneNumber,
+                    fee: props.fees,
+                    timePerSlot: props.timeSlot,
+                    feeCollect: props.feesCollectOnAccountOf.hospital ? 'hospital' : 'doctor',
+                    teleConsulting: props.teleConsulting,
+                    workingHours: timing
+                }
+            }
+        }
+        else if (props.currentVendor.businessType === 'doctor') {
+            link = REGISTER_AS_DOCTOR_LINK;
+            data = {
+                clinic: {
+                    name: props.name,
+                    contact: props.phoneNumber,
+                    address: props.address,
+                    fee: props.fees,
+                    timePerSlot: props.timeSlot,
+                    feeCollect: props.feesCollectOnAccountOf.hospital ? 'hospital' : 'doctor',
+                    teleConsulting: props.teleConsulting,
+                    workingHours: timing
+                }
+            }
+        }
+
+        if (link) {
+
+            axios
+                .put(`${link}/${props.currentVendor._id}`, data)
+                .then(res => {
+                    console.log(res);
+                    props.history.goBack();
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert('something went wrong');
+                })
+        }
     }
 
     return (
@@ -45,8 +102,8 @@ const DoctorAndHospitalRegistrationForm = (props) => {
                     onChange={(e) => { props.setName(e.target.value) }}
                 />
             </div>
-            {
-                props.type === 'addHospital'
+            {   //in adding hospitals
+                props.currentVendor.businessType === 'doctor'
                     ? <div className="address">
                         <input
                             type='text'
@@ -57,8 +114,8 @@ const DoctorAndHospitalRegistrationForm = (props) => {
                     </div>
                     : null
             }
-            {
-                props.type === 'addDoctor'
+            {   //in adding doctors
+                props.currentVendor.businessType === 'hospital'
                     ? <div className="degree">
                         <input
                             type='text'
@@ -168,7 +225,8 @@ const mapStatetoProps = state => ({
     timeSlot: state.doctorAndHospitalRegistration.timeSlotPerPatient,
     feesCollectOnAccountOf: state.doctorAndHospitalRegistration.feesCollectOnAccountOf,
     teleConsulting: state.doctorAndHospitalRegistration.teleConsulting,
-    timing: state.doctorAndHospitalRegistration.timing
+    timing: state.doctorAndHospitalRegistration.timing,
+    currentVendor: state.currentVendor
 });
 
 const mapDispatchToProps = dispatch => ({

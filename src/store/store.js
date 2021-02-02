@@ -11,6 +11,7 @@ import paymentDetailsReducer from './paymentDetails/paymentDetailsReducer';
 import staffTimingReducer from './staffTiming/staffTimingReducer';
 import deliveryAndCollectionReducer from './deliveryAndCollection/deliveryAndCollecrionReducer';
 import addStaffReducer from './addStaff/addStaffReducer';
+import currentVendorReducer from './currentVendor/currentVendorReducer';
 
 const rootReducer = combineReducers({
     location: locationReducer,
@@ -22,7 +23,8 @@ const rootReducer = combineReducers({
     paymentDetails: paymentDetailsReducer,
     timingAndStaff: staffTimingReducer,
     deliveryAndCollection: deliveryAndCollectionReducer,
-    addStaff: addStaffReducer
+    addStaff: addStaffReducer,
+    currentVendor: currentVendorReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));

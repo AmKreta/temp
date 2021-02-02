@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import './addTimings.styles.scss';
 
@@ -17,19 +18,56 @@ import { setStaffTiming, setStoreOpen } from '../../../../actions/action';
 //importing routes
 import { ADD_STAFF } from '../routes';
 
+//importing services
+import {
+    REGISTER_AS_PATHOLOGY_LINK,
+    REGISTER_AS_PHARMACY_LINK
+} from '../../../../services/services';
+
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
 const AddTimings = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-        let nextUrl = props.match.url.split('/');
-        //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
-        nextUrl.pop();//removing last two element
-        nextUrl.pop();
-        nextUrl.shift();//removing first element
-        nextUrl.push(ADD_STAFF);
-        props.history.push('/' + nextUrl.join('/'));
+
+        let url;
+        let data;
+
+        if (props.currentVendor.businessType === 'pharmacy') {
+            url = REGISTER_AS_PHARMACY_LINK;
+        }
+        else if (props.currentVendor.businessType === 'pathology') {
+            url = REGISTER_AS_PATHOLOGY_LINK;
+        }
+
+        //extracting time
+        let timing = {};
+        Object.keys(props.timing).forEach(item => {
+            if (props.timing[item].isSelected) {
+                timing[item.charAt(0).toUpperCase() + item.slice(1)] = { morning: props.timing[item].morning, evening: props.timing[item].morning }
+            }
+        });
+
+        data = {
+            workingHours: timing
+        }
+
+        axios
+            .put(`${url}/${props.currentVendor._id}`, data)
+            .then(res => {
+                let nextUrl = props.match.url.split('/');
+                //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
+                nextUrl.pop();//removing last two element
+                nextUrl.pop();
+                nextUrl.shift();//removing first element
+                nextUrl.push(ADD_STAFF);
+                props.history.push('/' + nextUrl.join('/'));
+            })
+            .catch(err => {
+                console.log(err);
+                alert('something went wrong');
+            });
     }
 
     const back = (e) => {
@@ -103,7 +141,8 @@ const AddTimings = (props) => {
 
 const mapStateToProps = state => ({
     storeOpen24Hours: state.timingAndStaff.storeOpen24Hours,
-    timing: state.timingAndStaff.timing
+    timing: state.timingAndStaff.timing,
+    currentVendor: state.currentVendor
 });
 
 const mapDispatchToProps = dispatch => ({

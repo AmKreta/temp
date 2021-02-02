@@ -79,6 +79,18 @@ const AllowAccessPage = ({ match, history }) => {
         history.push(`${match.url}/locationAccess`);
     }
 
+    const askForCamera = (e) => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                stream.getTracks().forEach(function (track) {
+                    track.stop();
+                });
+            })
+            .catch(err => {
+                alert('camera permission not granted');
+            })
+    }
+
     return (
         <Grid container item xs={12} sm={8} md={7} justify='center' alignItems='flex-end' color='primary' className={classes.bottomPadding}>
             <Grid container item xs={10} sm={9} md={6} direction='column' spacing={2} justify='center'>
@@ -94,6 +106,7 @@ const AllowAccessPage = ({ match, history }) => {
                     <AllowAccessPageButtons
                         classes={[classes.gradientBackground]}
                         label='Allow Camera Access'
+                        onClick={askForCamera}
                         icon={< CameraAltIcon fontSize='large' className={clsx([classes.rounded, classes.whiteBackground])} />}
                     />
 

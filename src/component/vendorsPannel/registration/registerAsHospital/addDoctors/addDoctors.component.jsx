@@ -7,7 +7,7 @@ import DoctorAndHospitalRegistrationForm from '../../doctorAndHospitalRegistrati
 const AddDoctors = () => {
     return (
         <div className="addDoctor">
-            <DoctorAndHospitalRegistrationForm type='addDoctors' />
+            <DoctorAndHospitalRegistrationForm />
         </div>
     )
 }

@@ -173,14 +173,16 @@ $buttonsHeight:10%;
             font-weight: bold;
             font-size: .9em;
             border-collapse: collapse;
-            margin:10px 0;
+            margin: 10px 0;
 
             tbody {
+                font-size: .9em;
+
                 tr {
 
                     &:nth-child(even) {
                         margin: 2px 0;
-                        background-color: #ccc;
+                        background-color: lighten(#ccc, 15%);
                     }
 
                     td {
@@ -208,15 +210,17 @@ $buttonsHeight:10%;
         }
 
         .addNewStaff {
-            text-align:left;
+            text-align: left;
+
             &>div {
                 display: inline-flex;
                 flex-flow: row nowrap;
                 align-items: center;
                 font-weight: bold;
                 border: 1px solid #ccc;
-                padding:0 2%;
-                border-radius:10px;
+                padding: 0 2%;
+                border-radius: 10px;
+
                 &>p {
                     margin-right: 5px;
                 }
