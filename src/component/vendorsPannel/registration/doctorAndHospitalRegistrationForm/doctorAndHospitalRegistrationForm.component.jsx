@@ -21,7 +21,7 @@ import {
 } from '../../../../actions/action';
 
 //importing services
-import { REGISTER_AS_DOCTOR_LINK, REGISTER_AS_HOSPITAL_LINK } from '../../../../services/services';
+import { UPDATE_REGISTERED_USER } from '../../../../services/services';
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -34,7 +34,6 @@ const DoctorAndHospitalRegistrationForm = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-        let link;
         let data;
 
         //extracting times
@@ -46,7 +45,6 @@ const DoctorAndHospitalRegistrationForm = (props) => {
         });
 
         if (props.currentVendor.businessType === 'hospital') {
-            link = REGISTER_AS_HOSPITAL_LINK;
             data = {
                 doctors: {
                     name: props.name,
@@ -61,7 +59,6 @@ const DoctorAndHospitalRegistrationForm = (props) => {
             }
         }
         else if (props.currentVendor.businessType === 'doctor') {
-            link = REGISTER_AS_DOCTOR_LINK;
             data = {
                 clinic: {
                     name: props.name,
@@ -76,24 +73,26 @@ const DoctorAndHospitalRegistrationForm = (props) => {
             }
         }
 
-        if (link) {
+        axios
+            .put(UPDATE_REGISTERED_USER, data, {
+                headers: {
+                    'Authorization': `Bearer ${props.auth_token.accessToken}`
+                }
+            })
+            .then(res => {
+                console.log(res);
+                props.history.goBack();
+            })
+            .catch(err => {
+                console.log(err);
+                alert('something went wrong');
+            })
 
-            axios
-                .put(`${link}/${props.currentVendor._id}`, data)
-                .then(res => {
-                    console.log(res);
-                    props.history.goBack();
-                })
-                .catch(err => {
-                    console.log(err);
-                    alert('something went wrong');
-                })
-        }
     }
 
     return (
         <form className="doctorAndHospitalRegistrationForm">
-            <h3>Add {props.type === 'addHospital' ? 'Hospital/Clinic' : 'Doctor'}</h3>
+            <h3>Add {props.currentVendor.businessType === 'doctor' ? 'Hospital/Clinic' : 'Doctor'}</h3>
             <div className="name">
                 <input
                     type='text'
@@ -226,7 +225,8 @@ const mapStatetoProps = state => ({
     feesCollectOnAccountOf: state.doctorAndHospitalRegistration.feesCollectOnAccountOf,
     teleConsulting: state.doctorAndHospitalRegistration.teleConsulting,
     timing: state.doctorAndHospitalRegistration.timing,
-    currentVendor: state.currentVendor
+    currentVendor: state.currentVendor,
+    auth_token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({

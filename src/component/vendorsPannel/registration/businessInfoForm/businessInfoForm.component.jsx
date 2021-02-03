@@ -18,12 +18,7 @@ import {
 } from '../routes';
 
 //importing services
-import {
-    REGISTER_AS_DOCTOR_LINK,
-    REGISTER_AS_HOSPITAL_LINK,
-    REGISTER_AS_PATHOLOGY_LINK,
-    REGISTER_AS_PHARMACY_LINK
-} from '../../../../services/services';
+import { REGISTER_LINK } from '../../../../services/services';
 
 //importing action
 import { setCurrentVendor } from '../../../../actions/action';
@@ -53,7 +48,8 @@ class BusinessInfoForm extends React.Component {
             degree: '',
             specialist: '',
             documents: null,
-            country: null
+            country: null,
+            phone: ''
         }
         this.uploadDocumentRef = React.createRef();
     }
@@ -62,7 +58,11 @@ class BusinessInfoForm extends React.Component {
         // will only run if country is not set 
         return prevState.country
             ? {}
-            : { country: nextProps.countryCode.name, type: nextProps.currentVendor.businessType }
+            : {
+                country: nextProps.countryCode.name,
+                type: nextProps.currentVendor.businessType,
+                phone: nextProps.currentVendor.phoneNumber
+            }
     }
 
     changeHandler = (e) => {
@@ -84,30 +84,23 @@ class BusinessInfoForm extends React.Component {
     submitHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
-
-        let postRequestLink = null;
         let gotoPageLink = null;
-
         //selecting link
         if (this.state.type === HOSPITAL) {
-            postRequestLink = REGISTER_AS_HOSPITAL_LINK;
             gotoPageLink = REGISTER_AS_HOSPITAL;
         }
         else if (this.state.type === PATHOLOGY) {
-            postRequestLink = REGISTER_AS_PATHOLOGY_LINK;
             gotoPageLink = REGISTER_AS_PATHOLOGY;
         }
         else if (this.state.type === PHARMACY) {
-            postRequestLink = REGISTER_AS_PHARMACY_LINK;
             gotoPageLink = REGISTER_AS_PHARMACY;
         }
         else if (this.state.type === DOCTOR) {
-            postRequestLink = REGISTER_AS_DOCTOR_LINK;
             gotoPageLink = REGISTER_AS_DOCTOR;
         }
 
         axios
-            .post(postRequestLink, this.state)
+            .post(`${REGISTER_LINK}?category=${this.props.currentVendor.businessType}`, this.state)
             .then(res => {
                 this.props.setCurrentVendor({ isRegistered: true, ...res.data.payload });
             })
@@ -176,7 +169,7 @@ class BusinessInfoForm extends React.Component {
                             <div className='businessInfo businessPincode halfWidth'>
                                 <label htmlFor="pin code">Pincode</label>
                                 <input
-                                    type='text'
+                                    type='number'
                                     id='pincode'
                                     value={this.state.pincode}
                                     onChange={this.changeHandler}

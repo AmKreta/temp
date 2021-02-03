@@ -19,10 +19,7 @@ import { setStaffTiming, setStoreOpen } from '../../../../actions/action';
 import { ADD_STAFF } from '../routes';
 
 //importing services
-import {
-    REGISTER_AS_PATHOLOGY_LINK,
-    REGISTER_AS_PHARMACY_LINK
-} from '../../../../services/services';
+import { UPDATE_REGISTERED_USER } from '../../../../services/services';
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -30,16 +27,7 @@ const AddTimings = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-
-        let url;
         let data;
-
-        if (props.currentVendor.businessType === 'pharmacy') {
-            url = REGISTER_AS_PHARMACY_LINK;
-        }
-        else if (props.currentVendor.businessType === 'pathology') {
-            url = REGISTER_AS_PATHOLOGY_LINK;
-        }
 
         //extracting time
         let timing = {};
@@ -54,7 +42,11 @@ const AddTimings = (props) => {
         }
 
         axios
-            .put(`${url}/${props.currentVendor._id}`, data)
+            .put(UPDATE_REGISTERED_USER, data, {
+                headers: {
+                    'Authorization': `Bearer ${props.auth_token.accessToken}`
+                }
+            })
             .then(res => {
                 let nextUrl = props.match.url.split('/');
                 //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
@@ -142,7 +134,8 @@ const AddTimings = (props) => {
 const mapStateToProps = state => ({
     storeOpen24Hours: state.timingAndStaff.storeOpen24Hours,
     timing: state.timingAndStaff.timing,
-    currentVendor: state.currentVendor
+    currentVendor: state.currentVendor,
+    auth_token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({

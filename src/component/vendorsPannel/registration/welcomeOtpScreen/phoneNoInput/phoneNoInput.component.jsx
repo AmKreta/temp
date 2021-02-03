@@ -3,7 +3,7 @@ import './phoneNoInput.styles.scss';
 
 const Input = ({ value, Ref, index, changeHandler }) => {
     return (
-        <input value={value} index={index} onChange={changeHandler} ref={Ref} />
+        <input type='number' value={value} index={index} onChange={changeHandler} ref={Ref} />
     );
 }
 

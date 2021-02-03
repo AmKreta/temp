@@ -19,12 +19,7 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 import { BiWallet } from 'react-icons/bi';
 
 //importing services
-import {
-    REGISTER_AS_DOCTOR_LINK,
-    REGISTER_AS_HOSPITAL_LINK,
-    REGISTER_AS_PHARMACY_LINK,
-    REGISTER_AS_PATHOLOGY_LINK
-} from '../../../../services/services';
+import { UPDATE_REGISTERED_USER, } from '../../../../services/services';
 
 const PaymentSetting = (props) => {
 
@@ -35,20 +30,6 @@ const PaymentSetting = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-
-        let url;
-        if (props.currentVendor.businessType === 'doctor') {
-            url = REGISTER_AS_DOCTOR_LINK;
-        }
-        else if (props.currentVendor.businessType === 'hospital') {
-            url = REGISTER_AS_HOSPITAL_LINK;
-        }
-        else if (props.currentVendor.businessType === 'pharmacy') {
-            url = REGISTER_AS_PHARMACY_LINK;
-        }
-        else if (props.currentVendor.businessType === 'pathology') {
-            url = REGISTER_AS_PATHOLOGY_LINK;
-        }
 
         let data = {
             payment: {
@@ -63,7 +44,11 @@ const PaymentSetting = (props) => {
         }
         console.log(data);
         axios
-            .put(`${url}/${props.currentVendor._id}`, data)
+            .put(UPDATE_REGISTERED_USER, data, {
+                headers: {
+                    'Authorization': `Bearer ${props.auth_token.accessToken}`
+                }
+            })
             .then(res => {
                 let nextUrl = props.match.url.split('/');
                 nextUrl.pop();
@@ -201,7 +186,8 @@ const mapStatetoProps = state => ({
     upiID: state.paymentDetails.upiID,
     IFSC: state.paymentDetails.IFSC,
     accountNumber: state.paymentDetails.accountNumber,
-    currentVendor: state.currentVendor
+    currentVendor: state.currentVendor,
+    auth_token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({

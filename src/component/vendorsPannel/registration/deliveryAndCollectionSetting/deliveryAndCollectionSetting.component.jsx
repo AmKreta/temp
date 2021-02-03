@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './deliveryAndCollectionSetting.styles.scss';
@@ -21,23 +22,16 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 import { GiScooter } from 'react-icons/gi';
 
 //importing services
-import {
-    REGISTER_AS_PATHOLOGY_LINK,
-    REGISTER_AS_PHARMACY_LINK
-} from '../../../../services/services';
-import axios from 'axios';
-
+import { UPDATE_REGISTERED_USER } from '../../../../services/services';
 
 //own props=['collectionSetting','deliverySetting']
 const DeliveryAndCollectionSetting = (props) => {
     const save = (e) => {
         e.preventDefault();
 
-        let url;
         let data;
 
         if (props.currentVendor.businessType === 'pharmacy') {
-            url = REGISTER_AS_PHARMACY_LINK;
             data = {
                 type: props.availableAt.customerAddress ? 'delivery' : 'pickup',
                 deliveryCharges: props.chargesPerOrder,
@@ -47,7 +41,6 @@ const DeliveryAndCollectionSetting = (props) => {
             }
         }
         else if (props.currentVendor.businessType === 'pathology') {
-            url = REGISTER_AS_PATHOLOGY_LINK;
             data = {
                 availablity: props.availableAt.customerAddress ? 'customer' : 'center',
                 collectionChargesPerVisit: props.chargesPerOrder,
@@ -59,7 +52,11 @@ const DeliveryAndCollectionSetting = (props) => {
         }
 
         axios
-            .put(`${url}/${props.currentVendor._id}`, data)
+            .put(UPDATE_REGISTERED_USER, data, {
+                headers: {
+                    'Authorization': `Bearer ${props.auth_token.accessToken}`
+                }
+            })
             .then(res => {
                 let nextUrl = props.match.url.split('/');
                 //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
@@ -221,7 +218,8 @@ const mapStateToProps = state => ({
     hardcopyDeliveryCharges: state.deliveryAndCollection.hardcopyDeliveryCharges,
     codAvailable: state.deliveryAndCollection.codAvailable,
     distance: state.deliveryAndCollection.distance,
-    currentVendor: state.currentVendor
+    currentVendor: state.currentVendor,
+    auth_token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -1,6 +1,6 @@
 import { UPDATE_ACCESS_TOKEN } from './tokenActionTypes';
 
-const initialState = { accessToken: null, refreshToken: null };
+const initialState = { accessToken: null };
 
 const tokenReducer = (state = initialState, action) => {
     switch (action.type) {

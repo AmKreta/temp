@@ -18,7 +18,8 @@ const initialState = {
     degree: '',
     specialist: '',
     documents: null,
-    country: null
+    country: null,
+    phoneNumber:''
 }
 
 const currentVendorReducer = (state = initialState, action) => {

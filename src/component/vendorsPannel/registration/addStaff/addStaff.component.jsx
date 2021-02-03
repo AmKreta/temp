@@ -13,16 +13,12 @@ import { IoMdAdd } from 'react-icons/io';
 import { MdClose } from 'react-icons/md';
 
 //importing services
-import {
-    REGISTER_AS_HOSPITAL_LINK,
-    REGISTER_AS_PATHOLOGY_LINK,
-    REGISTER_AS_PHARMACY_LINK
-} from '../../../../services/services';
+import { UPDATE_REGISTERED_USER } from '../../../../services/services';
 
 //importing reusable components
 import Icon from '../../../reusableComponent/icon/icon.component';
 
-const AddedStaffList = ({ name, phoneNo, designation, onClick }) => {
+const AddedStaffList = ({ name, phoneNo, designation, onClick, auth_token }) => {
     return (
         <tr>
             <td>{name}</td>
@@ -63,18 +59,6 @@ const AddStaff = (props) => {
 
     const save = (e) => {
         e.preventDefault();
-
-        let url;
-        if (props.currentVendor.businessType === 'hospital') {
-            url = REGISTER_AS_HOSPITAL_LINK;
-        }
-        else if (props.currentVendor.businessType === 'pathology') {
-            url = REGISTER_AS_PATHOLOGY_LINK;
-        }
-        else if (props.currentVendor.businessType === 'pharmacy') {
-            url = REGISTER_AS_PHARMACY_LINK;
-        }
-
         let data = {
             staffs: props.staffArray.map(item => ({
                 name: item.name,
@@ -82,9 +66,12 @@ const AddStaff = (props) => {
                 role: item.designation
             }))
         }
-
         axios
-            .put(`${url}/${props.currentVendor._id}`, data)
+            .put(UPDATE_REGISTERED_USER, data, {
+                headers: {
+                    'Authorization': `Bearer ${props.auth_token.accessToken}`
+                }
+            })
             .then(res => {
                 let nextUrl = props.match.url.split('/');
                 nextUrl.pop();
@@ -191,7 +178,8 @@ const AddStaff = (props) => {
 
 const mapStateToProps = state => ({
     staffArray: state.addStaff.staffArray,
-    currentVendor: state.currentVendor
+    currentVendor: state.currentVendor,
+    auth_token: state.token
 });
 
 const mapDispatchToProps = dispatch => ({
