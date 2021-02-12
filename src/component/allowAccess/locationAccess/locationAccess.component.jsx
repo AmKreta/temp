@@ -34,6 +34,24 @@ const LocationAccess = ({ history }) => {
 
     const classes = useStyles();
 
+    const setCurrentLocation = (e) => {
+        function success(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log(longitude, latitude);
+        }
+
+        function error() {
+            alert('Unable to retrieve your location');
+        }
+
+        if (!navigator.geolocation) {
+            alert('Geolocation is not supported by your browser');
+        } else {
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+    };
+
     useEffect(() => {
         if (cityPinCode.length !== 0) {
             if (cityPinCode in dummyData) {
@@ -65,7 +83,7 @@ const LocationAccess = ({ history }) => {
                             <CloseIcon onClick={returnBackToAllowAccessPage} />
                         </div>
                     </div>
-                    <div className='setCurrentLocationContainer'>
+                    <div className='setCurrentLocationContainer' onClick={setCurrentLocation}>
                         <div className='setCurrrentLocationIcon'>
                             <GpsFixedIcon className={classes.blue} />
                         </div>
@@ -79,7 +97,7 @@ const LocationAccess = ({ history }) => {
                     <div className="inputCityPincodeIcon">
                         <LocationOnIcon />
                     </div>
-                    <input id='cityPincodeInput' value={cityPinCode} onChange={(e) => { setCityPinCode(e.target.value) }} placeholder='Enter Pin Code Or City Name'/>
+                    <input id='cityPincodeInput' value={cityPinCode} onChange={(e) => { setCityPinCode(e.target.value) }} placeholder='Enter Pin Code Or City Name' />
                     {result.error ? <p className='cityPincodeInputError'>no result found enter again</p> : null}
                 </div>
 

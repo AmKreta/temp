@@ -17,11 +17,12 @@ import {
     setFees,
     setTimings,
     setFeesCollectionOnAccountOf,
-    setTeleconsulting
+    setTeleconsulting,
+    setCurrentVendor
 } from '../../../../actions/action';
 
 //importing services
-import { UPDATE_REGISTERED_USER } from '../../../../services/services';
+import { UPDATE_REGISTERED_USER, GET_USER_DEETAIL_BY_TOKEN } from '../../../../services/services';
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -80,7 +81,20 @@ const DoctorAndHospitalRegistrationForm = (props) => {
                 }
             })
             .then(res => {
-                console.log(res);
+                axios
+                    .get(GET_USER_DEETAIL_BY_TOKEN, {
+                        headers: {
+                            'Authorization': `Bearer ${props.auth_token.accessToken}`
+                        }
+                    })
+                    .then(response => {
+                        console.log(response.data.payload)
+                        props.setCurrentVendor(response.data.payload)
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert('something went wrong');
+                    });
                 props.history.goBack();
             })
             .catch(err => {
@@ -96,7 +110,7 @@ const DoctorAndHospitalRegistrationForm = (props) => {
             <div className="name">
                 <input
                     type='text'
-                    placeholder={`Enter name of hospital`}
+                    placeholder={`Enter name of the ${props.currentVendor.businessType === 'doctor' ? 'hospital' : 'doctor'}`}
                     value={props.name}
                     onChange={(e) => { props.setName(e.target.value) }}
                 />
@@ -128,7 +142,7 @@ const DoctorAndHospitalRegistrationForm = (props) => {
             <div className="phoneNo">
                 <input
                     type='text'
-                    placeholder={`Enter phone number of hospital`}
+                    placeholder={`Enter phone no. ${props.currentVendor.businessType === 'doctor' ? 'hospital' : 'doctor'}`}
                     value={props.phoneNumber}
                     onChange={(e) => { props.setPhoneNumber(e.target.value) }}
                 />
@@ -238,7 +252,8 @@ const mapDispatchToProps = dispatch => ({
     setTimeSlotForpatient: (time) => dispatch(setTimeSlotForpatient(time)),
     setTeleconsulting: (option) => dispatch(setTeleconsulting(option)),
     setFeesCollectionOnAccountOf: ({ doctor = false, hospital = true }) => dispatch(setFeesCollectionOnAccountOf({ doctor, hospital })),
-    setTimings: (day, timings) => dispatch(setTimings(day, timings))
+    setTimings: (day, timings) => dispatch(setTimings(day, timings)),
+    setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload))
 });
 
 export default connect(mapStatetoProps, mapDispatchToProps)(withRouter(DoctorAndHospitalRegistrationForm));

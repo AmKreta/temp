@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './header.styles.scss';
 
@@ -9,14 +10,15 @@ import { IoMdNotificationsOutline } from 'react-icons/io';
 import Icon from '../../reusableComponent/icon/icon.component';
 
 const Header = ({ location }) => {
-    const [isHidden, setIsHidden] = useState(false);
-    
+    const [isHidden, setIsHidden] = useState(true);
+    const businessName = useSelector(state => state.currentVendor.businessName);
+
     useEffect(() => {
-        if (location.pathname === '/vendor/registration') {
-            setIsHidden(true);
+        if (location.pathname.includes('/profile') || (location.pathname.includes('registerAs') && location.pathname!== '/vendor/registerAs')) {
+            setIsHidden(false);
         }
         else if (isHidden) {
-            setIsHidden(false);
+            setIsHidden(true);
         }
     }, [location.pathname]);
 
@@ -29,7 +31,7 @@ const Header = ({ location }) => {
                 <p>Add sign board</p>
             </div>
             <div className="vendorsName">
-                Dr.Reddy
+                {businessName}
             </div>
             <div className="vendorsNotification">
                 <Icon size='30px' iconColor='white'><IoMdNotificationsOutline /></Icon>

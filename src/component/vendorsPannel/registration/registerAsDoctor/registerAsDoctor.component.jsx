@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import './registerAsDoctor.styles.scss';
 
 //routes names
-import { ADD_HOSPITALS, PAYMENT_SETTING, PROFILE } from '../routes';
+import { ADD_HOSPITALS, PAYMENT_SETTING } from '../routes';
 
 //custom components
 import DoctorsRegistrationHome from './doctorsRegistrationHome/doctorsRegistrationHome.component';

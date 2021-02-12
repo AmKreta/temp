@@ -21,7 +21,7 @@ import {
 import { REGISTER_LINK } from '../../../../services/services';
 
 //importing action
-import { setCurrentVendor } from '../../../../actions/action';
+import { setCurrentVendor, updateAccessToken } from '../../../../actions/action';
 
 const HOSPITAL = 'hospital';
 const PHARMACY = 'pharmacy';
@@ -103,6 +103,7 @@ class BusinessInfoForm extends React.Component {
             .post(`${REGISTER_LINK}?category=${this.props.currentVendor.businessType}`, this.state)
             .then(res => {
                 this.props.setCurrentVendor({ isRegistered: true, ...res.data.payload });
+                this.props.updateAccessToken(res.data.token)
             })
             .then(() => {
                 let link = this.props.match.url.split('/');
@@ -308,7 +309,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload))
+    setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload)),
+    updateAccessToken: (token) => dispatch(updateAccessToken(token))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BusinessInfoForm);

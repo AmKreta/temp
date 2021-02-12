@@ -1,0 +1,41 @@
+@import '../../profile.sharableStyles.scss';
+
+.setDoctorOrHospital {
+    padding: 0 4%;
+
+    .setDoctorOrHospitalForm {
+        &>div {
+            margin-top: 10px;
+
+            &>label {
+                display: block;
+                text-align: left;
+                font-weight: bold;
+                padding-left: 2%;
+            }
+
+            &>input,
+            &>select,
+            &>textarea {
+                width: 100%;
+                @include input();
+            }
+
+            &>select {
+                background-color: white;
+            }
+        }
+    }
+
+    .setDoctorOrHospitalActions {
+        margin-top: 20px;
+
+        &>.whiteButton {
+            @include whiteButton();
+        }
+
+        &>.greenButton {
+            @include greenButton();
+        }
+    }
+}

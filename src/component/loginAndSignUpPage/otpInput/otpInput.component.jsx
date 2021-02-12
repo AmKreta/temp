@@ -24,7 +24,7 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     //making request to get otp ,otp.enabled only runs once
     useEffect(() => {
         if (otp.enabled) {
-            axios.post(GET_OTP, { mobileNumber: phoneNo.toString() })
+            axios.post(GET_OTP, { phoneNumber: `+91${phoneNo.toString()}` })
                 .then(res => {
                     console.log(res.data);
                     setOtpSentTrue();

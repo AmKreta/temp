@@ -30,13 +30,13 @@ const PhoneNoInput = ({ phoneNo, setPhoneNo, countryCode, setCountryCode }) => {
             return newPhoneNo;
         });
         // changing curor position
-        if (index < refArray.length - 1 && refArray[index + 1].current.value == '' && e.target.value !== '') {
+        if (index < refArray.length - 1 && refArray[index + 1].current.value === '' && e.target.value !== '') {
             // ie if the input is not the last one 
             // and
             //next input container doesn't have some value
             refArray[index + 1].current.focus();
         }
-    });
+    }, [setPhoneNo]);
 
     return (
         <div className="welcomeScreenPhoneNoInputContainer">

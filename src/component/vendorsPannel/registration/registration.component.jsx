@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import './registration.styles.scss';
 
 //custom Component
-import Header from '../header/header.component';
-import Footer from '../footer/footer.component';
 import WelcomeOtpScreen from './welcomeOtpScreen/welcomeOtpScreen.component';
 import BusinessInfoForm from './businessInfoForm/businessInfoForm.component';
 import RegisterAs from './registerAs/registerAs.component';
@@ -23,25 +21,32 @@ import {
     GET_OTP
 } from './routes';
 
-const Registration = ({ match }) => {
+const Registration = ({ match, location }) => {
     const [countryCode, setCountryCode] = useState({ code: '+91', shortHand: 'IND', name: 'India' });
-    console.log(`${match.url}/${GET_OTP}`);
+    const [registrationDivHeight, setRegistrationDivHeight] = useState('100%');
+
+    useEffect(() => {
+        if (location.pathname.includes('/registerAs')) {
+            setRegistrationDivHeight('80%')
+        }
+        else {
+            setRegistrationDivHeight('100%')
+        }
+    }, [location.pathname, setRegistrationDivHeight]);
+
     return (
-        <div className="registrationContainer">
+        <div className="registrationContainer" style={{ height: registrationDivHeight }}>
             {
-                <>
-                    <Header />
-                    <Switch>
-                        <Route exact path={`${match.url}/`} component={RegisterAs} />
-                        <Route path={`${match.url}/${GET_OTP}`} render={({ history, match }) => <WelcomeOtpScreen {...{ history, match, countryCode, setCountryCode }} />} />
-                        <Route path={`${match.url}/${ADD_BUSINESS_INFO}`} render={({ history, match }) => <BusinessInfoForm {...{ history, match, countryCode }} />} />
-                        <Route path={`${match.url}/${REGISTER_AS_DOCTOR}`} component={RegisterAsDoctor} />
-                        <Route path={`${match.url}/${REGISTER_AS_HOSPITAL}`} component={RegisterAsHospital} />
-                        <Route path={`${match.url}/${REGISTER_AS_PHARMACY}`} component={RegisterAsPharmacy} />
-                        <Route path={`${match.url}/${REGISTER_AS_PATHOLOGY}`} component={RegisterAsPathology} />
-                    </Switch>
-                    <Footer />
-                </>
+                <Switch>
+                    <Route exact path={`${match.url}/`} component={RegisterAs} />
+                    <Route path={`${match.url}/${GET_OTP}`} render={({ history, match }) => <WelcomeOtpScreen {...{ history, match, countryCode, setCountryCode }} />} />
+                    <Route path={`${match.url}/${ADD_BUSINESS_INFO}`} render={({ history, match }) => <BusinessInfoForm {...{ history, match, countryCode }} />} />
+                    <Route path={`${match.url}/${REGISTER_AS_DOCTOR}`} component={RegisterAsDoctor} />
+                    <Route path={`${match.url}/${REGISTER_AS_HOSPITAL}`} component={RegisterAsHospital} />
+                    <Route path={`${match.url}/${REGISTER_AS_PHARMACY}`} component={RegisterAsPharmacy} />
+                    <Route path={`${match.url}/${REGISTER_AS_PATHOLOGY}`} component={RegisterAsPathology} />
+                    <Redirect to='/404' />
+                </Switch>
             }
         </div>
     );

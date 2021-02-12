@@ -82,6 +82,9 @@ import { setStaff, removeStaff } from '../store/addStaff/addStaffActions';
 //current vendor
 import { setCurrentVendor } from '../store/currentVendor/currentVendorActions';
 
+//my products and tests
+import { setProductsAndTestList } from '../store/myProductsAndTests/myProductsAndTestActions';
+
 //exporting all actions
 export {
     setLocation,
@@ -131,5 +134,6 @@ export {
     setDeliveryAndCollectionMininumAmmount,
     setStaff,
     removeStaff,
-    setCurrentVendor
+    setCurrentVendor,
+    setProductsAndTestList
 };

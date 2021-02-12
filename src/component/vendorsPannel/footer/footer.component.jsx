@@ -11,14 +11,14 @@ import { IoLogoWhatsapp } from 'react-icons/io';
 import Icon from '../../reusableComponent/icon/icon.component';
 
 const Footer = ({ location }) => {
-    const [isHidden, setIsHidden] = useState(false);
+    const [isHidden, setIsHidden] = useState(true);
 
     useEffect(() => {
-        if (location.pathname === '/vendor/registration') {
-            setIsHidden(true);
+        if (location.pathname.includes('profile')||(location.pathname.includes('registerAs') && location.pathname!== '/vendor/registerAs')) {
+            setIsHidden(false);
         }
         else if (isHidden) {
-            setIsHidden(false);
+            setIsHidden(true);
         }
     }, [location.pathname]);
     return (

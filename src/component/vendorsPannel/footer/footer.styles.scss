@@ -12,6 +12,7 @@ $circleSize:50px;
     justify-content: space-evenly;
 
     &.hidden {
+        position: relative;
         display: none;
     }
 

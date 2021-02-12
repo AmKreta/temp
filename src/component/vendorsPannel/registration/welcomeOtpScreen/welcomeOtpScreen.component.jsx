@@ -27,75 +27,23 @@ const WelcomeOtpScreen = ({ history, match, currentVendor, setCurrentVendor, upd
     const [phoneNo, setPhoneNo] = useState(['', '', '', '', '', '', '', '', '', '']);
     const [countryCode, setCountryCode] = useState({ code: '+91', country: 'IND' });
 
-    const getOtp = () => {
-        setCurrentVendor({ phoneNumber: countryCode.code + phoneNo.join('') })
-        axios              //{mobileNumber:+91123456}
-            .post(GET_OTP, { phoneNumber: countryCode.code + phoneNo.join('') })
-            .then(res => {
-                if (res.data.payload.isRegistered) {
-                    //setCurrentVendor(res.data.payload);
-                    console.log('otp sent');
-                }
-            })
-            .catch(err => {
-                alert('something went wrong');
-            })
-    }
-
-    const verifyOtp = () => {
-        axios
-            .post(VERIFY_OTP, { phoneNumber: countryCode.code + phoneNo.join(''), otp: otp.join('') })
-            .then(res => {
-                // updating access token
-                updateAccessToken(res.data.payload.auth_token);
-                let link = match.url.split('/');
-                link.pop();
-                if (res.data.payload.isRegistered) {
-                    //deciding page to go on if user is verified
-                    let page = null;
-                    if (currentVendor.businessType === 'doctor') {
-                        page = REGISTER_AS_DOCTOR;
-                    }
-                    else if (currentVendor.businessType === 'hospital') {
-                        page = REGISTER_AS_HOSPITAL;
-                    }
-                    else if (currentVendor.businessType === 'pharmacy') {
-                        page = REGISTER_AS_PHARMACY;
-                    }
-                    else if (currentVendor.businessType === 'pathology') {
-                        page = REGISTER_AS_PATHOLOGY;
-                    }
-                    axios
-                        .get(GET_USER_DEETAIL_BY_TOKEN, {
-                            headers: {
-                                'Authorization': `Bearer ${res.data.payload.auth_token}`
-                            }
-                        })
-                        .then(response => {
-                            setCurrentVendor(response.data.payload);
-                            link.push(page);
-                            link = link.join('/');
-                            history.push(link);
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            alert('something went wrong');
-                        });
-                }
-                else {
-                    //user is not already registered , then fill the business registration from
-                    link.push(ADD_BUSINESS_INFO);
-                    link = link.join('/');
-                    history.push(link);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-                alert('something went wrong');
-            });
-    }
-
     useEffect(() => {
+
+        const getOtp = () => {
+            setCurrentVendor({ phoneNumber: countryCode.code + phoneNo.join('') })
+            axios              //{mobileNumber:+91123456}
+                .post(GET_OTP, { phoneNumber: countryCode.code + phoneNo.join('') })
+                .then(res => {
+                    if (res.data.payload.isRegistered) {
+                        //setCurrentVendor(res.data.payload);
+                        console.log('otp sent');
+                    }
+                })
+                .catch(err => {
+                    alert('something went wrong');
+                })
+        }
+
         //action when phone no is input
         let check = () => {
             for (let i = 0; i < phoneNo.length; i++) {
@@ -108,9 +56,63 @@ const WelcomeOtpScreen = ({ history, match, currentVendor, setCurrentVendor, upd
         if (check()) {
             getOtp();
         }
-    }, [phoneNo])
+    }, [phoneNo, countryCode.code, setCurrentVendor])
 
     useEffect(() => {
+
+        const verifyOtp = () => {
+            axios
+                .post(VERIFY_OTP, { phoneNumber: countryCode.code + phoneNo.join(''), otp: otp.join('') })
+                .then(res => {
+                    // updating access token
+                    updateAccessToken(res.data.payload.auth_token);
+                    let link = match.url.split('/');
+                    link.pop();
+                    if (res.data.payload.isRegistered) {
+                        //deciding page to go on if user is verified
+                        let page = null;
+                        if (currentVendor.businessType === 'doctor') {
+                            page = REGISTER_AS_DOCTOR;
+                        }
+                        else if (currentVendor.businessType === 'hospital') {
+                            page = REGISTER_AS_HOSPITAL;
+                        }
+                        else if (currentVendor.businessType === 'pharmacy') {
+                            page = REGISTER_AS_PHARMACY;
+                        }
+                        else if (currentVendor.businessType === 'pathology') {
+                            page = REGISTER_AS_PATHOLOGY;
+                        }
+                        axios
+                            .get(GET_USER_DEETAIL_BY_TOKEN, {
+                                headers: {
+                                    'Authorization': `Bearer ${res.data.payload.auth_token}`
+                                }
+                            })
+                            .then(response => {
+                                setCurrentVendor(response.data.payload);
+                                link.push(page);
+                                link = link.join('/');
+                                history.push(link);
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                alert('something went wrong');
+                            });
+                    }
+                    else {
+                        //user is not already registered , then fill the business registration from
+                        link.push(ADD_BUSINESS_INFO);
+                        link = link.join('/');
+                        history.push(link);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert('something went wrong');
+                });
+        }
+
         //action when otp is input
         let check = () => {
             for (let i = 0; i < otp.length - 2; i++) {
@@ -124,7 +126,7 @@ const WelcomeOtpScreen = ({ history, match, currentVendor, setCurrentVendor, upd
             //history.push(`${match.url}/${ADD_BUSINESS_INFO}`);
             verifyOtp();
         }
-    }, [otp]);
+    }, [otp, countryCode.code, currentVendor.businessType, history, match.url, phoneNo, setCurrentVendor, updateAccessToken]);
 
     return (
         <div className="welcomeOtpScreen">

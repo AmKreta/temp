@@ -82,9 +82,11 @@ $formButtonFieldHeight:15%;
                 display: flex;
                 flex-flow: row nowrap;
                 align-items: center;
+                padding-left:2%;
 
                 .radioInputLabel {
                     @include radio();
+                    margin-left:2%;
 
                     &:nth-child(1) {
                         width: 30%;

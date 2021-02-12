@@ -9,7 +9,8 @@ import {
     setPaymentOption,
     setUpiID,
     setBankIFSC,
-    setBankAccountNumber
+    setBankAccountNumber,
+    setCurrentVendor
 } from '../../../../actions/action';
 
 //reusable component
@@ -19,7 +20,7 @@ import Icon from '../../../reusableComponent/icon/icon.component';
 import { BiWallet } from 'react-icons/bi';
 
 //importing services
-import { UPDATE_REGISTERED_USER, } from '../../../../services/services';
+import { UPDATE_REGISTERED_USER, GET_USER_DEETAIL_BY_TOKEN } from '../../../../services/services';
 
 const PaymentSetting = (props) => {
 
@@ -50,14 +51,28 @@ const PaymentSetting = (props) => {
                 }
             })
             .then(res => {
-                let nextUrl = props.match.url.split('/');
-                nextUrl.pop();
-                nextUrl.shift();
-                nextUrl = '/' + nextUrl.join('/');
-                props.history.push(nextUrl);
+                axios
+                    .get(GET_USER_DEETAIL_BY_TOKEN, {
+                        headers: {
+                            'Authorization': `Bearer ${props.auth_token.accessToken}`
+                        }
+                    })
+                    .then(response => {
+                        props.setCurrentVendor(response.data.payload);
+                        let nextUrl = props.match.url.split('/');
+                        nextUrl.pop();
+                        nextUrl.shift();
+                        nextUrl = '/' + nextUrl.join('/');
+                        props.history.push(nextUrl);
+                    })
+                    .catch(err => {
+                        alert('something went wrong');
+                        console.log(err);
+                    })
             })
             .catch(err => {
                 alert('something went wrong');
+                console.log(err);
             });
     }
 
@@ -195,7 +210,8 @@ const mapDispatchToProps = dispatch => ({
     setOnlinePayment: (option) => dispatch(setOnlinePayment(option)),
     setUpiID: (upi) => dispatch(setUpiID(upi)),
     setBankIFSC: (ifsc) => dispatch(setBankIFSC(ifsc)),
-    setBankAccountNumber: (accountNo) => dispatch(setBankAccountNumber(accountNo))
+    setBankAccountNumber: (accountNo) => dispatch(setBankAccountNumber(accountNo)),
+    setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload))
 });
 
 export default connect(mapStatetoProps, mapDispatchToProps)(PaymentSetting);

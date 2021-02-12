@@ -12,12 +12,18 @@ import { IconContext } from 'react-icons';
 import { RiStarSFill, RiWalletFill } from 'react-icons/ri';
 import { GrAdd } from 'react-icons/gr';
 import { BsCalendarFill } from 'react-icons/bs';
-
+import { IoLogoWhatsapp } from 'react-icons/io';
 
 //verified logo
 import logo from './check.svg';
 
-const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, small, selectData }) => {
+//importing reusable component
+import Icon from '../icon/icon.component';
+
+//importing jss
+import { green } from '../../../assets/globalJSS';
+
+const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, small, selectData, large }) => {
     const {
         _id,
         firstName,
@@ -48,8 +54,28 @@ const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, 
         }
     }
 
+    const share = (e) => {
+        e.stopPropagation();
+        e.cancellable = true;
+        if (navigator.share) {
+            navigator
+                .share({
+                    title: 'WebShare API Demo',
+                    url: 'https://codepen.io/ayoisaiah/pen/YbNazJ'
+                })
+                .then(() => {
+                    console.log('Thanks for sharing!');
+                })
+                .catch(() => {
+                    alert('something went wrong')
+                });
+        } else {
+            alert('share permission not granted');
+        }
+    }
+
     return (
-        <div className={`searchResultCard ${small ? 'small' : null}`} id={_id} onClick={gotoPage}>
+        <div className={`searchResultCard ${small ? 'small' : null} ${large ? 'large' : null}`} id={_id} onClick={gotoPage}>
             <div className="name">
                 <p>
                     {businessName}
@@ -120,6 +146,15 @@ const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, 
             <div className="location">
                 pune
             </div>
+            <div className="previewPersonalWebsite">
+                <p>Preview Of Personal Website</p>
+                <p>www.mediseen.in/{businessName}</p>
+            </div>
+            <div className="share">
+                <Icon iconColor={green} size='40px' onClick={share}>
+                    <IoLogoWhatsapp />
+                </Icon>
+            </div>
         </div>
     );
 
@@ -129,4 +164,4 @@ const mapDispatchToProps = dispatch => ({
     selectData: (data) => dispatch(selectData(data))
 });
 
-export default connect(null,mapDispatchToProps)(withRouter(InfoCard));
+export default connect(null, mapDispatchToProps)(withRouter(InfoCard));

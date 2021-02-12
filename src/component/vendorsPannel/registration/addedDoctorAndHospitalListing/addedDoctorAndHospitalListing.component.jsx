@@ -11,7 +11,13 @@ const AddedDoctorAndHospitalList = (props) => {
     return (
         <div className="addedDoctorAndHospilatListContainer">
             {
-                list.map(item)
+                props.currentVendor.businessType === 'doctor'
+                    ? props.currentVendor.clinic.map((item, index) => { 
+                        return <infoCard
+                    })
+                    : props.currentVendor.doctors.map((item, index) => { 
+
+                    })
             }
         </div>
     );

@@ -24,6 +24,7 @@ const RegisterAsPathology = ({ match }) => {
                 <Route path={`${match.url}/${PAYMENT_SETTING}/`} component={PaymentSetting} />
                 <Route path={`${match.url}/${COLLECTION_SETTING}/`} component={CollectionSetting} />
                 <Route path={`${match.url}/${ADD_TESTS}/`} component={AddTest} />
+                <Redirect to='/404' />
             </Switch>
         </div>
     );

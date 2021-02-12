@@ -15,7 +15,7 @@ const VendorsPannelHome = ({ history, match }) => {
     return (
         <div className="vendorsPannelHome">
             <div className="introImage">
-                <img src="" alt="intro image" />
+                <img src="" alt="intro" />
             </div>
             <div className="intro">
                 <div className="introHeader">

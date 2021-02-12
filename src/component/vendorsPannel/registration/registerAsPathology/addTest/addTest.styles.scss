@@ -15,6 +15,9 @@ $formHeight:70%;
     width: 100%;
 
     .greenButton {
+        margin-top: 30px;
+        padding-top: 20px;
+
         &>button {
             @include greenButton();
         }
@@ -64,7 +67,7 @@ $formHeight:70%;
                 box-shadow: 0 0 5px #ccc, 0 0 5px #ccc inset;
             }
 
-            &>input {
+            &>input[type=text] {
                 flex-grow: 1;
                 border: none;
                 font-size: 1.1em;
@@ -96,6 +99,7 @@ $formHeight:70%;
         display: flex;
         flex-flow: column nowrap;
         align-items: stretch;
+        margin-top: 20px;
 
         .addImagesIconContainer {
             height: $imageInputSize;
@@ -114,11 +118,15 @@ $formHeight:70%;
     }
 
     .addProductsAndTestInputContainer {
-        height: $formHeight;
+        min-height: $formHeight;
         display: flex;
         flex-flow: column nowrap;
         align-items: stretch;
         justify-content: space-between;
+
+        .addProductsAndTestInput {
+            margin: 10px 0;
+        }
 
         .flexInputContainer {
             display: flex;
@@ -151,10 +159,6 @@ $formHeight:70%;
                 &>div {
                     margin-top: 10px;
                 }
-
-                &:focus {
-                    background: red;
-                }
             }
         }
 
@@ -162,7 +166,7 @@ $formHeight:70%;
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: space-between;
             font-weight: bold;
             font-size: .9em;
             margin-top: 15px;
@@ -184,8 +188,9 @@ $formHeight:70%;
         }
 
 
-        & input,
-        option {
+        & input[type=text],
+        & input[type=number],
+        & option {
             border: none;
             border-bottom: $inputBorder;
             transition: .5s ease-in-out;

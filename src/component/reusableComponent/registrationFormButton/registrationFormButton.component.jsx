@@ -4,6 +4,9 @@ import './registrationFormButton.styles.scss';
 //importing reusable components
 import Icon from '../icon/icon.component';
 
+//importing jss
+import { purple } from '../../../assets/globalJSS';
+
 const RegistrationFormButton = ({ translucent, icon1, label = [], icon2, img, alt = 'broken', onClick = () => { }, iconSize = '1.8em', iconColor = 'white' }) => {
     return (
         <div className={`flexContainer ${translucent ? 'translucent' : null}`} onClick={onClick}>
@@ -30,7 +33,7 @@ const RegistrationFormButton = ({ translucent, icon1, label = [], icon2, img, al
             </div>
             {
                 icon2
-                    ? <Icon iconColor='black !important'>
+                    ? <Icon iconColor={translucent ? 'black' : purple}>
                         {icon2}
                     </Icon>
                     : null

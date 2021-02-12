@@ -22,10 +22,10 @@
             transition: .5s ease-in-out;
         }
 
-        &:hover {
-            background-color: var(--lightColor);
-            transition:.5s ease-in-out;
-        }
+        //&:hover {
+           // background-color: var(--lightColor);
+           // transition:.5s ease-in-out;
+       // }
 
         &:active::before {
             background-color: var(--darkColor);

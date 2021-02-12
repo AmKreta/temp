@@ -13,13 +13,16 @@ import { AiOutlineClockCircle } from 'react-icons/ai';
 import Icon from '../../../reusableComponent/icon/icon.component';
 
 //importing actions
-import { setStaffTiming, setStoreOpen } from '../../../../actions/action';
+import { setCurrentVendor, setStaffTiming, setStoreOpen } from '../../../../actions/action';
 
 //importing routes
 import { ADD_STAFF } from '../routes';
 
 //importing services
-import { UPDATE_REGISTERED_USER } from '../../../../services/services';
+import { UPDATE_REGISTERED_USER, GET_USER_DEETAIL_BY_TOKEN } from '../../../../services/services';
+
+//importing actions
+import { setcurrentVendor } from '../../../../actions/action';
 
 const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'];
 
@@ -48,13 +51,26 @@ const AddTimings = (props) => {
                 }
             })
             .then(res => {
-                let nextUrl = props.match.url.split('/');
-                //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
-                nextUrl.pop();//removing last two element
-                nextUrl.pop();
-                nextUrl.shift();//removing first element
-                nextUrl.push(ADD_STAFF);
-                props.history.push('/' + nextUrl.join('/'));
+                axios
+                    .get(GET_USER_DEETAIL_BY_TOKEN, {
+                        headers: {
+                            'Authorization': `Bearer ${props.auth_token.accessToken}`
+                        }
+                    })
+                    .then(response => {
+                        props.setCurrentVendor(response.data.payload);
+                        let nextUrl = props.match.url.split('/');
+                        //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
+                        nextUrl.pop();//removing last two element
+                        nextUrl.pop();
+                        nextUrl.shift();//removing first element
+                        nextUrl.push(ADD_STAFF);
+                        props.history.push('/' + nextUrl.join('/'));
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert('something went wrong');
+                    })
             })
             .catch(err => {
                 console.log(err);
@@ -140,7 +156,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setStaffTiming: ({ day, timings }) => dispatch(setStaffTiming({ day, timings })),
-    setStoreOpen: (option) => dispatch(setStoreOpen(option))
+    setStoreOpen: (option) => dispatch(setStoreOpen(option)),
+    setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTimings);

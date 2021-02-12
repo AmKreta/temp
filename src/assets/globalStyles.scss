@@ -15,7 +15,7 @@ $pinkGradient:linear-gradient(to right, #220555, #EC2B7A);
     border-right:1px solid #ccc;
     border-bottom:2px solid #ccc;
     border-radius:$borderRadius;
-}
+} 
 
 @mixin centerElement() {
     display: grid;

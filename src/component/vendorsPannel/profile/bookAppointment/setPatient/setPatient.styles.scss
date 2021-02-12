@@ -1,0 +1,152 @@
+@import '../../profile.sharableStyles.scss';
+
+$margin-top:10px;
+$paddingLeftRight:2%;
+
+.setPatient {
+    //padding: 0% 4%;
+
+    .setPatientForm {
+        .setPatientFormHeader {
+            margin: 2% 0;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+
+            .searchPatient {
+                width: 80%;
+
+                &>label {
+                    display: block;
+                    text-align: left;
+                    font-weight: bold;
+                    margin: 2%;
+                }
+
+            }
+
+            .addPatient {
+                width: 18%;
+                font-size: .7em;
+                font-weight: bold;
+                display: hidden;
+                align-self: flex-end;
+            }
+        }
+
+        .editPatient {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-end;
+            font-weight: bold;
+            font-size: .85em;
+            margin-top: calc(#{$margin-top} + 20px);
+            position: relative;
+            top: 20%;
+        }
+
+        .patientInfoInput {
+            display: inline-block;
+            width: 48%;
+            margin-top: $margin-top;
+
+            &.patientFirstName,
+            &.patientLastName {
+                margin-top: 5px;
+            }
+
+            &:nth-child(odd) {
+                margin-right: 2%;
+                text-align: left;
+            }
+
+            &:nth-child(even) {
+                margin-left: 2%;
+                text-align: right;
+            }
+
+            &>label {
+                display: block;
+                text-align: left;
+                margin: 2%;
+                font-weight: bold;
+                font-size: .9em;
+            }
+
+            &>input,
+            &>select {
+                @include input();
+                background-color: white;
+            }
+        }
+
+        .patientPaymentStatus {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            margin: calc(#{$margin-top} + 10px) 0;
+
+            &>label {
+                width: 48%;
+                font-weight: bold;
+                text-align: right;
+                margin-right: 2%;
+            }
+
+            &>select {
+                @include input();
+                width: 48%;
+                margin-left: 2%;
+                background-color: white;
+            }
+        }
+
+        .patientVideoConsulting {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            margin: calc(#{$margin-top} + 10px) 0;
+            font-weight: bold;
+
+            &>label {
+                width: 48%;
+                font-weight: bold;
+                text-align: right;
+                margin-right: 2%;
+            }
+
+            &>div {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: flex-start;
+                width: 48%;
+                margin-left: 2%;
+
+                &>div:nth-child(1) {
+                    margin-right: 30px;
+                }
+
+                &>div {
+                    @include radio();
+                }
+            }
+        }
+    }
+
+    .setPatientsAction {
+        margin-top: calc(#{$margin-top} + 20px);
+
+        &>.whiteButton {
+            @include whiteButton();
+        }
+
+        &>.greenButton {
+            @include greenButton();
+        }
+    }
+}

@@ -1,0 +1,83 @@
+@import '../../../../../../assets/globalStyles.scss';
+
+$padding:0 2%;
+$margin-top:15px;
+
+.vendorHome {
+    position: relative;
+    padding: $padding;
+
+    .infoContainer {
+        &>.searchResultCard {
+            padding: 4% 0;
+        }
+
+        margin-top:5px;
+    }
+
+    .vendorApi {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 2% 4%;
+        margin-top: $margin-top;
+        text-align: left;
+
+        .apiLogo {
+            grid-area: logo;
+            overflow: hidden;
+            width: 15%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &>img {
+                max-height: 100%;
+                max-width: 100%;
+            }
+        }
+
+        .apiInfo {
+            width: 75%;
+            font-size: .9em;
+            font-weight: bold;
+
+            & strong {
+                font-weight: bolder;
+                font-size: 1.1em;
+            }
+        }
+
+        .appUrl {
+            flex-grow: 1;
+            font-weight: bold;
+            color: $blue;
+        }
+    }
+
+    .vendorInfo {
+        @include card();
+        height: 80px;
+        margin-top: $margin-top;
+        display: flex;
+        flex-flow: column wrap;
+        align-items: stretch;
+        justify-content: space-evenly;
+        font-weight: bold;
+        font-size: .9em;
+
+        &>div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vendorApiUserId {
+            &>p:nth-child(1) {
+                margin-right: 5px;
+            }
+        }
+    }
+}

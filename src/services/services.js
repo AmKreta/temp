@@ -19,15 +19,16 @@ export const SEARCH_BUSINESS = (category, query, filter) => {
 
 //returns a url for retreiving available doctors in a hospital or
 //hospitals doctor is going to be vailable in
-export const getAvailablityList = (id) => {
-    let url = `${server}`;
-}
+//export const getAvailablityList = (id) => {
+  //  let url = `${server}`;
+//}
 
 //registring user 
 export const REGISTER_LINK = `${server}api/business`;
 export const UPDATE_REGISTERED_USER = `${server}api/business/update`;
 export const GET_USER_DEETAIL_BY_TOKEN = `${server}api/business/details`;
-export const REGISTER_AS_DOCTOR_LINK = `${server}api/doctor`;
-export const REGISTER_AS_HOSPITAL_LINK = `${server}api/hospital`;
-export const REGISTER_AS_PHARMACY_LINK = `${server}api/pharmacy`;
-export const REGISTER_AS_PATHOLOGY_LINK = `${server}api/pathology`;
+
+//adding products and tests
+export const ADD_TEST_AND_PRODUCTS=`${server}api/product/create`;
+export const GET_TEST_AND_PRODUCTS=`${server}api/product/find/business`;
+

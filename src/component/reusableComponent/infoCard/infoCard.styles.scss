@@ -119,8 +119,8 @@ $maxCardWidth:100%; //50px;
         font-weight: bold;
         color: $brown;
         grid-area: type;
-        width:100%;
-        display:grid;
+        width: 100%;
+        display: grid;
         grid-template-columns: 2fr 2fr 1fr;
         grid-template-rows: 1fr;
         grid-template-areas: "option1 option2 option3";
@@ -151,6 +151,13 @@ $maxCardWidth:100%; //50px;
         @include dispFlex(flex-end, flex-end);
     }
 
+    .previewPersonalWebsite {
+        display: none;
+    }
+
+    .share {
+        display: none;
+    }
 
     &.small {
         transition: .5s ease-in-out;
@@ -190,6 +197,55 @@ $maxCardWidth:100%; //50px;
             font-size: .9em;
             @include dispFlex(flex-end, flex-end);
             overflow: hidden;
+        }
+    }
+
+    &.large {
+        pointer-events: none;
+        margin-top: 0;
+        padding: 1% 2% !important;
+        height:calc(#{$cardHeight} + 50px);
+        width: Min(100%, $maxCardWidth);
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: .8fr repeat(3, 1.2fr) .4fr 1fr;
+        grid-template-areas:
+            "nullB     nullB     nullB    nullB     isVarified isVarified"
+            "avatar    avatar    address  address   address    stars"
+            "avatar    avatar    address  address   address    distance"
+            "type      type      type     type      type       closeBy"
+            "nullA     nullA     nullA    nullA     nullA      nullA"
+            "website   website   website  website   website    share";
+
+        .previewPersonalWebsite {
+            display: flex;
+            grid-area: website;
+            flex-flow: column nowrap;
+            align-items: stretch;
+            justify-content: center;
+            font-size: .9em;
+            font-weight: bold;
+            text-align: left;
+            padding-left: 2%;
+
+            &>p:nth-child(1) {
+                color: lighten(#000000, 20%);
+            }
+
+            &>p:nth-child(2) {
+                color: $green;
+            }
+        }
+
+        .share {
+            display: flex;
+            grid-area: share;
+            align-items: center;
+            justify-content: center;
+            pointer-events: initial;
+        }
+
+        .name {
+            display: none;
         }
     }
 }

@@ -13,10 +13,13 @@ import { IoMdAdd } from 'react-icons/io';
 import { MdClose } from 'react-icons/md';
 
 //importing services
-import { UPDATE_REGISTERED_USER } from '../../../../services/services';
+import { UPDATE_REGISTERED_USER, GET_USER_DEETAIL_BY_TOKEN } from '../../../../services/services';
 
 //importing reusable components
 import Icon from '../../../reusableComponent/icon/icon.component';
+
+//importing actions
+import { setCurrentVendor } from '../../../../actions/action';
 
 const AddedStaffList = ({ name, phoneNo, designation, onClick, auth_token }) => {
     return (
@@ -73,11 +76,24 @@ const AddStaff = (props) => {
                 }
             })
             .then(res => {
-                let nextUrl = props.match.url.split('/');
-                nextUrl.pop();
-                nextUrl.shift();
-                nextUrl = '/' + nextUrl.join('/');
-                props.history.push(nextUrl);
+                axios
+                    .get(GET_USER_DEETAIL_BY_TOKEN, {
+                        headers: {
+                            'Authorization': `Bearer ${props.auth_token.accessToken}`
+                        }
+                    })
+                    .then(response => {
+                        props.setCurrentVendor(response.data.payload);
+                        let nextUrl = props.match.url.split('/');
+                        nextUrl.pop();
+                        nextUrl.shift();
+                        nextUrl = '/' + nextUrl.join('/');
+                        props.history.push(nextUrl);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        alert('something went wrong');
+                    })
             })
             .catch(err => {
                 console.log(err);
@@ -184,7 +200,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setStaff: ({ name, phoneNo, designation }) => dispatch(setStaff({ name, phoneNo, designation })),
-    removeStaff: (index) => dispatch(removeStaff(index))
+    removeStaff: (index) => dispatch(removeStaff(index)),
+    setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddStaff));

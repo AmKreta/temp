@@ -58,12 +58,16 @@
         justify-content: flex-end;
 
         .deliveryDistance {
+            width: 96%;
+            margin:auto;
+
             .deliveryDistanceLabel {
                 padding: 2% 0;
                 text-align: left;
             }
 
             .MuiSlider-root {
+                margin:2% 0;
                 .MuiSlider-rail {
                     height: 10px;
                     border-radius: 20px;

@@ -1,0 +1,47 @@
+@import '../../../../../assets/globalStyles.scss';
+
+$iconCircleSize:40px;
+
+.vendorProfileHeader {
+    background: white;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1%;
+    height: 17%;
+
+    .vendorProfileHeaderButton {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        font-size: 0.8em;
+        color: lighten(black, 30%);
+        font-weight: bold;
+        width: 24%;
+        text-align: center;
+
+        &>.iconContainer {
+            height: $iconCircleSize;
+            width: $iconCircleSize;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: lighten($green, 50%);
+        }
+
+        &>.label {
+            margin-top: 10px;
+            text-transform: capitalize;
+            padding: 0 5px;
+            border-bottom: 2px solid transparent;
+            transition: .2s ease-in-out;
+
+            &.active {
+                border-bottom-color: $green;
+                transition: .2s ease-in-out;
+            }
+        }
+    }
+}

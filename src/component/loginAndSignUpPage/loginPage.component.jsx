@@ -33,14 +33,14 @@ const LoginPage = ({ history, userName, phoneNo, otp, setUserName, setPhoneNo, s
     }, [phoneNo, otp.enabled, setOtpEnabledTrue, setOtpSendingTrue]);
 
     const signIn = (e) => {
-        const reqBody = { name: userName, mobileNumber: phoneNo.toString(), otp: otp.value.join('') };
+        const reqBody = { name: userName, phoneNumber: `+91${phoneNo}`, otp: otp.value.join('') };
         console.log(reqBody);
         axios
             .post(VERIFY_OTP, reqBody)
             .then(res => res.data)
             .then(data => {
                 if (data.status) {
-                    updateAccessToken(data.payload);
+                    updateAccessToken(data.payload.token);
                     console.log(data.payload);
                     history.push('/allowAccess');
                 }
