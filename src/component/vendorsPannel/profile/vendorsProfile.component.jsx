@@ -22,10 +22,10 @@ const VendorsProfile = ({ currentVendor }) => {
                         return <HospitalProfile />
                     }
                     else if (currentVendor.businessType === 'pathology') {
-                        return <PharmacyProfile />
+                        return <PathologyProfile />
                     }
                     else if (currentVendor.businessType === 'pharmacy') {
-                        return <PathologyProfile />
+                        return <PharmacyProfile />
                     }
                 })()
             }

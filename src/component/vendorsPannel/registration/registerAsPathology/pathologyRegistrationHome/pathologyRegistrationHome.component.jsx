@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import './pathologyRegistrationHome.styles.scss';
@@ -95,6 +96,11 @@ const PathologyRegistrationHome = ({ history, match, currentVendor, auth_token, 
                     label={[<p>If You Are facing Problems Chat With Us</p>]}
                 />
             </div>
+            {
+                (currentVendor.staffs && currentVendor.workingHours) && (currentVendor.collections && currentVendor.payment) && tests.length
+                    ? <Redirect to='/vendor/profile' />
+                    : null
+            }
         </div>
     );
 }

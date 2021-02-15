@@ -5,7 +5,7 @@ import './appointment.styles.scss';
 //importing reusable components
 import DatePicker from '../../../../reusableComponent/datePicker/datePicker.component';
 
-//importing custm components
+//importing custom components
 import TimeSlots from '../../TimeSlots/timeSlots.component';
 import BookAppointment from '../../bookAppointment/bookAppointment.component';
 

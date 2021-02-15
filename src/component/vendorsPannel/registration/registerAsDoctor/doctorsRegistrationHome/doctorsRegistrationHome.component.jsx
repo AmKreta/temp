@@ -85,7 +85,7 @@ const DoctorsRegistrationHome = ({ history, match, currentVendor }) => {
             </div>
             {
                 (currentVendor.clinic && currentVendor.clinic.length) && (currentVendor.payment && currentVendor.payment.type)
-                    ? <Redirect to={`${match.url}/profile`} />
+                    ? <Redirect to={`/vendor/profile`} />
                     : null
             }
         </>

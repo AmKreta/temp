@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './hospitalRegistrationHome.styles.scss';
 
@@ -81,6 +82,11 @@ const HospitalRegistrationHome = ({ history, match, currentVendor }) => {
                 label={[<p>If You Are Facing Problem Chat With Us</p>]}
                 iconSize='2.5em'
             />
+            {
+                (currentVendor.doctors && currentVendor.doctors.length) && (currentVendor.payment) && (currentVendor.staffs.length)
+                    ? <Redirect to={`/vendor/profile`} />
+                    : null
+            }
         </div>
     );
 }

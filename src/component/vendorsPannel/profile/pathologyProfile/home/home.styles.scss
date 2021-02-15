@@ -1,0 +1,58 @@
+@import '../../../../../../assets/globalStyles.scss';
+
+$padding:0 2%;
+$margin-top:15px;
+
+.vendorHome {
+    position: relative;
+    padding: $padding;
+
+    .infoContainer {
+        &>.searchResultCard {
+            padding: 4% 0;
+        }
+
+        margin-top:5px;
+    }
+
+    .vendorTestListContainer {
+        margin: 20px 0;
+
+        .vendorTestListHeader {
+            display: flex;
+            align-items: center;
+            color: $blue;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .vendorTestList {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            overflow-y: scroll;
+            overflow-x: auto;
+            width: 100%;
+
+            .vendorTestAndProductListItem {
+                @include card();
+                height: 200px;
+                min-width: 200px;
+                box-shadow: 0 0 5px #ccc;
+
+                &:not(:last-child) {
+                    margin: 5px 0;
+                    margin-right: 10px;
+                }
+
+                .vendorTestAndProductListItemHeader{
+                    .vendorTestAndProductListItemHeaderCount{
+                        background-color: #ccc;
+                        padding:1%;
+                        display:inline-block;
+                    }
+                }
+            }
+        }
+    }
+}

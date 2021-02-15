@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './paymentSetting.styles.scss';
 
@@ -214,4 +215,4 @@ const mapDispatchToProps = dispatch => ({
     setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload))
 });
 
-export default connect(mapStatetoProps, mapDispatchToProps)(PaymentSetting);
+export default connect(mapStatetoProps, mapDispatchToProps)(withRouter(PaymentSetting));

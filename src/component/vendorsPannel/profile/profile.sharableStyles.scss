@@ -10,8 +10,9 @@ $registerAsHomeHeaderSize:1.2em;
     font-weight: bold;
     border-radius: 10px;
     font-size: 1.1em;
-    &:focus{
-        outline:none;
+
+    &:focus {
+        outline: none;
     }
 }
 
@@ -48,29 +49,30 @@ $registerAsHomeHeaderSize:1.2em;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
+
     &>input[type='radio'] {
         margin: $margin;
     }
 }
 
-@mixin greenIcon($size:30px,$marginRight:5px){
-     height: $size;
-            width: $size;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: $green;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: $marginRight;
+@mixin greenIcon($size:30px, $marginRight:5px) {
+    height: $size;
+    width: $size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $green;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: $marginRight;
 }
 
-@mixin greenIconContainer($height:10%){
+@mixin greenIconContainer($height:10%) {
     display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        height: $height;
-        font-weight:bold;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: $height;
+    font-weight: bold;
 }
 
 

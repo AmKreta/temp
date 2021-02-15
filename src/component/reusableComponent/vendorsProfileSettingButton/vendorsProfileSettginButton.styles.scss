@@ -1,0 +1,65 @@
+@import '../../vendorsPannel/profile/profile.sharableStyles.scss';
+
+$iconSize:50px;
+
+.vendorsProfileSettingButton {
+    background-color: #80828B26;
+    border-bottom: 4px solid #80828B26;
+    box-shadow: 0 4px 5px #80828B26;
+    padding: 3%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    min-height: 100px;
+    border-radius: 5px;
+    transition: .2s ease-in-out;
+
+    &:hover {
+        transition: .2s ease-in-out;
+        background-color: lighten(#80828B26, 10%);
+    }
+
+    &:not(:first-child) {
+        margin-top: 10px;
+    }
+
+    .vendorProfileSettingIconContainer {
+        @include greenIcon($iconSize);
+        min-height: $iconSize;
+        min-width: $iconSize;
+        margin-top: 1.5%;
+    }
+
+    .vendorsProfileSettingButtonLabel {
+        padding: 0 2%;
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        text-align: left;
+
+        &>div:nth-child(1) {
+            margin-bottom: 1%;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+
+            &>p {
+                flex-grow: 1;
+                font-size: 1.15em;
+                font-weight: bold;
+            }
+        }
+
+        &>div:nth-child(2) {
+            margin-top: 1%;
+
+            &>p {
+                width: 90%;
+                color: #6E7989;
+                font-size: .7em;
+                line-height: 1.4em;
+            }
+        }
+    }
+}
