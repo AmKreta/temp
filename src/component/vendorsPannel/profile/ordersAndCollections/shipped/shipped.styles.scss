@@ -1,0 +1,33 @@
+@import '../OrderAndCollection.sharableStyle.scss';
+@import '../../profile.sharableStyles.scss';
+
+.shippedOrders {
+    @include orderInfoModal();
+
+    .vendorPopupShippedInvoice {
+        height: 40%;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+
+        &>img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .vendorPannelShippedActions {
+        margin-top: 20px;
+        margin-bottom: 10px;
+
+        &>.greenButton {
+            @include greenButton();
+        }
+
+        &>.whiteButton {
+            @include whiteButton();
+        }
+    }
+}

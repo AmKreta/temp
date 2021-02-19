@@ -1,0 +1,151 @@
+@import '../../../assets/globalStyles.scss';
+
+$greenButtonHeight:30px;
+$iconSize:25px;
+
+.vendorTestAndProductListItem {
+    @include card();
+    height: 205px;
+    min-width: 205px;
+    box-shadow: 0 0 5px #ccc;
+    //border-radius: 10px;
+    position: relative;
+    margin-top: 5px;
+    margin-bottom:calc(#{$greenButtonHeight} / 1.8);
+
+    &.flexDisplay {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: stretch;
+        justify-content: space-evenly;
+        padding: 1% 0;
+    }
+
+    &:not(:last-child) {
+        margin-right: 20px;
+    }
+
+    .vendorTestAndProductListItemHeader {
+        position: absolute;
+        top: 3%;
+        left: 3%;
+        text-align: left;
+        z-index: 1;
+
+        .vendorTestAndProductListItemHeaderCount {
+            padding: 1% 5px;
+            display: inline-block;
+            font-weight: bold;
+            background-color: #ccc;
+        }
+
+        .vendorTestAndProductListItemHeaderLabel {
+            font-weight: bold;
+            font-size: .8em;
+        }
+    }
+
+    .productsOffer {
+        position: absolute;
+        top: 0;
+        right: 0;
+        transform: translate(36%, -20%) rotate(-44.5deg);
+        z-index: 1;
+
+        .productDiscount {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(44.5deg);
+            color: white;
+            font-weight: bold;
+            font-size: .8em;
+            z-index: 1;
+            padding: 1%;
+
+            &>p:nth-child(1) {
+                margin-bottom: 2px;
+            }
+        }
+    }
+
+    .vendorTestAndProductListItemMain {
+        height: 70%;
+        width: 60%;
+        margin: 5px auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        &>img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .vendorTestAndProductListFooter {
+        font-weight: bold;
+        font-size: .9em;
+
+        &>div {
+            padding: 0 10%;
+        }
+
+        .vendorTestAndProductListItemName {
+            text-align: left;
+        }
+
+        .vendorTestAndProductListItemPrice {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: flex-start;
+
+            .vendorTestAndProductListItemMrp {
+                margin-left: 5px;
+                color: darken(#ccc, 10%);
+            }
+
+            .vendorTestAndProductListItemSellingPrice {
+                margin-right: 5px;
+            }
+        }
+    }
+
+    .vendorTestAndProductListItemActions {
+        height: $greenButtonHeight;
+        width: 53%;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 60%);
+        background-color: $green;
+        color: white;
+        box-shadow: 0 0 5px #ccc;
+
+        .productListAddRemoveButton {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            height: 100%;
+            padding: 0 4%;
+
+            .quantityOfProductsLeft {
+                font-weight: 800;
+                color: white;
+            }
+
+            .AddMoreProductsToList,
+            .removeProductsFromList {
+                background-color: white;
+                border-radius: 50%;
+                height: $iconSize;
+                width: $iconSize;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}

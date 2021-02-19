@@ -1,0 +1,198 @@
+@import '../profile.sharableStyles.scss';
+@import '../../../../../assets/globalStyles.scss';
+
+$orderDetailsAndOrderPaymentMethodPadding:31%;
+
+.vendorsOrders {
+    padding: 2%;
+    padding-top: 0;
+    min-height: 100%;
+    background: lighten(#ccc, 10%);
+    position: relative;
+
+    .orderStatsContainer {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        background-color: rgba(0, 0, 0, .7);
+        padding: 2%;
+
+        &.hidden {
+            display: none;
+        }
+
+        .orderStats {
+            height: 100px;
+            width: 100%;
+            margin-top: 20px;
+            background-color: white;
+            position: relative;
+
+            .saleIcon {
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            .todaySale,
+            .totalSale {
+                width: 70%;
+                margin: auto;
+                height: 50%;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                font-weight: bold;
+
+                &>p {
+                    width: 50%;
+                    text-align: right;
+                }
+            }
+        }
+    }
+
+    .vendorsOrderHeader {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        height: 35px;
+    }
+
+    .vendorsOrdersListContainer {
+        font-size: .96em;
+
+        .orderListItem {
+            background: white;
+            border: 1px solid #ccc;
+            border-bottom-width: 2px;
+            box-shadow: 0 0 5px #ccc;
+            margin: auto;
+            margin-top: 10px;
+            height: 112px;
+            width: Min(100%, 400px);
+            font-weight: bold;
+            padding: 7px 13px;
+            padding-top: 13px;
+            border-radius: 10px;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1.5fr repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-areas:
+                "orderNo     orderDateTime orderDateTime"
+                "totalItems  orderCost     orderPaymentMethod"
+                "orderStatus null          orderDetails";
+            row-gap: 3px;
+
+            &>div {
+                overflow: hidden;
+            }
+
+            .orderNo {
+                grid-area: orderNo;
+                align-self: start;
+                justify-self: start;
+            }
+
+            .orderDateTime {
+                grid-area: orderDateTime;
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                //padding-right: 10%;
+                padding-left: 15%;
+                letter-spacing: 1px;
+            }
+
+            .orderTotalItems {
+                grid-area: totalItems;
+                color: rgb(133, 133, 133);
+                display: flex;
+                align-items: center;
+                justify-content: start;
+            }
+
+            .orderCost {
+                grid-area: orderCost;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: center;
+
+                &>div {
+                    padding: 0 !important;
+                    //removing padding from icon
+                }
+            }
+
+            .orderPaymentMethod {
+                grid-area: orderPaymentMethod;
+                color: $red;
+                align-self: center;
+                justify-self: start;
+                padding-left: $orderDetailsAndOrderPaymentMethodPadding;
+            }
+
+            .orderStatus {
+                grid-area: orderStatus;
+                align-self: end;
+                justify-self: start;
+                text-transform: capitalize;
+
+                &.pending {
+                    color: $warning;
+                }
+
+                &.accepted {
+                    color: $green;
+                }
+
+                &.shipped,
+                &.collected {
+                    color: $blue;
+                }
+
+                &.delivered {
+                    color: rgb(133, 133, 133);
+                }
+
+                &.cancelled {
+                    color: $red;
+                }
+            }
+
+            .orderDetails {
+                grid-area: orderDetails;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: flex-end;
+                justify-content: flex-start;
+                padding-left: $orderDetailsAndOrderPaymentMethodPadding;
+
+                &>div {
+                    position: relative;
+                    top: 9%;
+
+                    &>div {
+                        padding: 0 !important;
+                        //removing padding from icon
+                    }
+                }
+            }
+
+            .horizontalRule {
+                height: 0px;
+                width: 100%;
+                position: absolute;
+                left: 0;
+                top: 75px;
+                border: 1px solid #ccc;
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+@import '../OrderAndCollection.sharableStyle.scss';
+
+.collectedOrders {
+    @include orderInfoModal();
+}

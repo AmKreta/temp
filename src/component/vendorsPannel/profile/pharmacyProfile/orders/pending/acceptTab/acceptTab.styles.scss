@@ -1,0 +1,57 @@
+@import '../../../../profile.sharableStyles.scss';
+
+.vendorPopupPendingAcceptTabContainer {
+    position: fixed;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    z-index: 1;
+    margin: 0 !important;
+
+    .vendorPopupPendingAcceptTab {
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid white;
+        box-shadow: 0 0 5px white;
+        padding: 5px;
+
+        &>div {
+            margin: 5px 0;
+
+            &:nth-child(2) {
+                text-align: right;
+                width: 100%;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: flex-end;
+            }
+
+            &>p {
+                font-size: .95em;
+                font-weight: bold;
+            }
+
+            &>button {
+                transform: scale(.6);
+                position: relative;
+                top: 10px;
+
+                &.greenButton {
+                    @include greenButton();
+                    left: 10%;
+                }
+
+                &.whiteButton {
+                    @include whiteButton();
+                    left: 25%;
+                }
+            }
+        }
+    }
+}

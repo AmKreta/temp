@@ -11,7 +11,7 @@ import Loader from '../../reusableComponent/loading/loading.component';
 import { setOtpSendingTrue, setOtpSentTrue, setOtp, setOtpErrorTrue } from '../../../actions/action';
 
 //importing services
-import { GET_OTP } from '../../../services/services';
+import { USER_GET_OTP } from '../../../services/services';
 
 const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorTrue, phoneNo }) => {
 
@@ -24,7 +24,7 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     //making request to get otp ,otp.enabled only runs once
     useEffect(() => {
         if (otp.enabled) {
-            axios.post(GET_OTP, { phoneNumber: `+91${phoneNo.toString()}` })
+            axios.post(USER_GET_OTP, { phoneNumber: `+91${phoneNo.toString()}` })
                 .then(res => {
                     console.log(res.data);
                     setOtpSentTrue();
@@ -78,7 +78,7 @@ const OtpInput = ({ otp, setOtp, setOtpSendingTrue, setOtpSentTrue, setOtpErrorT
     const RresendHandler = (e) => {
         setOtpSendingTrue();
         setTimer({ min: 2, sec: 0 });
-        axios.post(GET_OTP, { mobileNumber: phoneNo.toString() })
+        axios.post(USER_GET_OTP, { mobileNumber: phoneNo.toString() })
             .then(res => {
                 console.log(res.data);
                 setOtpSentTrue();

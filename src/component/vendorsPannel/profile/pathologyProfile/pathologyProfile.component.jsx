@@ -4,7 +4,8 @@ import './pathologyProfile.styles.scss';
 
 //importing custom components
 import Home from './home/home.component';
-import Collection from './collection/collection.component';
+//import Collection from './collection/collection.component';
+import OrderAndCollections from '../ordersAndCollections/ordersAndCollections.component';
 import Setting from './setting/setting.component';
 import Promotions from './promotions/promotions.component';
 
@@ -14,7 +15,7 @@ const PathologyProfile = ({ match }) => {
             <Switch>
                 <Route exact path={`${match.url}/`} render={({ match }) => <Redirect to={`${match.url}/home`} />} />
                 <Route path={`${match.url}/home`} component={Home} />
-                <Route path={`${match.url}/collection`} component={Collection} />
+                <Route path={`${match.url}/collection`} component={OrderAndCollections} />
                 <Route path={`${match.url}/setting`} component={Setting} />
                 <Route path={`${match.url}/promotions`} component={Promotions} />
                 <Redirect to='/404' />

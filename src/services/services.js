@@ -7,6 +7,9 @@ export const GET_OTP = `${server}api/auth/user-get-otp`;
 // @res={ status:true/false, payload:jwt }
 export const VERIFY_OTP = `${server}api/auth/user-verify-otp`;
 
+export const USER_GET_OTP = `${server}api/user/user-get-otp`;
+export const USER_VERIFY_OTP = `${server}api/user/user-verify-otp`
+
 // returns a url for retreiving search result
 export const SEARCH_BUSINESS = (category, query, filter) => {
   let searchQuery = query !== '' ? `&search=${query}` : '';

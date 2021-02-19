@@ -1,6 +1,7 @@
 @import '../../../../assets/globalStyles.scss';
 
 $registerAsHomeHeaderSize:1.2em;
+$red: #f44336;
 
 @mixin Button($height) {
     height: $height;

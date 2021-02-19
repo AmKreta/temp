@@ -1,5 +1,5 @@
 @import '../../../../assets/globalStyles.scss';
-$red: #f44336;
+@import '../profile.sharableStyles.scss';
 
 .appoinements {
     border: 1px solid $purple;

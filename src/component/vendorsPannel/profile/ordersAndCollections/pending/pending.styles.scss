@@ -1,0 +1,35 @@
+@import '../OrderAndCollection.sharableStyle.scss';
+@import '../../profile.sharableStyles.scss';
+
+.pendingOrders {
+    @include orderInfoModal();
+
+    &>div:not(:first-child) {
+        margin: 10px 0;
+    }
+
+    .vendorPopupInvoice {
+        height: 40%;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: center;
+
+        &>img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .vendorPopupButtons {
+        margin: 20px 0 !important;
+
+        &>.greenButton {
+            @include greenButton();
+        }
+
+        &>.whiteButton {
+            @include whiteButton();
+        }
+    }
+}

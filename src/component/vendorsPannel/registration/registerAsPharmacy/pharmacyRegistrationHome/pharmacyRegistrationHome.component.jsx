@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import './pharmacyRegistrationHome.styles.scss';
@@ -40,7 +41,7 @@ const PharmacyRegistrationHome = ({ history, match, currentVendor, products, aut
                 alert("can't fetch product Details");
             })
     }, [auth_token.accessToken, setProductsAndTestList]);
-    
+
     return (
         <div className="pharmacyRegistrationHome">
             <div>
@@ -97,6 +98,11 @@ const PharmacyRegistrationHome = ({ history, match, currentVendor, products, aut
                     label={[<p>If You Are facing Problems Chat With Us</p>]}
                 />
             </div>
+            {
+                (currentVendor.staffs.length && currentVendor.workingHours) && (currentVendor.payment && currentVendor.deliveryDetails) && (products.length)
+                    ? <Redirect to='/vendor/profile' />
+                    : null
+            }
         </div>
     );
 }

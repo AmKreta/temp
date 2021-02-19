@@ -8,14 +8,15 @@ $brown:#D65246;
 $darkGreen:#128C7e;
 $blueGradient:linear-gradient(to right, #2BBEC8, #1DE9B6);
 $pinkGradient:linear-gradient(to right, #220555, #EC2B7A);
+$warning:#ffc107;
 
-@mixin card($borderRadius:10px){
-    box-shadow:0 0 10px #ccc;
-    border-left:1px solid #ccc;
-    border-right:1px solid #ccc;
-    border-bottom:2px solid #ccc;
-    border-radius:$borderRadius;
-} 
+@mixin card($borderRadius:8px) {
+    box-shadow: 0 0 10px #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    border-bottom: 2px solid #ccc;
+    border-radius: $borderRadius;
+}
 
 @mixin centerElement() {
     display: grid;

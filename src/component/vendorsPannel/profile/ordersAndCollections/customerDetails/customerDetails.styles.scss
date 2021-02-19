@@ -1,0 +1,35 @@
+.orderCustomerDetails {
+    padding: 0 13px;
+    font-size: .95em;
+    font-weight: bold;
+
+    & .justifyFlexStart {
+        justify-content: flex-start;
+
+        &>div:nth-child(1) {
+            margin-right: 25px;
+        }
+    }
+
+    &>div {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+        margin: 2px 0;
+    }
+
+    .vendorPopUpCustomerDetails {
+        color: rgb(133, 133, 133);
+    }
+
+    .vendorPopupCustomerAddress {
+        flex-wrap: wrap;
+        text-align: left;
+        color: rgb(133, 133, 133);
+
+        &>div {
+            margin: 2px 0;
+        }
+    }
+}

@@ -1,0 +1,82 @@
+@import '../../../profile.sharableStyles.scss';
+@import '../../OrderAndCollection.sharableStyle.scss';
+
+.vendorPopupPendingAcceptTabCollectionContainer {
+    @include orderInfoInnerModal();
+    margin: 0 !important;
+    font-weight: bold;
+
+    .vendorPopupPendingAcceptTabCollection {
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid white;
+        box-shadow: 0 0 5px white;
+        padding: 10px;
+        padding-top: 15px;
+        width: 100%;
+
+        .vendorPopupPendingAcceptTabItemList {
+            margin: 10px 0;
+            min-height: 200px;
+
+            &>div {
+                display: flex;
+                flex-flow: row wrap;
+                align-items: center;
+                justify-content: center;
+                padding: 3px 0;
+                margin: 10px 0;
+                width: 100%;
+
+                &:first-child {
+                    color: rgb(133, 133, 133);
+                }
+
+
+                &>div:nth-child(1) {
+                    //first column
+                    width: 40%;
+                }
+
+                &>div:nth-child(n+2) {
+                    //rest of columns
+                    width: 20%;
+                }
+            }
+        }
+
+        .vendorPopupPendingAcceptTabMessage {
+            margin: 15px 0;
+
+            &>p {
+                margin: 5px 0;
+            }
+        }
+
+        .vendorPopupPendingAcceptTabAssignCollectionBoy {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+
+            &>div:first-child {
+                color: rgb(133, 133, 133);
+                align-self: flex-end;
+                margin-bottom: 5px;
+            }
+        }
+
+        .vendorPopupPendingAcceptTabCollectionActions {
+            margin-top: 20px;
+            margin-bottom: 10px;
+
+            &>.greenButton {
+                @include greenButton();
+            }
+
+            &>.whiteButton {
+                @include whiteButton();
+            }
+        }
+    }
+}

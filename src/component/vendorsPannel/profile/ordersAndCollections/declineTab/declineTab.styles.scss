@@ -1,0 +1,64 @@
+@import '../../profile.sharableStyles.scss';
+@import '../OrderAndCollection.sharableStyle.scss';
+
+.vendorPopupPendingDeclineTabContainer {
+    @include orderInfoInnerModal();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+    font-weight: bold;
+
+    .vendorPopupPendingDeclineTab {
+        background-color: white;
+        border: 1px solid white;
+        box-shadow: 0 0 5px white;
+        border-radius: 10px;
+        width: 100%;
+        padding: 10px;
+
+        &>div {
+            margin: 15px 0;
+        }
+
+        .vendorPopupDeleteOrderConfirmation {
+            &>p {
+                margin: 5px 0;
+            }
+        }
+
+        .vendorPopupGrandTotalCost {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 13px;
+            font-weight: bold;
+
+            &>div:nth-child(2) {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: space-between;
+
+                &>div:nth-child(1)>div {
+                    //removing padding from icon
+                    padding: 0 !important;
+                }
+            }
+        }
+
+        .vendorPopupOrderDeclineActions {
+            margin: 10px 0;
+
+            &>.whiteButton {
+                @include whiteButton();
+            }
+
+            &>.redButton {
+                @include greenButton();
+                background-color: $red;
+            }
+        }
+    }
+}

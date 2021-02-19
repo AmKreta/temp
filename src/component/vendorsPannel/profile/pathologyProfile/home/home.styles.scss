@@ -1,4 +1,5 @@
 @import '../../../../../../assets/globalStyles.scss';
+@import '../../profile.sharableStyles.scss';
 
 $padding:0 2%;
 $margin-top:15px;
@@ -16,7 +17,8 @@ $margin-top:15px;
     }
 
     .vendorTestListContainer {
-        margin: 20px 0;
+        margin-top: 20px;
+        margin-bottom: 5px;
 
         .vendorTestListHeader {
             display: flex;
@@ -30,29 +32,18 @@ $margin-top:15px;
             display: flex;
             flex-flow: row nowrap;
             align-items: center;
-            overflow-y: scroll;
-            overflow-x: auto;
+            overflow-y: auto;
+            overflow-x: scroll;
             width: 100%;
+        }
+    }
 
-            .vendorTestAndProductListItem {
-                @include card();
-                height: 200px;
-                min-width: 200px;
-                box-shadow: 0 0 5px #ccc;
+    .VendorHomePageButton {
+        margin-top: 20px;
+        margin-bottom: 10px;
 
-                &:not(:last-child) {
-                    margin: 5px 0;
-                    margin-right: 10px;
-                }
-
-                .vendorTestAndProductListItemHeader{
-                    .vendorTestAndProductListItemHeaderCount{
-                        background-color: #ccc;
-                        padding:1%;
-                        display:inline-block;
-                    }
-                }
-            }
+        &>.greenButton {
+            @include greenButton();
         }
     }
 }

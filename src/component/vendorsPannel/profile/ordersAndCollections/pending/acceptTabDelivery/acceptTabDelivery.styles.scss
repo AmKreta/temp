@@ -1,0 +1,53 @@
+@import '../../../profile.sharableStyles.scss';
+@import '../../OrderAndCollection.sharableStyle.scss';
+
+.vendorPopupPendingAcceptTabContainer {
+    @include orderInfoInnerModal();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 !important;
+
+    .vendorPopupPendingAcceptTab {
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid white;
+        box-shadow: 0 0 5px white;
+        padding: 10px;
+        padding-top: 15px;
+
+        &>div {
+            margin: 5px 0;
+
+            &:nth-child(2) {
+                text-align: right;
+                width: 100%;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: center;
+                margin-top: 30px;
+            }
+
+            &>p {
+                font-size: .95em;
+                font-weight: bold;
+            }
+
+            &>button {
+
+
+
+                &.greenButton {
+                    @include greenButton();
+
+                }
+
+                &.whiteButton {
+                    @include whiteButton();
+
+                }
+            }
+        }
+    }
+}

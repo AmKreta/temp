@@ -1,0 +1,60 @@
+@import '../../../../../assets/globalStyles.scss';
+@import '../../profile.sharableStyles.scss';
+@import '../OrderAndCollection.sharableStyle.scss';
+
+.vendorPopupAcceptedDeliveryContainer {
+    @include orderInfoInnerModal();
+
+    .vendorPopupAcceptedDelivery {
+        background-color: white;
+        border: 1px solid white;
+        box-shadow: 0 0 5px white;
+        border-radius: 10px;
+        width: 100%;
+        padding: 10px;
+
+        .vendorPopupAcceptedDeliveryHeader {
+            margin: 10px 0;
+            text-align: left;
+        }
+
+        .vendorPopupAcceptedDeliveryMain {
+            margin-top: 30px;
+
+            &>div {
+                &:nth-child(1) {
+                    color: $blue;
+                    font-weight: bold;
+                }
+
+                &:nth-child(2) {
+                    &>figure {
+                        height: 250px;
+
+                        &>img {
+                            max-height: 90%;
+                            max-width: 90%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .vendorPopupAcceptedDeliveryPaymentMethod {
+            text-align: left;
+            margin-left: 5%;
+        }
+
+        .vendorPopupAcceptedDeliveryActions {
+            margin: 20px 0;
+
+            &>.whiteButton {
+                @include whiteButton();
+            }
+
+            &>.greenButton {
+                @include greenButton();
+            }
+        }
+    }
+}

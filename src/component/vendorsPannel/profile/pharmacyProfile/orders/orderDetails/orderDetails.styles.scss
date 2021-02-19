@@ -1,0 +1,76 @@
+@import '../../../../../../assets//globalStyles.scss';
+@import '../../../profile.sharableStyles.scss';
+
+.vendorOrderDetail {
+    height: 72px;
+    font-weight: bold;
+    font-size: .95em;
+    padding: 7px 13px;
+    padding-top: 13px;
+    display: grid;
+    grid-template-columns: 1.5fr repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-areas:
+        "orderNo       date time"
+        "paymentStatus null status";
+
+    &>div {
+        overflow: hidden;
+    }
+
+    .vendorPopupOrderNo {
+        grid-area: orderNo;
+        align-self: start;
+        justify-self: start;
+    }
+
+    .vendorPopupOrderDate {
+        grid-area: date;
+        align-self: start;
+        justify-self: end;
+        letter-spacing: 1px;
+    }
+
+    .vendorPopupOrderTime {
+        grid-area: time;
+        align-self: start;
+        justify-self: end;
+        letter-spacing: 1px;
+
+    }
+
+    .vendotPopupPaymentMethod {
+        grid-area: paymentStatus;
+        color: $red;
+        align-self: end;
+        justify-self: start;
+    }
+
+    .vendorPopupStatus {
+        grid-area: status;
+        align-self: end;
+        justify-self: end;
+        text-transform: capitalize;
+
+        &.pending {
+            color: $warning;
+        }
+
+        &.accepted {
+            color: $green;
+        }
+
+        &.shipped,
+        &.collected {
+            color: $blue;
+        }
+
+        &.delivered {
+            color: rgb(133, 133, 133);
+        }
+
+        &.cancelled {
+            color: $red;
+        }
+    }
+}

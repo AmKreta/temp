@@ -1,0 +1,45 @@
+@import '../OrderAndCollection.sharableStyle.scss';
+@import '../../profile.sharableStyles.scss';
+
+.acceptedOrders {
+    @include orderInfoModal();
+    font-weight: bold;
+
+    .vendorPopupItemList {
+        &>div {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 5px 0;
+            margin: 10px 0;
+
+            &:first-child {
+                color: rgb(133, 133, 133);
+            }
+
+
+            &>div:nth-child(1) {
+                //first column
+                width: 40%;
+            }
+
+            &>div:nth-child(n+2) {
+                //rest of columns
+                width: 20%;
+            }
+        }
+    }
+
+    .vendorPopupAcceptedActions {
+        margin: 20px 0;
+
+        &>.whiteButton {
+            @include whiteButton();
+        }
+
+        &>.greenButton {
+            @include greenButton();
+        }
+    }
+}
