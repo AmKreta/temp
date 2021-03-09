@@ -1,6 +1,16 @@
+@import '../../../../../assets/globalStyles.scss';
+
 .pathologyProfile {
     background: white;
     height: 83%;
     overflow-y: scroll;
     overflow-x: auto;
+}
+
+@media only screen and (min-width : $medium) {
+    .pathologyProfile {
+        min-width: calc(100% - 100px);
+        flex-grow: 1;
+        height: 100%;
+    }
 }

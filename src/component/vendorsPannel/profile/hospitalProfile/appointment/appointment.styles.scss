@@ -1,6 +1,9 @@
 @import '../../../../../assets/globalStyles.scss';
 
 .vendorAppointments {
+    width: Min(100%, 500px);
+    margin:auto;
+
     .appointmentsContainer {
         &>.hospitalList {
             &>select {

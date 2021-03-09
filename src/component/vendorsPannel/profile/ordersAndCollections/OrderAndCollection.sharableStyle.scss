@@ -9,8 +9,8 @@
     overflow-x: auto;
 }
 
-@mixin orderInfoInnerModal(){
-     position: fixed;
+@mixin orderInfoInnerModal() {
+    position: fixed;
     top: 10%;
     left: 0;
     width: 100%;
@@ -21,3 +21,5 @@
     overflow-y: scroll;
     overflow-x: auto;
 }
+
+$modalWidth: Min(100%, 500px);

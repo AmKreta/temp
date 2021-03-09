@@ -1,9 +1,10 @@
 import React from 'react';
 import './timeSlots.styles.scss';
 
-const TimeSlots = ({ isBooked, name, phoneNo, timings, changeTab }) => {
+const TimeSlots = ({ accepted, isBooked, name, phoneNo, timings, changeTab, _id, deleteAppointment, acceptAppointment, dispatch }) => {
+
     return (
-        <div className={`appoinements ${isBooked ? 'booked' : 'vacant'}`}>
+        <div className={`appoinements ${isBooked ? 'booked' : 'vacant'} ${accepted ? 'accepted' : 'notAccepted'}`}>
             {
                 isBooked
                     ? <>
@@ -19,19 +20,30 @@ const TimeSlots = ({ isBooked, name, phoneNo, timings, changeTab }) => {
                             </div>
                         </div>
                         <div className="appointmentActions">
-                            <button>Delete</button>
-                            <button>Accept</button>
+                            {
+                                !accepted
+                                    ? <>
+                                        <button onClick={() => deleteAppointment(_id, timings)} > Delete</button>
+                                        <button onClick={() => acceptAppointment(_id, timings)}>Accept</button>
+                                    </>
+                                    : <p>Accepted</p>
+                            }
                         </div>
-                        <div className="appointmentTime">
-                            <p>{timings.from}am</p>
+                        <div className="appointmentTime bookedAppointmentTime">
+                            <p>{timings.from}</p>
                             <p>-</p>
-                            <p>{timings.to}am</p>
+                            <p>{timings.to}</p>
                         </div>
                     </>
-                    : <div onClick={changeTab} className='appointmentTime'>
-                        <p>{timings.from}am</p>
+                    : <div onClick={(e) => {
+                        changeTab();
+                        dispatch({ type: 'setTimings', payload: timings });
+                    }}
+                        className='appointmentTime'
+                    >
+                        <p>{timings.from}</p>
                         <p>-</p>
-                        <p>{timings.to}am</p>
+                        <p>{timings.to}</p>
                     </div>
             }
         </div>

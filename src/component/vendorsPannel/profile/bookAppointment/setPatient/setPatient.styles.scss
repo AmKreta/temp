@@ -17,6 +17,15 @@ $paddingLeftRight:2%;
             .searchPatient {
                 width: 80%;
 
+                &>div:nth-child(2) {
+                    border: 1px solid black !important;
+                    box-shadow: none;
+
+                    &>.inputIcon {
+                        color: black;
+                    }
+                }
+
                 &>label {
                     display: block;
                     text-align: left;

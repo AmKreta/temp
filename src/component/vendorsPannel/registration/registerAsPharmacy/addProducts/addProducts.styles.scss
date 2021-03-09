@@ -12,10 +12,40 @@ $inputBorder:1px solid #ccc;
     width: 100%;
     overflow-y: scroll;
     overflow-x: auto;
+    position: relative;
 
-    .greenButton {
-        &>button {
+    .uploadingSpinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, .9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+
+        &>div {
+            height: 50px;
+            width: 50px;
+            border: 10px solid $blue;
+            border-radius: 50%;
+            border-top-color: white;
+            animation-name: loadngSpinner;
+            animation-iteration-count: infinite;
+            animation-duration: .5s;
+            animation-timing-function: linear;
+        }
+    }
+
+    .Button {
+        &>.greenButton {
             @include greenButton();
+        }
+
+        &>.whiteButton {
+            @include whiteButton();
         }
     }
 
@@ -86,26 +116,38 @@ $inputBorder:1px solid #ccc;
         }
     }
 
-    .addImages {
-        min-height: $imageInputSize;
-        width: $imageInputSize;
+    .addImagesContainer {
         display: flex;
-        flex-flow: column nowrap;
-        align-items: stretch;
+        align-items: baseline;
+        justify-content: flex-start;
+        flex-flow: row nowrap;
 
-        .addImagesIconContainer {
-            height: $imageInputSize;
+        .addImages {
+            min-height: $imageInputSize;
             width: $imageInputSize;
-            border: 1px solid #ccc;
-            border-radius: 20px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            flex-flow: column nowrap;
+            align-items: stretch;
+            margin-right: 10px;
 
-        .addImagesCaption {
-            font-weight: bold;
-            font-size: .6em;
+            &:hover {
+                cursor: pointer;
+            }
+
+            .addImagesIconContainer {
+                height: $imageInputSize;
+                width: $imageInputSize;
+                border: 1px solid #ccc;
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .addImagesCaption {
+                font-weight: bold;
+                font-size: .6em;
+            }
         }
     }
 
@@ -149,6 +191,23 @@ $inputBorder:1px solid #ccc;
             }
         }
 
+        .selectCategory {
+            border: none;
+
+            &>div:first-child {
+                width: 83%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid #ccc;
+                ;
+            }
+
+            &>div:last-child {
+                width: 15%;
+            }
+        }
+
         & input,
         option {
             border: none;
@@ -187,5 +246,15 @@ $inputBorder:1px solid #ccc;
             text-align: left;
             padding-left: 1%;
         }
+    }
+}
+
+@keyframes loadngSpinner {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
     }
 }

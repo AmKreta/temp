@@ -4,6 +4,7 @@
 .collectedOrders {
     @include orderInfoModal();
     font-weight: bold;
+    height:var(--height);
 
     .vendorPopupPictures {
         height: 40%;

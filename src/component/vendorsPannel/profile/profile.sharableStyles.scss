@@ -7,10 +7,14 @@ $red: #f44336;
     height: $height;
     margin: 0 3%;
     padding: 0 3%;
-    width: 40%;
+    width: Min(40%, 200px);
     font-weight: bold;
     border-radius: 10px;
     font-size: 1.1em;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     &:focus {
         outline: none;

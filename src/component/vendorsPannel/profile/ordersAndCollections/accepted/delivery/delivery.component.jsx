@@ -31,7 +31,7 @@ const Delivery = ({ setShowDeliverCollectionTab, setActiveTabNull }) => {
     const classes = useStyles();
 
     return (
-        <div className="vendorPopupAcceptedDeliveryContainer" style={{ height }}>
+        <div className="vendorPopupAcceptedDeliveryContainer" style={{ '--height': `${height}px` }}>
             <div className="vendorPopupAcceptedDelivery">
                 <div className="vendorPopupAcceptedDeliveryHeader">
                     <p>You are done with packing and are ready to deliver</p>

@@ -20,9 +20,11 @@ $margin-top:15px;
         flex-flow: row wrap;
         align-items: center;
         justify-content: space-evenly;
-        padding: 2% 4%;
+        padding: Min(2%, 10px) Min(20px, 4%);
         margin-top: $margin-top;
         text-align: left;
+        width: Min(500px, 100%);
+        margin: auto;
 
         .apiLogo {
             grid-area: logo;
@@ -67,6 +69,8 @@ $margin-top:15px;
         justify-content: space-evenly;
         font-weight: bold;
         font-size: .9em;
+        width: Min(500px, 100%);
+        margin:auto;
 
         &>div {
             display: flex;

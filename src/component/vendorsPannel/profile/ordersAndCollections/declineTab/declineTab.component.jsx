@@ -25,7 +25,7 @@ const DeclineTab = ({ setShowDeclineTab, setActiveTabNull, orderNo, cost }) => {
     };
 
     return (
-        <div className="vendorPopupPendingDeclineTabContainer" style={{ height }}>
+        <div className="vendorPopupPendingDeclineTabContainer" style={{ '--height': `${height}px` }}>
             <div className="vendorPopupPendingDeclineTab">
                 <div className="vendorPopupDeleteOrderConfirmation">
                     <p>Are you sure you want to Decline/Delete </p>
@@ -63,7 +63,7 @@ const DeclineTab = ({ setShowDeclineTab, setActiveTabNull, orderNo, cost }) => {
                             />
                             <FormControlLabel
                                 value="Delivery person is not Responsive"
-                                control={<Radio />} l
+                                control={<Radio />}
                                 label="Delivery person is not Responsive"
                             />
                             <FormControlLabel

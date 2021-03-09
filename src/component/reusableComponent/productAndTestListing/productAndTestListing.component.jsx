@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './productAndtestListing.styles.scss';
 
@@ -11,16 +12,58 @@ import { MdLocalOffer } from 'react-icons/md';
 //importing reusable components
 import Icon from '../../reusableComponent/icon/icon.component';
 
-const ProductAndTestListing = ({ category, company, details, fastingRequired, image, itemType, mrp, name, qty, qtyType, sellingPrice }) => {
+//importing services
+import { UPDATE_MY_PRODUCT, UPDATE_MY_TEST } from '../../../services/services';
+
+const ProductAndTestListing = ({ _id, category, company, details, fastingRequired, image, itemType, mrp, name, qty, qtyType, sellingPrice, hasDiscount, discount }) => {
+
     const businessType = useSelector(state => state.currentVendor.businessType);
+    const auth_token = useSelector(state => state.token);
+
+    const [quantity, setQuantity] = useState(qty);
+
+    const incrementProduct = useCallback((e) => {
+        let link = businessType === 'pharmacy' ? UPDATE_MY_PRODUCT : UPDATE_MY_TEST;
+        axios
+            .put(link(_id), { qty: quantity + 1 }, {
+                headers: {
+                    'Authorization': `Bearer ${auth_token.accessToken}`
+                }
+            })
+            .then(res => {
+                setQuantity(prevState => prevState + 1);
+            })
+            .catch(err => {
+                console.log(err);
+                alert('unable to increase quantity of product')
+            });
+    }, [businessType, quantity, setQuantity]);
+
+    const decrementProduct = useCallback((e) => {
+        let link = businessType === 'pharmacy' ? UPDATE_MY_PRODUCT : UPDATE_MY_TEST;
+        axios
+            .put(link(_id), { qty: quantity - 1 }, {
+                headers: {
+                    'Authorization': `Bearer ${auth_token.accessToken}`
+                }
+            })
+            .then(res => {
+                setQuantity(prevState => prevState - 1);
+            })
+            .catch(err => {
+                console.log(err);
+                alert('unable to decrease quantity of product')
+            });
+    }, [businessType, quantity, setQuantity]);
+
     return (
-        <div className={`vendorTestAndProductListItem ${businessType === 'pathology' ? 'flexDisplay' : null}`} title={category}>
+        <div className={`vendorTestAndProductListItem ${businessType === 'pathology' ? 'flexDisplay' : null} ${quantity === 0 ? 'outOfStock' : null}`} title={category}>
             <div className="vendorTestAndProductListItemHeader">
                 <div className="vendorTestAndProductListItemHeaderCount">
                     {qty}KG
                 </div>
                 {
-                    businessType === 'pathology'
+                    businessType === 'pathology' && fastingRequired
                         ? <div className="vendorTestAndProductListItemHeaderLabel">
                             <p>Fasting Required</p>
                         </div>
@@ -28,7 +71,7 @@ const ProductAndTestListing = ({ category, company, details, fastingRequired, im
                 }
             </div>
             {
-                (() => {
+                /*(() => {
                     let discount = 0;
                     discount = 100 - ((sellingPrice / mrp) * 100);
                     return businessType === 'pharmacy' && discount > 0
@@ -37,15 +80,27 @@ const ProductAndTestListing = ({ category, company, details, fastingRequired, im
                                 <MdLocalOffer />
                             </Icon>
                             <div className="productDiscount">
-                                <p>{discount}%</p>
+                                <p>{discount.toFixed()}%</p>
                                 <p>Off</p>
                             </div>
                         </div>
                         : null
-                })()
+                })()*/
+
+                hasDiscount && discount && (
+                    <div className="productsOffer">
+                        <Icon size='65px' iconColor={blue}>
+                            <MdLocalOffer />
+                        </Icon>
+                        <div className="productDiscount">
+                            <p>{discount && discount.toFixed()}%</p>
+                            <p>Off</p>
+                        </div>
+                    </div>
+                )
             }
             <div className="vendorTestAndProductListItemMain">
-                <img src="https://img10.hkrtcdn.com/2034/prd_203349_o.jpg" alt='product' />
+                <img src={image} alt='product' />
             </div>
             <div className="vendorTestAndProductListFooter">
                 <div className="vendorTestAndProductListItemName">
@@ -68,21 +123,25 @@ const ProductAndTestListing = ({ category, company, details, fastingRequired, im
                 businessType === 'pharmacy'
                     ? <div className="vendorTestAndProductListItemActions">
                         {
-                            qty === 0
-                                ? <div className="ProductListAddButton">
-                                    add button
+                            quantity === 0
+                                ? <div className="productListAddButton">
+                                    <div className="AddMoreProductsToList">
+                                        <Icon size='18px' onClick={incrementProduct}>
+                                            <BiPlus />
+                                        </Icon>
+                                    </div>
                                 </div>
                                 : <div className='productListAddRemoveButton'>
                                     <div className="removeProductsFromList">
-                                        <Icon size='18px'>
+                                        <Icon size='18px' onClick={decrementProduct}>
                                             <BiMinus />
                                         </Icon>
                                     </div>
                                     <div className="quantityOfProductsLeft">
-                                        {qty}
+                                        {quantity}
                                     </div>
                                     <div className="AddMoreProductsToList">
-                                        <Icon size='18px'>
+                                        <Icon size='18px' onClick={incrementProduct}>
                                             <BiPlus />
                                         </Icon>
                                     </div>

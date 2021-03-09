@@ -5,7 +5,7 @@ const height = window.innerHeight - (window.innerHeight / 100) * 20;
 
 const AcceptTabDelivery = ({ setShowAcceptTab, setActiveTabNull }) => {
     return (
-        <div className="vendorPopupPendingAcceptTabContainer" style={{ height }}>
+        <div className="vendorPopupPendingAcceptTabContainer" style={{ '--height': `${height}px` }}>
             <div className="vendorPopupPendingAcceptTab">
                 <div>
                     <p>

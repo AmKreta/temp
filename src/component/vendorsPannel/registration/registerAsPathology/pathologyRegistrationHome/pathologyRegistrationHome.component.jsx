@@ -19,7 +19,7 @@ import RegistrationFormButton from '../../../../reusableComponent/registrationFo
 import { ADD_TIMINGS, COLLECTION_SETTING, ADD_TESTS } from '../../routes';
 
 //importing services
-import { GET_TEST_AND_PRODUCTS } from '../../../../../services/services';
+import { GET_TESTS } from '../../../../../services/services';
 
 //importing actions
 import { setProductsAndTestList } from '../../../../../actions/action';
@@ -27,7 +27,7 @@ import { setProductsAndTestList } from '../../../../../actions/action';
 const PathologyRegistrationHome = ({ history, match, currentVendor, auth_token, tests, setProductsAndTestList }) => {
     useEffect(() => {
         axios
-            .get(GET_TEST_AND_PRODUCTS, {
+            .get(GET_TESTS, {
                 headers: {
                     'Authorization': `Bearer ${auth_token.accessToken}`
                 }

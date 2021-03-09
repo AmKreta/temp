@@ -18,7 +18,7 @@ const height = window.innerHeight - (window.innerHeight / 100) * 20;
 const Collected = ({ setActiveTabNull, orderNo, orderDate, orderTime, paymentMethod, status, totalItems, cost }) => {
     const [showDeclineTab, setShowDeclineTab] = useState(false);
     return (
-        <div className="collectedOrders" style={{ height: `${height}px` }}>
+        <div className="collectedOrders" style={{ '--height': `${height}px` }}>
             <OrderDetails {...{ orderNo, orderDate, orderTime, paymentMethod, status }} />
             <hr />
             <div className='vendorPopupPictures'>

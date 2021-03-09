@@ -3,6 +3,7 @@
 
 .shippedOrders {
     @include orderInfoModal();
+    height:var(--height);
 
     .vendorPopupShippedInvoice {
         height: 40%;

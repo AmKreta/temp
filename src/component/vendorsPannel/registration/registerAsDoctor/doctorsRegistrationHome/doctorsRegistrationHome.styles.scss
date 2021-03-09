@@ -1,7 +1,7 @@
 @import '../../../../../../assets/globalStyles.scss';
 @import '../../registration.sharableStyles.scss';
 
-$spacing:10%;
+$spacing:Min(30px,10%);
 $headerFontSize:1.2em;
 
 .doctorsRegistrationHome {

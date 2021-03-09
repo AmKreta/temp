@@ -13,101 +13,106 @@
         @include greenButton();
     }
 
-    .businessInfoForm {
-        .businessType {
-            display: flex;
-            flex-flow: row nowrap;
-            align-items: center;
-            justify-content: space-between;
-            color: $brown;
-            font-weight: bold;
+    &>div {
+        width: Min(100%, 500px);
+        margin: auto;
 
-            &>p.active {
-                outline: 2px solid $brown;
-                padding: 1%;
-            }
-        }
-
-        .inputInfo {
-
-            & label {
-                text-align: left;
-                display: block;
-                font-weight: bold;
-                margin-left: 4%;
-            }
-
-            & input {
-                @include input();
-            }
-
-            & select {
-                @include input();
-                font-size: .9em;
+        .businessInfoForm {
+            .businessType {
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+                justify-content: space-between;
+                color: $brown;
                 font-weight: bold;
 
-                &>option {
-                    @include input();
-                    font-size: .9em;
-                    font-weight: bold;
+                &>p.active {
+                    outline: 2px solid $brown;
+                    padding: 1%;
                 }
             }
 
-            .firstNameInputContainer {
+            .inputInfo {
+
+                & label {
+                    text-align: left;
+                    display: block;
+                    font-weight: bold;
+                    margin-left: Min(4%, 10px);
+                }
+
+                & input {
+                    @include input();
+                }
+
+                & select {
+                    @include input();
+                    font-size: .9em;
+                    font-weight: bold;
+
+                    &>option {
+                        @include input();
+                        font-size: .9em;
+                        font-weight: bold;
+                    }
+                }
+
+                .firstNameInputContainer {
+                    display: flex;
+                    flex-flow: row wrap;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .businessTitle {
+                        width: 22%;
+                    }
+
+                    .businessFirstName {
+                        width: 75%;
+                    }
+                }
+            }
+
+            .multipleInputs {
+                width: 100%;
                 display: flex;
                 flex-flow: row wrap;
                 align-items: center;
                 justify-content: space-between;
 
-                .businessTitle {
-                    width: 22%;
+                .halfWidth {
+                    width: 48%;
                 }
+            }
 
-                .businessFirstName {
-                    width: 75%;
-                }
+            & .businessInfo {
+                margin-top: 15px;
             }
         }
 
-        .multipleInputs {
-            width: 100%;
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            justify-content: space-between;
+        .uploadDocuments {
+            margin: 20px 0;
 
-            .halfWidth {
-                width: 48%;
+            &>label {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+
+            &>p {
+                font-size: .7em;
+                color: darken(#ccc, 20%);
+            }
+
+            &>input {
+                display: none;
             }
         }
 
-        & .businessInfo {
-            margin-top: 15px;
+        .businessInfoFormHeader {
+            color: $green;
+            text-align: left;
+            margin-bottom: 10px;
         }
-    }
-
-    .uploadDocuments {
-        margin: 20px 0;
-
-        &>label {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-        }
-
-        &>p {
-            font-size: .7em;
-            color: darken(#ccc, 20%);
-        }
-
-        &>input {
-            display: none;
-        }
-    }
-
-    .businessInfoFormHeader {
-        color: $green;
-        text-align: left;
-        margin-bottom: 10px;
     }
 }

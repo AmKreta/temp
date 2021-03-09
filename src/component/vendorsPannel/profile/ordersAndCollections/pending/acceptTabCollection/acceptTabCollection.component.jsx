@@ -34,7 +34,7 @@ const AcceptTab = ({ setShowAcceptTab, setActiveTabNull }) => {
     const classes = useStyles();
 
     return (
-        <div className="vendorPopupPendingAcceptTabCollectionContainer" style={{ height }}>
+        <div className="vendorPopupPendingAcceptTabCollectionContainer" style={{ '--height': `${height}px` }}>
             <div className="vendorPopupPendingAcceptTabCollection">
                 <div>
                     <InputWithIcon />

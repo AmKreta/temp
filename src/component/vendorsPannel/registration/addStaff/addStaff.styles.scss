@@ -2,7 +2,7 @@
 
 $skipButtonContainerHeight:10%;
 $labelHeight:10%;
-$formHeight:80%;
+$formHeight:Clamp(450px, 80%, 900px);
 $buttonsHeight:10%;
 
 .addStaff {
@@ -35,6 +35,7 @@ $buttonsHeight:10%;
 
     .addStaffLabelContainer {
         @include greenIconContainer($labelHeight);
+        margin: 10px 0;
 
         .addStaffLabelIcon {
             @include greenIcon();
@@ -171,9 +172,9 @@ $buttonsHeight:10%;
             width: 100%;
             text-align: left;
             font-weight: bold;
-            font-size: .9em;
+            font-size: .95em;
             border-collapse: collapse;
-            margin: 10px 0;
+            margin: 20px 0;
 
             tbody {
                 font-size: .9em;

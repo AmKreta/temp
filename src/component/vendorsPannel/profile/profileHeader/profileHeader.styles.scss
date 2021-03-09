@@ -45,3 +45,12 @@ $iconCircleSize:40px;
         }
     }
 }
+
+@media only screen and (min-width : $medium) {
+    .vendorProfileHeader {
+        flex-flow: column nowrap;
+        width: clamp(80px, 10%, 100px);
+        height: 100%;
+        border-right: 1px solid #ccc;
+    }
+}

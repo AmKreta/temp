@@ -5,6 +5,7 @@
     @include orderInfoInnerModal();
     margin: 0 !important;
     font-weight: bold;
+    height: var(--height);
 
     .vendorPopupPendingAcceptTabCollection {
         background-color: white;
@@ -13,7 +14,8 @@
         box-shadow: 0 0 5px white;
         padding: 10px;
         padding-top: 15px;
-        width: 100%;
+        width: Min(100%, 500px);
+        margin: auto;
 
         .vendorPopupPendingAcceptTabItemList {
             margin: 10px 0;

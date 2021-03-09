@@ -53,7 +53,7 @@ $maxCardWidth:100%; //50px;
 
     .avatar {
         grid-area: avatar;
-        @include dispFlex(flex, flex-start);
+        @include dispFlex(flex-start, flex-start);
 
         .avatarImage {
             max-height: 100%;

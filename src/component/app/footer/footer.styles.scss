@@ -2,10 +2,10 @@
 
 .appFooter {
     height: 10%;
-    display:flex;
-    flex-flow:row wrap;
-    align-items:flex-start;
-    justify-content:space-around;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    justify-content: space-around;
 
     &.purpleAppFooter {
         background-color: $purple;
@@ -15,11 +15,12 @@
     &.whiteAppFooter {
         background-color: white;
         color: rgba(0, 0, 0, .9);
+        box-shadow: 0 -1px 5px #ccc;
     }
 }
 
-@media only screen and ( min-width : $medium ){
-    .appFooter{
-        display:none;
+@media only screen and (min-width : $medium) {
+    .appFooter {
+        display: none;
     }
 }

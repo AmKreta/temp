@@ -3,6 +3,7 @@
 
 .pendingOrders {
     @include orderInfoModal();
+    height:var(--height);
 
     &>div:not(:first-child) {
         margin: 10px 0;

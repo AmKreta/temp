@@ -1,0 +1,27 @@
+.uploadedImagesPreviewContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 10px;
+    overflow-y: scroll;
+    overflow-x: auto;
+
+    &.activeInputImage {
+        border: 1px solid red;
+    }
+
+    &>.uploadedImagesContainer {
+        overflow: hidden;
+        width: 70px;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-right: 5px;
+        }
+
+        &>img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+}

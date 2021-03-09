@@ -23,12 +23,12 @@ import { ADD_TIMINGS, DELIVERY_SETTING, ADD_PRODUCTS } from '../../routes';
 import { setProductsAndTestList } from '../../../../../actions/action';
 
 //importing services
-import { GET_TEST_AND_PRODUCTS } from '../../../../../services/services';
+import { GET_PRODUCTS } from '../../../../../services/services';
 
 const PharmacyRegistrationHome = ({ history, match, currentVendor, products, auth_token, setProductsAndTestList }) => {
     useEffect(() => {
         axios
-            .get(GET_TEST_AND_PRODUCTS, {
+            .get(GET_PRODUCTS, {
                 headers: {
                     'Authorization': `Bearer ${auth_token.accessToken}`
                 }

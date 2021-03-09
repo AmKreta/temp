@@ -6,12 +6,17 @@ $registerAsHomeHeaderSize:1.2em;
     height: $height;
     margin: 0 3%;
     padding: 0 3%;
-    width: 40%;
+    width: Min(40%, 200px);
     font-weight: bold;
     border-radius: 10px;
     font-size: 1.1em;
-    &:focus{
-        outline:none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: none;
     }
 }
 
@@ -42,36 +47,43 @@ $registerAsHomeHeaderSize:1.2em;
         outline: none;
         box-shadow: 0 0 5px #ccc inset;
     }
-}
 
-@mixin radio($margin:0 3px 0 0) {
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    &>input[type='radio'] {
-        margin: $margin;
+    &.erroredInput {
+        border: 1px solid red;
     }
 }
 
-@mixin greenIcon($size:30px,$marginRight:5px){
-     height: $size;
-            width: $size;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: $green;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: $marginRight;
-}
-
-@mixin greenIconContainer($height:10%){
+@mixin radio() {
     display: flex;
-        flex-flow: row nowrap;
-        align-items: center;
-        height: $height;
-        font-weight:bold;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    &>input[type='radio'] {
+        &:hover {
+            cursor: pointer;
+        }
+    }
+}
+
+@mixin greenIcon($size:30px, $marginRight:5px) {
+    height: $size;
+    width: $size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $green;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: $marginRight;
+}
+
+@mixin greenIconContainer($height:10%) {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    height: $height;
+    font-weight: bold;
 }
 
 
-$padding:2% 5%;
+$padding:Min(2%, 20px) Min(5%, 50px);

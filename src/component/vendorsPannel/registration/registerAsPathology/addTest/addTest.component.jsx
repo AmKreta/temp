@@ -16,24 +16,31 @@ import { BiRupee } from 'react-icons/bi';
 import { lightBlue } from '../../../../../assets/globalJSS';
 
 //importing services
-import { ADD_TEST_AND_PRODUCTS} from '../../../../../services/services';
+import { ADD_TESTS, UPLOAD_FILE } from '../../../../../services/services';
 
 //importing actions
-import { setCurrentVendor,setProductsAndTestList } from '../../../../../actions/action';
+import { setCurrentVendor, setProductsAndTestList } from '../../../../../actions/action';
+
+//importing custom components
+import UploadedImagesPreview from '../../uploadedImagePreview/uploadedImagesPreview.component';
+
+//setShowAddtests is sent as prop from pathology profile
 
 const AddTests = (props) => {
 
-    const [category, setCategory] = useState([]);
-    const [type, setType] = useState([]);
+    const [category, setCategory] = useState(['Cytopathology', 'Dermapathology', 'Forensic Pathology', 'Histopathology', 'NeuroPathology']);
+    const [type, setType] = useState(['x-ray', 'ct-scan', 'blood-test', 'urine-test', 'mri-scan']);
+    const [uploading, setUploading] = useState(false);
+
     const initialState = {
         image: [],
         name: '',
-        category: 'Choose Category',
+        category: 'Cytopathology',
         mrp: '',
         sellingPrice: '',
         testDetails: '',
-        quantity: '0',
-        type: 'tablet',
+        quantity: '',
+        type: 'x-ray',
         fastingRequired: false
     };
     const [data, dispatch] = useReducer((state, action) => {
@@ -66,49 +73,69 @@ const AddTests = (props) => {
     }, initialState);
 
     const addButtonhandler = (e) => {
-        var Data = {
-            image: 'amk',
-            name: data.name,
-            mrp: data.mrp,
-            sellingPrice: data.sellingPrice,
-            details: data.testDetails,
-            qty: data.quantity,
-            fastingRequired: data.fastingRequired,
-            category: data.category,
-            qtyType: data.type
-        }
-        /*let formData = new FormData();
-        Object.keys(Data).forEach(item => {
-            if (item === 'image') {
-                Data[item].forEach(image => {
-                    formData.append('image', image);
-                })
-            }
-            else {
-                formData.append(item, Data[item]);
-            }
-        });*/
+
+        setUploading(true);
+
+        const imagesArray = data.image;
+        console.log(imagesArray);
+
+        let formData = new FormData();
+        formData.append('file', imagesArray[0]);
 
         axios
-            .post(ADD_TEST_AND_PRODUCTS, Data, {
+            .post(UPLOAD_FILE, formData, {
                 headers: {
-                    'Authorization': `Bearer ${props.auth_token.accessToken}`,  
+                    'Authorization': `Bearer ${props.auth_token.accessToken}`,
+                    'Content-type': 'multipart/form-data'
                 }
             })
-            .then(res => {
-                props.setProductsAndTestList(res.data.payload);
-                props.history.goBack();
+            .then(response => {
+                var Data = {
+                    image: response.data.payload.location,
+                    name: data.name,
+                    mrp: data.mrp,
+                    sellingPrice: data.sellingPrice,
+                    details: data.testDetails,
+                    qty: data.quantity,
+                    fastingRequired: data.fastingRequired,
+                    category: data.category,
+                    qtyType: data.type
+                }
+                axios
+                    .post(ADD_TESTS, Data, {
+                        headers: {
+                            'Authorization': `Bearer ${props.auth_token.accessToken}`,
+                        }
+                    })
+                    .then(res => {
+                        setUploading(false);
+
+                        props.setProductsAndTestList(res.data.payload);
+
+                        if (props.setShowAddTests) {
+                            //ie rendered in pathology profile
+                            props.setTestCategories(prevState => [...prevState, res.data.payload]); //test categories is list of test
+                            props.setShowAddTests(false);
+                        }
+                        else {
+                            //ie rendering in pathology registration
+                            props.history.goBack();
+                        }
+                    })
+                    .catch(err => {
+                        setUploading(false);
+
+                        console.log(err);
+                        alert('something went wrong');
+                    });
             })
             .catch(err => {
-                console.log(err);
-                alert('something went wrong');
-            })
-    }
+                setUploading(false);
 
-    useEffect(() => {
-        setCategory(['a', 'b', 'c']);
-        setType(['a', 'b', 'c', 'd']);
-    }, [])
+                console.log(err);
+                alert('file not uploaded');
+            });
+    }
 
     const inputContainerRef = useRef(null);
     const imageInputRef = useRef(null);
@@ -137,23 +164,32 @@ const AddTests = (props) => {
                     <p>Or Scan Barcode</p>
                 </div>
             </div>
-            <div className="addImages">
-                <div className="addImagesIconContainer">
-                    <Icon onClick={(e) => imageInputRef.current.click()} noRippleEffect iconColor='grey' size='40px'>
-                        <AiOutlineCamera />
-                    </Icon>
-                    <input
-                        type='file'
-                        multiple="multiple"
-                        style={{ display: 'none' }}
-                        ref={imageInputRef}
-                        onChange={(e) => dispatch({ type: 'addImage', payload: e.target.files })}
-                    />
+            <div className="addImagesContainer">
+                <div className="addImages">
+                    <div className="addImagesIconContainer">
+                        <Icon onClick={(e) => imageInputRef.current.click()} noRippleEffect iconColor='grey' size='40px'>
+                            <AiOutlineCamera />
+                        </Icon>
+                        <input
+                            type='file'
+                            multiple="multiple"
+                            style={{ display: 'none' }}
+                            ref={imageInputRef}
+                            onChange={(e) => dispatch({ type: 'addImage', payload: e.target.files })}
+                        />
+                    </div>
+                    <div className="addImagesCaption">
+                        {
+                            data.image.length
+                                ? <p>Change Images </p>
+                                : <>
+                                    <p>Add Images</p>
+                                    <p>(Upto 3 images)</p>
+                                </>
+                        }
+                    </div>
                 </div>
-                <div className="addImagesCaption">
-                    <p>Add Images</p>
-                    <p>(Upto 3 images)</p>
-                </div>
+                <UploadedImagesPreview imagesArray={data.image} />
             </div>
             <div className="addProductsAndTestInputContainer">
                 <div className="testName addProductsAndTestInput">
@@ -166,7 +202,7 @@ const AddTests = (props) => {
                 </div>
                 <div className="selectTest addProductsAndTestInput selectInputContainer">
                     <div className='selectInputCaption'>
-                        <p>{data.category}</p>
+                        <p>{/*data.category*/}</p>
                     </div>
                     <div className='selectInput'>
                         <select onChange={(e) => dispatch({ type: 'setCategory', payload: e.target.value })}>
@@ -211,7 +247,7 @@ const AddTests = (props) => {
                     </div>
                     <div className="selectTest addProductsAndTestInput selectInputContainer">
                         <div className='selectInputCaption'>
-                            <p>{data.type}</p>
+                            <p>{/*data.type*/}</p>
                         </div>
                         <div className='selectInput'>
                             <select onChange={(e) => dispatch({ type: 'setType', payload: e.target.value })}>
@@ -242,10 +278,22 @@ const AddTests = (props) => {
                         />
                     </div>
                 </div>
-                <div className="greenButton">
-                    <button onClick={addButtonhandler}>Add Test</button>
+                <div className="Button">
+                    {
+                        props.setShowAddTests
+                            ? <button className='whiteButton' onClick={(e) => props.setShowAddTests(false)} >cancel</button>
+                            : null
+                    }
+                    <button className='greenButton' onClick={addButtonhandler}>Add Test</button>
                 </div>
             </div>
+            {
+                uploading
+                    ? <div className="uploadingSpinner">
+                        <div />
+                    </div>
+                    : null
+            }
         </div >
     );
 }
@@ -257,7 +305,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setCurrentVendor: (payload) => dispatch(setCurrentVendor(payload)),
-    setProductsAndTestList:(payload)=>dispatch(setProductsAndTestList(payload))
+    setProductsAndTestList: (payload) => dispatch(setProductsAndTestList(payload))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTests);

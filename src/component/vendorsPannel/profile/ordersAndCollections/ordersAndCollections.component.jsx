@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import './ordersAndCollections.styles.scss';
 import { Switch, FormControl, InputLabel, Select, makeStyles, MenuItem } from '@material-ui/core';
@@ -14,6 +15,9 @@ import { green } from '../../../../assets/globalJSS';
 
 //importing reusable components
 import Icon from '../../../reusableComponent/icon/icon.component';
+
+//importing services
+import { GET_ORDERS_BY_BUSINESS } from '../../../../services/services';
 
 //importing icons
 import { FaChartBar } from 'react-icons/fa';
@@ -48,6 +52,7 @@ const Orders = () => {
     const [activeTab, setActiveTab] = useState(null);
     const [activeItem, setActiveItem] = useState(null);
     const businessType = useSelector(state => state.currentVendor.businessType);
+    const auth_token = useSelector(state => state.token);
 
     const handleChange = (event) => {
         setStatus(event.target.value);
@@ -64,7 +69,23 @@ const Orders = () => {
 
     const setActiveTabNull = useCallback((e) => {
         setActiveTab(null);
-    }, [setActiveTab])
+    }, [setActiveTab]);
+
+    useEffect(() => {
+        axios
+            .get(GET_ORDERS_BY_BUSINESS, {
+                headers: {
+                    'Authorization': `Bearer ${auth_token.accessToken}`
+                }
+            })
+            .then(res => {
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+                alert(`unable to fetch orders`);
+            });
+    }, []);
 
     return (
         <div className="vendorsOrders">
@@ -99,31 +120,28 @@ const Orders = () => {
                         <FaChartBar />
                     </Icon>
                 </div>
-                <FormControl className={classes.formControl}>
-                    <InputLabel id="demo-simple-select-label">Filter</InputLabel>
-                    <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={status}
-                        onChange={handleChange}
-                    >
-                        <MenuItem value={'All'}>All</MenuItem>
-                        <MenuItem value={'Pending'}>Pending</MenuItem>
-                        <MenuItem value={'Accepted'}>Accepted</MenuItem>
-                        <MenuItem value={'Shipped'}>Shipped</MenuItem>
-                        {
-                            businessType === 'pharmacy'
-                                ? <MenuItem value={'Delivered'}>Delivered</MenuItem>
-                                : null
-                        }
-                        {
-                            businessType === 'pathology'
-                                ? <MenuItem value={'Collected'}>Collected</MenuItem>
-                                : null
-                        }
-                        <MenuItem value={'Cancelled'}>Cancled</MenuItem>
-                    </Select>
-                </FormControl>
+                <select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={status}
+                    onChange={handleChange}
+                >
+                    <option value={'All'}>All</option>
+                    <option value={'Pending'}>Pending</option>
+                    <option value={'Accepted'}>Accepted</option>
+                    <option value={'Shipped'}>Shipped</option>
+                    {
+                        businessType === 'pharmacy'
+                            ? <option value={'Delivered'}>Delivered</option>
+                            : null
+                    }
+                    {
+                        businessType === 'pathology'
+                            ? <option value={'Collected'}>Collected</option>
+                            : null
+                    }
+                    <option value={'Cancelled'}>Cancled</option>
+                </select>
             </div>
             <div className="vendorsOrdersListContainer">
                 {

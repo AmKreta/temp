@@ -14,7 +14,7 @@ const Shipped = ({ setActiveTabNull, orderNo, orderDate, orderTime, paymentMetho
     const [showDeliverTab, setShowDeliverTab] = useState(false);
     const [showDeclineTab, setShowDeclineTab] = useState(false);
     return (
-        <div className="shippedOrders" style={{ height: `${height}px` }}>
+        <div className="shippedOrders" style={{ '--height': `${height}px` }}>
             <OrderDetails {...{ orderNo, orderDate, orderTime, paymentMethod, status }} />
             <hr />
             <div className='vendorPopupShippedInvoice'>
@@ -30,12 +30,12 @@ const Shipped = ({ setActiveTabNull, orderNo, orderDate, orderTime, paymentMetho
             </div>
             {
                 showDeliverTab
-                    ? <Delivered {...{ setShowDeliverTab, setActiveTabNull }} />
+                    ? <Delivered {...{ setShowDeliverTab, setActiveTabNull, cost, orderNo }} />
                     : null
             }
             {
                 showDeclineTab
-                    ? <DeclineTab {...{ setShowDeclineTab, setActiveTabNull }} />
+                    ? <DeclineTab {...{ setShowDeclineTab, setActiveTabNull, cost, orderNo }} />
                     : null
             }
         </div>

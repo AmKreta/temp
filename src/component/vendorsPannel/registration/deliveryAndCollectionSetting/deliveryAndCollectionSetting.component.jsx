@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './deliveryAndCollectionSetting.styles.scss';
 import { Slider, Typography } from '@material-ui/core';
+import Radio from '@material-ui/core/Radio';
+
+import { deliveryValidator, collectionValidator } from './validator/validator';
 
 //importing actions
 import {
@@ -24,9 +27,13 @@ import { GiScooter } from 'react-icons/gi';
 
 //importing services
 import { UPDATE_REGISTERED_USER, GET_USER_DEETAIL_BY_TOKEN } from '../../../../services/services';
+import { Block } from '@material-ui/icons';
 
 //own props=['collectionSetting','deliverySetting']
 const DeliveryAndCollectionSetting = (props) => {
+
+    const [errorsField, setErrorsField] = useState({});
+
     const save = (e) => {
         e.preventDefault();
 
@@ -56,38 +63,45 @@ const DeliveryAndCollectionSetting = (props) => {
             }
         }
 
-        axios
-            .put(UPDATE_REGISTERED_USER, data, {
-                headers: {
-                    'Authorization': `Bearer ${props.auth_token.accessToken}`
-                }
-            })
-            .then(res => {
-                axios
-                    .get(GET_USER_DEETAIL_BY_TOKEN, {
-                        headers: {
-                            'Authorization': `Bearer ${props.auth_token.accessToken}`
-                        }
-                    })
-                    .then(response => {
-                        props.setCurrentVendor(response.data.payload);
-                        let nextUrl = props.match.url.split('/');
-                        //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
-                        nextUrl.pop();//removing last two element
-                        nextUrl.pop();
-                        nextUrl.shift();//removing first element
-                        nextUrl.push('paymentSetting');
-                        props.history.push('/' + nextUrl.join('/'));
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        alert('something went wrong');
-                    })
-            })
-            .catch(err => {
-                console.log(err);
-                alert('something went wrong');
-            })
+        let error = props.currentVendor.businessType === 'pharmacy' ? deliveryValidator(data) : collectionValidator(data);
+
+        if (Object.keys(error).length === 0) {
+            axios
+                .put(UPDATE_REGISTERED_USER, data, {
+                    headers: {
+                        'Authorization': `Bearer ${props.auth_token.accessToken}`
+                    }
+                })
+                .then(res => {
+                    axios
+                        .get(GET_USER_DEETAIL_BY_TOKEN, {
+                            headers: {
+                                'Authorization': `Bearer ${props.auth_token.accessToken}`
+                            }
+                        })
+                        .then(response => {
+                            props.setCurrentVendor(response.data.payload);
+                            let nextUrl = props.match.url.split('/');
+                            //nextUrl=['','vendor','registerAs*','deliverySetting or collectionSetting',""]
+                            nextUrl.pop();//removing last two element
+                            nextUrl.pop();
+                            nextUrl.shift();//removing first element
+                            nextUrl.push('paymentSetting');
+                            props.history.push('/' + nextUrl.join('/'));
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            alert('something went wrong');
+                        })
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert('something went wrong');
+                });
+        }
+        else {
+            setErrorsField(error);
+        }
     }
 
     const back = (e) => {
@@ -114,8 +128,7 @@ const DeliveryAndCollectionSetting = (props) => {
                         <p>{Type.current} Available At</p>
                     </div>
                     <div className="radioInput">
-                        <input
-                            type='radio'
+                        <Radio
                             value='customerAddress'
                             name='availableAt'
                             checked={props.availableAt.customerAddress ? true : false}
@@ -129,8 +142,7 @@ const DeliveryAndCollectionSetting = (props) => {
                         <label htmlFor="available at customer Address">Customer Address</label>
                     </div>
                     <div className="radioInput">
-                        <input
-                            type='radio'
+                        <Radio
                             value='pickUpByCustomer'
                             name='availableAt'
                             checked={props.availableAt.pickUpByCustomer ? true : false}
@@ -152,6 +164,7 @@ const DeliveryAndCollectionSetting = (props) => {
                             placeholder={`${Type.current} charges per order`}
                             value={props.chargesPerOrder}
                             onChange={(e) => props.setDeliveryAndCollectionChargesperOrder(e.target.value)}
+                            className={`${errorsField.chargesPerOrder ? 'erroredInput' : null}`}
                         />
                     </div>
                     <div className="deliveryAndCollectionInput">
@@ -161,6 +174,7 @@ const DeliveryAndCollectionSetting = (props) => {
                             placeholder={`Minimum ${Type.current} ammount`}
                             value={props.minimumAmmount}
                             onChange={(e) => props.setDeliveryAndCollectionMininumAmmount(e.target.value)}
+                            className={`${errorsField.minOrderAmmount ? 'erroredInput' : null}`}
                         />
                     </div>
                     {
@@ -182,8 +196,7 @@ const DeliveryAndCollectionSetting = (props) => {
                         <p>Cash On Delivery Available</p>
                     </div>
                     <div className="radioInput">
-                        <input
-                            type='radio'
+                        <Radio
                             value='yes'
                             name='cod'
                             checked={props.codAvailable ? true : false}
@@ -192,8 +205,7 @@ const DeliveryAndCollectionSetting = (props) => {
                         <label htmlFor="available at customer Address">Yes</label>
                     </div>
                     <div className="radioInput">
-                        <input
-                            type='radio'
+                        <Radio
                             value='no'
                             name='cod'
                             checked={props.codAvailable ? false : true}
@@ -217,7 +229,14 @@ const DeliveryAndCollectionSetting = (props) => {
                         onChange={(e) => { props.setDeliveryAndCollectionDistance(e.target.innerText) }}
                         className='slider'
                     />
-
+                    <p style={{
+                        color: 'red',
+                        fontSize: '.8em',
+                        textAlign: 'left',
+                        display: errorsField.distance ? 'block' : 'none'
+                    }}>
+                        distance is not set
+                    </p>
                 </div>
 
                 <div className="deliveryAndCollectionButtonContainer">

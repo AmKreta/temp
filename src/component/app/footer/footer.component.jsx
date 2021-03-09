@@ -37,6 +37,9 @@ const useStyles = makeStyles(theme => ({
     colorWhite: {
         color: 'white'
     },
+    colorBlack: {
+        color: 'black'
+    },
     large: {
         transform: 'scale(1.1)',
         borderRadius: '50%',
@@ -44,28 +47,33 @@ const useStyles = makeStyles(theme => ({
         bottom: '35%',
         border: '5px solid #220555',
     },
+    small: {
+        borderRadius: '50%',
+        position: 'relative',
+        transform:'scale(.8)'
+    },
     gradientbackground: {
         backgroundImage: 'linear-gradient(90deg, #220555 30%, #EC2B7A 70%)'
     }
 }));
 
-const Footer = ({ history }) => {
+const Footer = ({ history, location }) => {
     const classes = useStyles();
     return (
-        <footer className="appFooter purpleAppFooter">
-            <IconButton className={classes.colorWhite}>
+        <footer className={`appFooter ${location.pathname === '/home' ? 'purpleAppFooter' : 'whiteAppFooter'}`}>
+            <IconButton className={location.pathname === '/home' ? classes.colorWhite : classes.colorBlack}>
                 <LocalMallIcon fontSize='large' />
             </IconButton>
-            <IconButton className={classes.colorWhite}>
+            <IconButton className={location.pathname === '/home' ? classes.colorWhite : classes.colorBlack}>
                 <ExploreIcon fontSize='large' />
             </IconButton>
-            <IconButton className={clsx([classes.colorWhite, classes.large, classes.gradientbackground])}>
+            <IconButton className={clsx([classes.colorWhite, location.pathname === '/home' ? classes.large : classes.small, classes.gradientbackground])}>
                 <LocationOnIcon fontSize='large' />
             </IconButton>
-            <IconButton className={classes.colorWhite}>
+            <IconButton className={location.pathname === '/home' ? classes.colorWhite : classes.colorBlack}>
                 <WhatsAppIcon fontSize='large' />
             </IconButton>
-            <IconButton className={classes.colorWhite} onClick={(e)=>history.push('/vendor')}>
+            <IconButton className={location.pathname === '/home' ? classes.colorWhite : classes.colorBlack} onClick={(e) => history.push('/vendor')}>
                 <StoreIcon fontSize='large' />
             </IconButton>
         </footer>

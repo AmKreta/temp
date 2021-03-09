@@ -1,4 +1,14 @@
+@import '../../../../assets/globalStyles.scss';
+
 .vendorsProfile {
     height: 80%;
-    
+}
+
+@media only screen and (min-width : $medium) {
+    .vendorsProfile {
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: stretch;
+        background: yellow;
+    }
 }

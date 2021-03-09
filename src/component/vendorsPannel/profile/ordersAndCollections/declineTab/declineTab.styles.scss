@@ -8,13 +8,14 @@
     justify-content: center;
     margin: 0 !important;
     font-weight: bold;
+    height: var(--height);
 
     .vendorPopupPendingDeclineTab {
         background-color: white;
         border: 1px solid white;
         box-shadow: 0 0 5px white;
         border-radius: 10px;
-        width: 100%;
+        width: Min(100%, 500px);
         padding: 10px;
 
         &>div {

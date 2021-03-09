@@ -8,6 +8,37 @@ $margin-top:15px;
     position: relative;
     padding: $padding;
 
+    .testsAddedPopupContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, .9);
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .testsAdded {
+            height: 50%;
+            width: 50%;
+            background-color: white;
+            box-shadow: 0 0 5px white;
+            display: flex;
+            flex-flow: column wrap;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 10px;
+            border-radius: 10px;
+
+            &>.greenButton {
+                @include greenButton();
+            }
+        }
+    }
+
+
     .infoContainer {
         &>.searchResultCard {
             padding: 4% 0;

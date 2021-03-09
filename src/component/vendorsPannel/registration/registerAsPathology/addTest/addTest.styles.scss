@@ -13,12 +13,41 @@ $formHeight:70%;
     padding: $padding;
     height: 100%;
     width: 100%;
+    position: relative;
 
-    .greenButton {
-        margin-top: 30px;
-        padding-top: 20px;
+    .uploadingSpinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 100vw;
+        background-color: rgba(0, 0, 0, .9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
 
-        &>button {
+        &>div {
+            height: 50px;
+            width: 50px;
+            border: 10px solid $blue;
+            border-radius: 50%;
+            border-top-color: white;
+            animation-name: loadngSpinner;
+            animation-iteration-count: infinite;
+            animation-duration: .5s;
+        }
+    }
+
+    .Button {
+        //margin-top: 20px;
+        //padding-top: 20px;
+
+        &>.whiteButton {
+            @include whiteButton();
+        }
+
+        &>.greenButton {
             @include greenButton();
         }
 
@@ -92,28 +121,36 @@ $formHeight:70%;
         }
     }
 
-    .addImages {
-        height: $inputImageHeight;
-        min-height: $imageInputSize;
-        width: $imageInputSize;
+    .addImagesContainer {
         display: flex;
-        flex-flow: column nowrap;
-        align-items: stretch;
-        margin-top: 20px;
+        align-items: baseline;
+        justify-content: flex-start;
+        flex-flow: row nowrap;
 
-        .addImagesIconContainer {
-            height: $imageInputSize;
+        .addImages {
+            height: $inputImageHeight;
+            min-height: $imageInputSize;
             width: $imageInputSize;
-            border: 1px solid #ccc;
-            border-radius: 20px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+            flex-flow: column nowrap;
+            align-items: stretch;
+            margin-top: 10px;
 
-        .addImagesCaption {
-            font-weight: bold;
-            font-size: .6em;
+            .addImagesIconContainer {
+                height: $imageInputSize;
+                width: $imageInputSize;
+                border: 1px solid #ccc;
+                border-radius: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .addImagesCaption {
+                font-weight: bold;
+                font-size: .6em;
+            }
         }
     }
 
@@ -204,5 +241,19 @@ $formHeight:70%;
                 transition: .5s ease-in-out;
             }
         }
+
+        & input[type=text]:nth-child(1) {
+            margin-top: 0;
+        }
+    }
+}
+
+@keyframes loadngSpinner {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    to {
+        transform: rotateZ(360deg);
     }
 }

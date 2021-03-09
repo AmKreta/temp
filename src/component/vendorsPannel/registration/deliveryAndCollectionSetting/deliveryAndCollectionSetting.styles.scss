@@ -30,6 +30,10 @@
         @include input();
     }
 
+    .deliveryAndCollectionButtonContainer {
+        margin: 15px;
+    }
+
     .radioInputContainer {
         display: flex;
         flex-flow: row wrap;
@@ -47,6 +51,14 @@
             @include radio();
             width: 50%;
         }
+
+        &:nth-child(1) {
+
+            //first radio input container
+            &>div:not(:first-child) {
+                width: 100%;
+            }
+        }
     }
 
     .deliveryAndCollectionSettingForm {
@@ -59,7 +71,7 @@
 
         .deliveryDistance {
             width: 96%;
-            margin:auto;
+            margin: auto;
 
             .deliveryDistanceLabel {
                 padding: 2% 0;
@@ -67,7 +79,8 @@
             }
 
             .MuiSlider-root {
-                margin:2% 0;
+                margin: 2% 0;
+
                 .MuiSlider-rail {
                     height: 10px;
                     border-radius: 20px;

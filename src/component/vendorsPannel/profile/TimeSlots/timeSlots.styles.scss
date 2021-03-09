@@ -18,9 +18,9 @@
 
     &.booked {
         display: grid;
-        grid-template-columns: 7fr 3fr;
+        grid-template-columns: 1fr 1fr;
         grid-template-rows: repeat(2, 1fr);
-        grid-template-areas: "nameAndNumber time""actions null";
+        grid-template-areas: "nameAndNumber nameAndNumber""actions time";
         font-weight: bold;
         align-items: baseline;
 
@@ -34,9 +34,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5em;
         color: $red;
         font-weight: 800;
+    }
+
+    &.accepted {
+        background-color: lighten($green, 40%);
+        border-color: $green;
     }
 
     .customerInfoContainer {
@@ -70,14 +74,26 @@
                 background-color: $green;
             }
         }
+
+        &>p {
+            color: green
+        }
     }
 
     .appointmentTime {
         grid-area: time;
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
         align-items: center;
-        font-size: .8em;
+        font-size: 1.5em;
+        width: 100%;
+
+        &.bookedAppointmentTime {
+            align-items: flex-end;
+            justify-content: flex-end;
+            flex-wrap: nowrap;
+            font-size: .8em;
+        }
 
         &>p:not(:last-child) {
             margin-right: 2%;

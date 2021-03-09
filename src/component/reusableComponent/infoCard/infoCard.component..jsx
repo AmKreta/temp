@@ -30,7 +30,7 @@ const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, 
         lastName,
         businessName,
         type,
-        image,
+        photo,
         area,
         city,
         state,
@@ -82,7 +82,7 @@ const InfoCard = ({ data, history, stars = 5, closeBy = '10pm', distance = 3.3, 
                 </p>
             </div>
             <div className="avatar">
-                <img src={image} className='avatarImage' alt={`profile pic of ${firstName + lastName}`} />
+                {photo && <img src={photo} className='avatarImage' alt={`profile pic of ${firstName + lastName}`} />}
             </div>
             <div className="address">
                 <p>{area}</p>

@@ -8,12 +8,12 @@
     padding: $padding;
 
     &>div {
-        margin: 3% 0;
+        margin: Min(3%, 15px) 0;
     }
 
     & .greenButton {
         @include greenButton();
-        margin: 4% 0;
+        margin: Min(4%, 15px) 0;
     }
 
     &>.logo {
@@ -33,4 +33,11 @@
         font-weight: bold;
         font-size: .9em;
     }
+
+    .welcomeScreenPhoneNoInput,
+    .welcomeScreenOtpInput {
+        width: Min(100%, 500px);
+        margin: auto;
+    }
+
 }

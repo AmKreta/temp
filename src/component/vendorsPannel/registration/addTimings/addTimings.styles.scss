@@ -8,6 +8,8 @@ $marginTop:10px;
     overflow-y: scroll;
     overflow-x: auto;
     padding: $padding;
+    width: Min(100%, 600px);
+    margin: auto;
 
     & .whiteButton {
         @include whiteButton();

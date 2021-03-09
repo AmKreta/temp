@@ -18,7 +18,7 @@ const VendorQR = ({ showVendorQRTab, goBackToOrdersPage }) => {
     };
 
     return (
-        <div className="vendorPopupAcceptedDeliveryContainer" style={{ height }}>
+        <div className="vendorPopupAcceptedDeliveryContainer" style={{ '--height': `${height}px` }}>
             <div className="vendorPopupAcceptedDelivery">
                 <div className="vendorPopupAcceptedDeliveryHeader">
                     <p>Payment Received</p>

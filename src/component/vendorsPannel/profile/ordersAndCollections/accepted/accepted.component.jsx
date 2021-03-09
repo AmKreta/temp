@@ -26,7 +26,7 @@ const Accepted = ({ setActiveTabNull, orderNo, orderDate, orderTime, paymentMeth
     const businessType = useSelector(state => state.currentVendor.businessType);
 
     return (
-        <div className="acceptedOrders" style={{ height: `${height}px` }}>
+        <div className="acceptedOrders" style={{ '--height': `${height}px` }}>
             <OrderDetails {...{ orderNo, orderDate, orderTime, paymentMethod, status }} />
             <hr />
             <div className="vendorPopupItemList">

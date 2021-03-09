@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import './addStaff.styles.scss';
 
+import { isName, isPhoneNo } from './validator/validator';
+
 //importing actions
 import { setStaff, removeStaff } from '../../../../actions/action';
 
@@ -47,6 +49,7 @@ const AddStaff = (props) => {
     const [phoneNo, setPhoneNo] = useState('');
     const [designation, setDesignation] = useState('Manager');
     const [subDesignation, setSubDesignation] = useState('');
+    const [showErroredInput, setShowErroredInput] = useState(false);
 
     useEffect(() => {
         //picking secondlast element in match.url
@@ -69,36 +72,41 @@ const AddStaff = (props) => {
                 role: item.designation
             }))
         }
-        axios
-            .put(UPDATE_REGISTERED_USER, data, {
-                headers: {
-                    'Authorization': `Bearer ${props.auth_token.accessToken}`
-                }
-            })
-            .then(res => {
-                axios
-                    .get(GET_USER_DEETAIL_BY_TOKEN, {
-                        headers: {
-                            'Authorization': `Bearer ${props.auth_token.accessToken}`
-                        }
-                    })
-                    .then(response => {
-                        props.setCurrentVendor(response.data.payload);
-                        let nextUrl = props.match.url.split('/');
-                        nextUrl.pop();
-                        nextUrl.shift();
-                        nextUrl = '/' + nextUrl.join('/');
-                        props.history.push(nextUrl);
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        alert('something went wrong');
-                    })
-            })
-            .catch(err => {
-                console.log(err);
-                alert('something went wrong');
-            })
+        if (data.staffs.length) {
+            axios
+                .put(UPDATE_REGISTERED_USER, data, {
+                    headers: {
+                        'Authorization': `Bearer ${props.auth_token.accessToken}`
+                    }
+                })
+                .then(res => {
+                    axios
+                        .get(GET_USER_DEETAIL_BY_TOKEN, {
+                            headers: {
+                                'Authorization': `Bearer ${props.auth_token.accessToken}`
+                            }
+                        })
+                        .then(response => {
+                            props.setCurrentVendor(response.data.payload);
+                            let nextUrl = props.match.url.split('/');
+                            nextUrl.pop();
+                            nextUrl.shift();
+                            nextUrl = '/' + nextUrl.join('/');
+                            props.history.push(nextUrl);
+                        })
+                        .catch(err => {
+                            console.log(err);
+                            alert('something went wrong');
+                        })
+                })
+                .catch(err => {
+                    console.log(err);
+                    alert('something went wrong');
+                });
+        }
+        else {
+            alert('add atleast one data');
+        }
     }
 
     const back = (e) => {
@@ -143,6 +151,7 @@ const AddStaff = (props) => {
                                 placeholder='Enter name of the staff'
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
+                                className={`${!isName(name) && showErroredInput ? 'erroredInput' : null}`}
                             />
                         </div>
                         <div className="inputInfo phoneNoAndDesignation">
@@ -153,6 +162,7 @@ const AddStaff = (props) => {
                                     placeholder='Enter phone no of staff to manage store'
                                     value={phoneNo}
                                     onChange={(e) => setPhoneNo(e.target.value)}
+                                    className={`${!isPhoneNo(phoneNo) && showErroredInput ? 'erroredInput' : null}`}
                                 />
                             </div>
                             <div className='selectDesignation'>
@@ -165,8 +175,12 @@ const AddStaff = (props) => {
                     </div>
                 </div>
                 <div className='addNewStaff' onClick={(e) => {
-                    if (name.length && phoneNo.length) {
+                    if (isName(name) && isPhoneNo(phoneNo)) {
                         props.setStaff({ name, phoneNo, designation });
+                        setShowErroredInput(false);
+                    }
+                    else {
+                        setShowErroredInput(true);
                     }
                 }}>
                     <div>

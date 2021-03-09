@@ -4,13 +4,14 @@
 
 .vendorPopupAcceptedDeliveryContainer {
     @include orderInfoInnerModal();
+    height: var(--height);
 
     .vendorPopupAcceptedDelivery {
         background-color: white;
         border: 1px solid white;
         box-shadow: 0 0 5px white;
         border-radius: 10px;
-        width: 100%;
+        width: Min(100%, 500px);
         padding: 10px;
 
         .vendorPopupAcceptedDeliveryHeader {
@@ -29,7 +30,7 @@
 
                 &:nth-child(2) {
                     &>figure {
-                        height: 250px;
+                        height: 200px;
 
                         &>img {
                             max-height: 90%;

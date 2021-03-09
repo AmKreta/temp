@@ -1,7 +1,7 @@
 @import '../profile.sharableStyles.scss';
 @import '../../../../../assets/globalStyles.scss';
 
-$orderDetailsAndOrderPaymentMethodPadding:31%;
+$orderDetailsAndOrderPaymentMethodPadding:20px;
 
 .vendorsOrders {
     padding: 2%;
@@ -58,9 +58,21 @@ $orderDetailsAndOrderPaymentMethodPadding:31%;
     .vendorsOrderHeader {
         display: flex;
         flex-flow: row nowrap;
-        align-items: flex-end;
+        align-items: center;
         justify-content: space-between;
         height: 35px;
+
+        &>div:nth-child(1)>div {
+            padding-bottom: 0;
+        }
+
+        &>select {
+            @include input();
+            width: min-content;
+            height: 30px;
+            text-align: center;
+            background-color: white;
+        }
     }
 
     .vendorsOrdersListContainer {
@@ -74,7 +86,7 @@ $orderDetailsAndOrderPaymentMethodPadding:31%;
             margin: auto;
             margin-top: 10px;
             height: 112px;
-            width: Min(100%, 400px);
+            min-width: Min(100%, 400px);
             font-weight: bold;
             padding: 7px 13px;
             padding-top: 13px;
@@ -105,8 +117,22 @@ $orderDetailsAndOrderPaymentMethodPadding:31%;
                 align-items: flex-start;
                 justify-content: space-between;
                 //padding-right: 10%;
-                padding-left: 15%;
+                //padding-left: 15%;
                 letter-spacing: 1px;
+
+                &>div {
+                    width: 50%;
+
+                    &:nth-child(1) {
+                        text-align: left;
+                        padding-left: 10px;
+                    }
+
+                    &:nth-child(2) {
+                        text-align: left;
+                        padding-left: 10px;
+                    }
+                }
             }
 
             .orderTotalItems {
@@ -193,6 +219,16 @@ $orderDetailsAndOrderPaymentMethodPadding:31%;
                 top: 75px;
                 border: 1px solid #ccc;
             }
+        }
+    }
+}
+
+@media only screen and (min-width : $medium) {
+    .vendorsOrders {
+        .vendorsOrdersListContainer {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            column-gap: 10px;
         }
     }
 }

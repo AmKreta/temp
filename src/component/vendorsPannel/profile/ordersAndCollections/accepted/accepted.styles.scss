@@ -4,6 +4,7 @@
 .acceptedOrders {
     @include orderInfoModal();
     font-weight: bold;
+    height: var(--height);
 
     .vendorPopupItemList {
         &>div {

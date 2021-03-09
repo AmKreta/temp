@@ -1,6 +1,6 @@
 @import '../../../../assets/globalStyles.scss';
 
-$buttonPadding:5% 3%;
+$buttonPadding:Min(5%, 10px) Min(3%, 15px);
 $strongFontSize:1.1em;
 $fontSize:1em;
 $circleSize:55px;
@@ -13,6 +13,12 @@ $borderRadius:20px;
     padding: $buttonPadding;
     border-radius: $borderRadius;
     line-height: 1.5em;
+    width: Min(100%, 400px);
+    margin: 0 auto;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     &.translucent {
         opacity: .5;

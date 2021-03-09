@@ -20,7 +20,7 @@ $borderRadius:30px;
     }
 
     .intro {
-        height: 40%;
+        height: 60%;
         background: $green;
         border-top-left-radius: $borderRadius;
         border-top-right-radius: $borderRadius;
@@ -76,6 +76,151 @@ $borderRadius:30px;
                 border-top-left-radius: $borderRadius;
                 justify-content: center;
                 padding-left: 5%;
+            }
+        }
+    }
+
+    .introCaption {
+        display: none;
+    }
+}
+
+@media only screen and (min-width:$large) {
+    .vendorsPannelHome {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 300px calc(100vw - 300px);
+        grid-template-rows: repeat(2, 1fr);
+        grid-template-areas: "image caption""intro caption";
+        background-color: white;
+
+        .introImage {
+            grid-area: image;
+        }
+
+        .intro {
+            grid-area: intro;
+            height: 100%;
+            border-bottom-left-radius: $borderRadius;
+            border-bottom-right-radius: $borderRadius;
+            justify-content: space-between;
+
+            .introHeader {
+                font-size: 13px;
+
+                &>p {
+                    margin: auto;
+                    font-weight: bold;
+                }
+            }
+
+            .introContent {
+                font-size: 12px;
+                height: 50%;
+            }
+
+            .introFooter {
+                justify-content: flex-end;
+
+                .cancel {
+                    display: none;
+                }
+            }
+        }
+
+        .introCaption {
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: stretch;
+            justify-content: space-evenly;
+            grid-area: caption;
+            justify-self: center;
+
+            &>h3 {
+                font: normal normal bold 36px/58px Roboto;
+                font-size: 20px;
+                letter-spacing: 0px;
+                color: #128C7E;
+                opacity: 1;
+            }
+
+            .largeLogo {
+                height: 20%;
+                display: flex;
+                align-items: center;
+                justify-content: space-evenly;
+
+                .largelogoImageContainer {
+                    width: 30%;
+
+                    &>img {
+                        max-height: 100%;
+                        max-width: 100%;
+                    }
+                }
+
+                .largeLogoText {
+                    width: 50%;
+                    text-align: left;
+                    font: normal normal bold 36px/58px Montserrat;
+                    letter-spacing: 0px;
+                    color: #00B8B1;
+                    text-shadow: 0px 10px 6px #00000029;
+                }
+            }
+
+            .introFeatures {
+                height: 40%;
+                display: flex;
+                flex-flow: column nowrap;
+                align-items: stretch;
+                justify-content: space-between;
+                word-spacing: 2px;
+                line-height: 30px;
+
+                .introFeatureOne {
+                    height: 50%;
+                }
+
+                .introFeatureTwo {
+                    height: 40%;
+                }
+            }
+
+            &>.signUpButton {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: $purple;
+                align-self: center;
+                padding: 5px 15px;
+                border-radius: 10px;
+
+                &:hover {
+                    cursor: pointer
+                }
+
+                .signUpButtonIcon {
+                    padding: 5px;
+                    background-image: $pinkGradient;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+
+                &>button {
+                    background-color: $purple;
+                    border: none;
+                    outline: none;
+                    padding: 5px 10px;
+                    color: white;
+                    border-radius: 10px;
+                    font-weight: bold;
+                    font-size: 1.2em;
+
+                    &:hover {
+                        cursor: pointer
+                    }
+                }
             }
         }
     }

@@ -18,7 +18,7 @@ const Pending = ({ setActiveTabNull, orderNo, orderDate, orderTime, paymentMetho
     const businessType = useSelector(state => state.currentVendor.businessType);
 
     return (
-        <div className="pendingOrders" style={{ height: `${height}px` }}>
+        <div className="pendingOrders" style={{ '--height': `${height}px` }}>
             <OrderDetails {...{ orderNo, orderDate, orderTime, paymentMethod, status }} />
             <hr />
             <div className='vendorPopupInvoice'>

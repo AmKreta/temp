@@ -11,7 +11,7 @@ $borderRadius:20px;
     justify-content: center;
 
     .registration {
-        width: 90%;
+        width: Min(90%, 400px);
         font-size: 1.5em;
         font-weight: bold;
         padding: 5% 0;
@@ -23,10 +23,15 @@ $borderRadius:20px;
 
         .registerAsButtons {
             .registerAsButton {
+                &:hover {
+                    cursor: pointer;
+                }
+
                 background: white;
                 box-shadow: 0 0 15px #ccc;
+                border:1px solid #ccc;
                 margin-top: 5%;
-                padding: 7% 2%;
+                padding: Min(7%, 25px) Min(2%, 8px);
                 display: flex;
                 flex-flow: row nowrap;
                 align-items: center;

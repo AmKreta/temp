@@ -3,7 +3,7 @@
 
 $buttonHeight:40px;
 $inputHeight:40px;
-$marginTop:10px;
+$marginTop:20px;
 $padding:4%;
 $height1:10%;
 $height2:10%;
@@ -23,8 +23,9 @@ $formButtonFieldHeight:15%;
     font-weight: bold;
     padding: $padding;
 
-    & button {
 
+    & button {
+        //margin:20px 0;
         &:focus {
             outline: none;
         }
@@ -50,24 +51,35 @@ $formButtonFieldHeight:15%;
 
     .paymentSettingLabel {
         @include greenIconContainer($height2);
+        margin-top: $marginTop;
 
         .labelIconContainer {
-           @include greenIcon();
+            @include greenIcon();
         }
     }
 
     #paymentSettingForm {
-        height: $formHeight;
+        height: auto;
+        //min-height: $formHeight;
         margin-top: $marginTop;
 
+        .radioInputLabelLabel {
+            width: 100% !important;
+            text-align: left;
+        }
+
         .radioInputLabelContainer {
-            font-size: .9em;
             font-weight: bold;
             display: flex;
-            flex-flow: row nowrap;
+            flex-flow: row wrap;
             align-items: center;
             justify-content: space-evenly;
             height: $formRadioInputHeight;
+            height: 70px;
+
+            &:first-child {
+                margin-bottom: 10px;
+            }
 
             .radioInputLabelLabel {
                 width: 50%;
@@ -75,18 +87,18 @@ $formButtonFieldHeight:15%;
             }
 
             .radioInputLabelOptions {
-                width: 50%;
+                width: 100%;
                 display: flex;
                 flex-flow: row nowrap;
                 align-items: center;
                 display: flex;
                 flex-flow: row nowrap;
                 align-items: center;
-                padding-left:2%;
+                padding-left: 2%;
 
                 .radioInputLabel {
                     @include radio();
-                    margin-left:2%;
+                    margin-left: 2%;
 
                     &:nth-child(1) {
                         width: 30%;
@@ -122,6 +134,7 @@ $formButtonFieldHeight:15%;
 
         .paymentSettingButton {
             height: $formButtonFieldHeight;
+            margin:10px 0;
         }
     }
 }

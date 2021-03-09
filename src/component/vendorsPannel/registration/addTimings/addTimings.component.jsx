@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import './addTimings.styles.scss';
+
+import { VALIDATE } from './validator/validator';
+
+import Radio from '@material-ui/core/Radio';
 
 //importing custom components
 import AddDayAndTime from '../addDayAndTime/addDayAndTime.component';
@@ -28,6 +32,8 @@ const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'
 
 const AddTimings = (props) => {
 
+    const [errorFields, setErrorFields] = useState({});
+
     const save = (e) => {
         e.preventDefault();
         let data;
@@ -36,7 +42,7 @@ const AddTimings = (props) => {
         let timing = {};
         Object.keys(props.timing).forEach(item => {
             if (props.timing[item].isSelected) {
-                timing[item.charAt(0).toUpperCase() + item.slice(1)] = { morning: props.timing[item].morning, evening: props.timing[item].morning }
+                timing[item.charAt(0).toUpperCase() + item.slice(1)] = { morning: props.timing[item].morning, evening: props.timing[item].evening }
             }
         });
 
@@ -44,7 +50,10 @@ const AddTimings = (props) => {
             workingHours: timing
         }
 
-        axios
+        let errors = VALIDATE(data);
+        console.log(errors);
+        if (Object.keys(errors).length === 0) {
+            axios
             .put(UPDATE_REGISTERED_USER, data, {
                 headers: {
                     'Authorization': `Bearer ${props.auth_token.accessToken}`
@@ -76,6 +85,10 @@ const AddTimings = (props) => {
                 console.log(err);
                 alert('something went wrong');
             });
+        }
+        else {
+            setErrorFields(errors)
+        }
     }
 
     const back = (e) => {
@@ -108,25 +121,25 @@ const AddTimings = (props) => {
                     <div className="openHoursLabel">
                         <p>
                             24 Hours Open
-                            </p>
+                        </p>
                     </div>
                     <div className="radioInput">
-                        <input
-                            type='radio'
-                            value='no'
-                            name='twentyFourHoursOpen'
+                        <Radio
                             checked={props.storeOpen24Hours ? true : false}
                             onChange={(e) => props.setStoreOpen(true)}
+                            value="no"
+                            name="twentyFourHoursOpen"
+
                         />
                         <label htmlFor="twenty four hours open">yes</label>
                     </div>
                     <div className="radioInput">
-                        <input
-                            type='radio'
-                            value='yes'
-                            name='twentyFourHoursOpen'
+                        <Radio
                             checked={props.storeOpen24Hours ? false : true}
                             onChange={(e) => props.setStoreOpen(false)}
+                            value="yes"
+                            name="twentyFourHoursOpen"
+
                         />
                         <label htmlFor="not twenty four hours open ">no</label>
                     </div>
@@ -134,7 +147,14 @@ const AddTimings = (props) => {
                 <div className="dayAndTimeInput">
                     <div className="addDayAndTime">
                         {
-                            days.map((item, index) => <AddDayAndTime key={index} day={item} setTimings={props.setStaffTiming} />)
+                            days.map((item, index) => (
+                                <AddDayAndTime
+                                    key={index}
+                                    day={item}
+                                    setTimings={props.setStaffTiming}
+                                    error={errorFields[`workingHours ${item}`]}
+                                />
+                            ))
                         }
                     </div>
                 </div>
